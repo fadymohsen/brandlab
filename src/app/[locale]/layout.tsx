@@ -5,6 +5,7 @@ import { locales, rtlLocales } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { DictionaryProvider } from "@/i18n/dictionary-provider";
+import { LeadPopupProvider } from "@/components/LeadPopupProvider";
 import "../globals.css";
 
 const outfit = Outfit({
@@ -73,7 +74,9 @@ export default async function LocaleLayout({
       className={`${outfit.variable} ${notoKufi.variable} antialiased`}
     >
       <body className="min-h-screen">
-        <DictionaryProvider dictionary={dict}>{children}</DictionaryProvider>
+        <DictionaryProvider dictionary={dict}>
+          <LeadPopupProvider>{children}</LeadPopupProvider>
+        </DictionaryProvider>
       </body>
     </html>
   );
