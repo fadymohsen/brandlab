@@ -294,7 +294,7 @@ const en = {
     copyright: "Brand Lab. All rights reserved.",
     crafted: "Crafted with passion for visual storytelling.",
   },
-} as const;
+};
 
 export type Dictionary = typeof en;
 export default en;
