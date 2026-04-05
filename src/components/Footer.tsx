@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
@@ -11,45 +13,38 @@ const socialLinks = [
   { label: "In", href: "#", name: "LinkedIn" },
 ];
 
-const companyHrefs = [
-  "#about",
-  "#portfolio",
-  "#testimonials",
-  "#pricing",
-  "#contact",
-];
+const companyHrefs = ["/about", "/portfolio", "/pricing", "/contact"];
+const resourceHrefs = ["/faq", "/privacy", "/terms", "/refund"];
 
 export default function Footer() {
   const dict = useDictionary();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
 
   const footerSections = [
-    {
-      title: dict.footer.servicesTitle,
-      links: dict.footer.services.map((label) => ({
-        label,
-        href: "#services",
-      })),
-    },
     {
       title: dict.footer.companyTitle,
       links: dict.footer.company.map((label, i) => ({
         label,
-        href: companyHrefs[i],
+        href: `/${locale}${companyHrefs[i]}`,
       })),
     },
     {
       title: dict.footer.resourcesTitle,
-      links: dict.footer.resources.map((label) => ({ label, href: "#" })),
+      links: dict.footer.resources.map((label, i) => ({
+        label,
+        href: `/${locale}${resourceHrefs[i]}`,
+      })),
     },
   ];
 
   return (
     <footer className="border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-5 gap-12">
+        <div className="grid lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-3 mb-6">
+            <Link href={`/${locale}`} className="flex items-center gap-3 mb-6">
               <Image
                 src="/logo.jpg"
                 alt="Brand Lab"
@@ -60,7 +55,7 @@ export default function Footer() {
               <span className="text-xl font-bold text-cream">
                 Brand <span className="gradient-text">Lab</span>
               </span>
-            </a>
+            </Link>
             <p className="text-cream/50 leading-relaxed max-w-sm mb-6">
               {dict.footer.tagline}
             </p>
@@ -87,7 +82,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
                       className="text-sm text-cream/50 hover:text-cream transition-colors inline-flex items-center gap-1 group"
                     >
@@ -96,7 +91,7 @@ export default function Footer() {
                         size={12}
                         className="opacity-0 group-hover:opacity-100 transition-opacity"
                       />
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -109,7 +104,17 @@ export default function Footer() {
           <p className="text-sm text-cream/30">
             &copy; {new Date().getFullYear()} {dict.footer.copyright}
           </p>
-          <p className="text-sm text-cream/30">{dict.footer.crafted}</p>
+          <p className="text-sm text-cream/30">
+            {dict.footer.poweredBy}{" "}
+            <a
+              href="https://veliq.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary-light transition-colors font-medium"
+            >
+              VELIQ
+            </a>
+          </p>
         </div>
       </div>
     </footer>
