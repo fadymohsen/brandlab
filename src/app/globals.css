@@ -5,8 +5,8 @@
   --color-primary-light: #9F67FF;
   --color-secondary: #E91E8C;
   --color-accent: #F97316;
-  --color-dark: #1A1A2E;
-  --color-dark-light: #2D2D44;
+  --color-dark: #141414;
+  --color-dark-light: #1E1E1E;
   --color-cream: #F5F0E8;
   --color-cream-dark: #EDE5D8;
   --font-outfit: var(--font-outfit);
@@ -21,7 +21,7 @@ html, body {
 }
 
 body {
-  background: #1A1A2E;
+  background: #141414;
   color: #F5F0E8;
   font-family: var(--font-outfit), sans-serif;
 }
@@ -103,7 +103,7 @@ select {
 /* Gradient border */
 .gradient-border {
   position: relative;
-  background: #1A1A2E;
+  background: #141414;
   border-radius: 1rem;
 }
 
