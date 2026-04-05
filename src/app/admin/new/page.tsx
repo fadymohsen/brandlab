@@ -5,11 +5,19 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
 
+const categories = [
+  "Video Editing",
+  "Montage & Reels",
+  "Color Grading",
+  "Motion Graphics",
+  "Sound Design",
+  "Brand Identity Videos",
+];
+
 export default function NewPortfolioItem() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -18,8 +26,8 @@ export default function NewPortfolioItem() {
     e.preventDefault();
     setError("");
 
-    if (!title.trim() || !youtubeUrl.trim()) {
-      setError("Title and YouTube URL are required");
+    if (!title.trim() || !youtubeUrl.trim() || !category) {
+      setError("All fields are required");
       return;
     }
 
@@ -37,7 +45,7 @@ export default function NewPortfolioItem() {
       const res = await fetch("/api/portfolio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, category, youtubeUrl, description }),
+        body: JSON.stringify({ title, category, youtubeUrl, description: "" }),
       });
 
       if (res.ok) {
@@ -86,15 +94,22 @@ export default function NewPortfolioItem() {
 
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Category
+                Category *
               </label>
-              <input
-                type="text"
+              <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                placeholder="e.g. Brand Film, Reel, Montage"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+              >
+                <option value="" className="bg-dark">
+                  Select a category
+                </option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat} className="bg-dark">
+                    {cat}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
@@ -107,19 +122,6 @@ export default function NewPortfolioItem() {
                 onChange={(e) => setYoutubeUrl(e.target.value)}
                 placeholder="https://www.youtube.com/shorts/VIDEO_ID"
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
-                placeholder="Brief description of this project..."
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors resize-none"
               />
             </div>
 

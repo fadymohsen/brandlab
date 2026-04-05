@@ -5,11 +5,19 @@ import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
 
+const categories = [
+  "Video Editing",
+  "Montage & Reels",
+  "Color Grading",
+  "Motion Graphics",
+  "Sound Design",
+  "Brand Identity Videos",
+];
+
 export default function EditPortfolioItem() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
@@ -29,7 +37,6 @@ export default function EditPortfolioItem() {
           setTitle(item.title);
           setCategory(item.category);
           setYoutubeUrl(item.youtubeUrl);
-          setDescription(item.description);
         }
       }
       setFetching(false);
@@ -41,23 +48,27 @@ export default function EditPortfolioItem() {
     e.preventDefault();
     setError("");
 
-    if (!title.trim() || !youtubeUrl.trim()) {
-      setError("Title and YouTube URL are required");
+    if (!title.trim() || !youtubeUrl.trim() || !category) {
+      setError("All fields are required");
       return;
     }
 
     setLoading(true);
-    const res = await fetch(`/api/portfolio/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, category, youtubeUrl, description }),
-    });
+    try {
+      const res = await fetch(`/api/portfolio/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, category, youtubeUrl, description: "" }),
+      });
 
-    if (res.ok) {
-      router.push("/admin");
-    } else {
-      const data = await res.json();
-      setError(data.error || "Something went wrong");
+      if (res.ok) {
+        router.push("/admin");
+      } else {
+        const data = await res.json();
+        setError(data.error || "Something went wrong");
+      }
+    } catch (err) {
+      setError("Network error: " + String(err));
     }
     setLoading(false);
   }
@@ -103,14 +114,22 @@ export default function EditPortfolioItem() {
 
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Category
+                Category *
               </label>
-              <input
-                type="text"
+              <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+              >
+                <option value="" className="bg-dark">
+                  Select a category
+                </option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat} className="bg-dark">
+                    {cat}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>
@@ -122,18 +141,6 @@ export default function EditPortfolioItem() {
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors resize-none"
               />
             </div>
 
