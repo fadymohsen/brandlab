@@ -29,13 +29,12 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { label: dict.nav.home, href: "#home" },
-    { label: dict.nav.services, href: "#services" },
-    { label: dict.nav.about, href: "#about" },
-    { label: dict.nav.portfolio, href: "#portfolio" },
-    { label: dict.nav.testimonials, href: "#testimonials" },
-    { label: dict.nav.pricing, href: "#pricing" },
-    { label: dict.nav.contact, href: "#contact" },
+    { label: dict.nav.home, href: `/${currentLocale}` },
+    { label: dict.nav.about, href: `/${currentLocale}/about` },
+    { label: dict.nav.services, href: `/${currentLocale}/services` },
+    { label: dict.nav.portfolio, href: `/${currentLocale}/portfolio` },
+    { label: dict.nav.pricing, href: `/${currentLocale}/pricing` },
+    { label: dict.nav.contact, href: `/${currentLocale}/contact` },
   ];
 
   return (
@@ -43,8 +42,8 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <a href="#home" className="flex items-center gap-3 relative z-60">
+            {/* Logo — Left */}
+            <a href="#home" className="flex items-center gap-3 relative z-60 shrink-0">
               <Image
                 src="/logo.jpg"
                 alt="Brand Lab"
@@ -57,8 +56,8 @@ export default function Navbar() {
               </span>
             </a>
 
-            {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-8">
+            {/* Center — Nav Links + Lang */}
+            <div className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
@@ -77,14 +76,15 @@ export default function Navbar() {
                 <Globe size={16} />
                 {currentLocale === "en" ? "العربية" : "English"}
               </Link>
-
-              <a
-                href="#contact"
-                className="ms-4 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-              >
-                {dict.nav.cta}
-              </a>
             </div>
+
+            {/* Right — CTA */}
+            <a
+              href="#contact"
+              className="hidden lg:flex px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity shrink-0"
+            >
+              {dict.nav.cta}
+            </a>
 
             {/* Mobile Menu Toggle */}
             <button
