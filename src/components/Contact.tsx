@@ -2,6 +2,7 @@
 
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import PhoneField from "./PhoneField";
 
 export default function Contact() {
   const dict = useDictionary();
@@ -108,6 +109,11 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
+                <PhoneField
+                  label={dict.contact.form.phone}
+                  placeholder="+20 123 456 7890"
+                />
 
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-2">

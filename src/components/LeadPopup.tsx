@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { X, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import PhoneField from "./PhoneField";
 
 export default function LeadPopup({
   isOpen,
@@ -64,16 +64,10 @@ export default function LeadPopup({
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                {dict.leadPopup.phone}
-              </label>
-              <input
-                type="tel"
-                placeholder={dict.leadPopup.phonePlaceholder}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
+            <PhoneField
+              label={dict.leadPopup.phone}
+              placeholder={dict.leadPopup.phonePlaceholder}
+            />
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
                 {dict.leadPopup.businessField}
