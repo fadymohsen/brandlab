@@ -6,10 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Globe, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { useLeadPopup } from "./LeadPopupProvider";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const dict = useDictionary();
+  const { open: openPopup } = useLeadPopup();
   const pathname = usePathname();
 
   const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
@@ -79,12 +81,12 @@ export default function Navbar() {
             </div>
 
             {/* Right — CTA */}
-            <a
-              href="#contact"
+            <button
+              onClick={openPopup}
               className="hidden lg:flex px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity shrink-0"
             >
               {dict.nav.cta}
-            </a>
+            </button>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -174,14 +176,13 @@ export default function Navbar() {
             </Link>
 
             {/* CTA */}
-            <a
-              href="#contact"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            <button
+              onClick={() => { setIsOpen(false); openPopup(); }}
+              className="flex items-center justify-center gap-2 py-4 w-full bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity"
             >
               {dict.nav.cta}
               <ArrowRight size={18} className="rtl:rotate-180" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
