@@ -1,6 +1,8 @@
 "use client";
 
-import { Play, ExternalLink } from "lucide-react";
+import { Play, ExternalLink, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 const gradients = [
@@ -14,6 +16,8 @@ const gradients = [
 
 export default function Portfolio() {
   const dict = useDictionary();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
 
   return (
     <section id="portfolio" className="py-24 lg:py-32 relative">
@@ -22,45 +26,33 @@ export default function Portfolio() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
             {dict.portfolio.label}
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
             {dict.portfolio.title}{" "}
-            <span className="gradient-text">
-              {dict.portfolio.titleHighlight}
-            </span>
+            <span className="gradient-text">{dict.portfolio.titleHighlight}</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
             {dict.portfolio.subtitle}
           </p>
         </div>
 
-        {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {dict.portfolio.items.map((project, index) => (
             <div
               key={project.title}
               className="group relative overflow-hidden rounded-2xl cursor-pointer"
             >
-              {/* Placeholder Visual */}
               <div
                 className={`aspect-video bg-gradient-to-br ${gradients[index]} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
               />
-
-              {/* Play Button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform border border-white/20">
-                  <Play
-                    size={24}
-                    className="text-white fill-white ms-1"
-                  />
+                  <Play size={24} className="text-white fill-white ms-1" />
                 </div>
               </div>
-
-              {/* Content Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-dark via-dark/80 to-transparent">
                 <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                   {project.category}
@@ -72,8 +64,6 @@ export default function Portfolio() {
                   {project.description}
                 </p>
               </div>
-
-              {/* External Link */}
               <div className="absolute top-4 end-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
                   <ExternalLink size={16} className="text-white" />
@@ -81,6 +71,17 @@ export default function Portfolio() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link
+            href={`/${locale}/portfolio`}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+          >
+            {dict.portfolio.cta}
+            <ArrowRight size={18} className="rtl:rotate-180" />
+          </Link>
         </div>
       </div>
     </section>
