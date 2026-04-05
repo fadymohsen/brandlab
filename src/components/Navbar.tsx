@@ -116,7 +116,7 @@ export default function Navbar() {
         </div>
 
         {/* Menu Content */}
-        <div className="relative z-10 flex flex-col h-full pt-28 pb-10 px-8">
+        <div className="relative z-10 flex flex-col h-full pt-20 pb-10 px-8">
           {/* Nav Links */}
           <div className="flex-1 flex flex-col justify-center space-y-2">
             {navLinks.map((link, index) => (
