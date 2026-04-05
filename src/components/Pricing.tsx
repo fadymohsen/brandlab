@@ -1,0 +1,140 @@
+import { Check, ArrowRight } from "lucide-react";
+
+const plans = [
+  {
+    name: "Starter",
+    price: "$299",
+    period: "per project",
+    description: "Perfect for freelancers and small content pieces.",
+    features: [
+      "Up to 5 minutes final cut",
+      "2 revision rounds",
+      "Basic color correction",
+      "Royalty-free music",
+      "Social media export formats",
+      "5-day delivery",
+    ],
+    cta: "Get Started",
+    featured: false,
+  },
+  {
+    name: "Professional",
+    price: "$799",
+    period: "per project",
+    description: "Ideal for startups and growing brands.",
+    features: [
+      "Up to 15 minutes final cut",
+      "Unlimited revisions",
+      "Cinematic color grading",
+      "Custom sound design",
+      "Motion graphics & titles",
+      "All export formats",
+      "3-day priority delivery",
+      "Dedicated editor",
+    ],
+    cta: "Start Your Journey",
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    period: "tailored for you",
+    description: "For brands that demand the extraordinary.",
+    features: [
+      "Unlimited duration",
+      "Unlimited revisions",
+      "Full post-production suite",
+      "Original score composition",
+      "Advanced VFX & animation",
+      "Multi-platform optimization",
+      "24-hour rush delivery",
+      "Dedicated creative team",
+      "Brand style guide creation",
+    ],
+    cta: "Contact Us",
+    featured: false,
+  },
+];
+
+export default function Pricing() {
+  return (
+    <section id="pricing" className="py-24 lg:py-32 relative">
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-sm font-semibold text-primary uppercase tracking-widest">
+            Pricing
+          </span>
+          <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
+            Simple, <span className="gradient-text">Transparent</span> Pricing
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+            Choose the plan that fits your needs. No hidden fees, no surprises.
+          </p>
+        </div>
+
+        {/* Pricing Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`relative rounded-2xl p-8 transition-transform duration-300 hover:scale-[1.02] ${
+                plan.featured
+                  ? "bg-gradient-to-b from-primary/20 to-secondary/10 border border-primary/30 glow"
+                  : "gradient-border"
+              }`}
+            >
+              <div className="relative z-10">
+                {plan.featured && (
+                  <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">
+                    Most Popular
+                  </div>
+                )}
+
+                <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
+                <p className="text-cream/50 text-sm mt-2">
+                  {plan.description}
+                </p>
+
+                <div className="mt-6 mb-8">
+                  <span className="text-5xl font-bold gradient-text">
+                    {plan.price}
+                  </span>
+                  <span className="text-cream/50 ml-2">/ {plan.period}</span>
+                </div>
+
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3">
+                      <Check
+                        size={18}
+                        className="text-primary mt-0.5 shrink-0"
+                      />
+                      <span className="text-cream/70 text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#contact"
+                  className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-all ${
+                    plan.featured
+                      ? "bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
+                      : "border border-cream/20 text-cream hover:bg-cream/5"
+                  }`}
+                >
+                  {plan.cta}
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

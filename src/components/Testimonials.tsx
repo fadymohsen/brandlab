@@ -1,0 +1,110 @@
+import { Star, Quote } from "lucide-react";
+
+const testimonials = [
+  {
+    name: "Sarah Mitchell",
+    role: "CEO, Elevate Fitness",
+    content:
+      "Brand Lab completely transformed our brand presence. The videos they produced were cinematic, engaging, and drove real results. Our social media engagement tripled within a month.",
+    rating: 5,
+  },
+  {
+    name: "James Rodriguez",
+    role: "Content Creator, 500K+ Followers",
+    content:
+      "Working with Brand Lab feels like having a creative partner who truly understands your vision. The editing quality is unmatched, and the turnaround time is incredible.",
+    rating: 5,
+  },
+  {
+    name: "Emily Chen",
+    role: "Founder, TechFlow",
+    content:
+      "Our product launch video was a game-changer. Brand Lab captured our product's essence perfectly. The video helped us secure our seed round — I can't recommend them enough.",
+    rating: 5,
+  },
+  {
+    name: "Omar Hassan",
+    role: "Freelance Photographer & Videographer",
+    content:
+      "As a freelancer, I needed a reliable editing partner. Brand Lab delivers consistently beautiful work that my clients love. They've become an essential part of my workflow.",
+    rating: 5,
+  },
+];
+
+export default function Testimonials() {
+  return (
+    <section
+      id="testimonials"
+      className="py-24 lg:py-32 relative bg-dark-light/30"
+    >
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-sm font-semibold text-primary uppercase tracking-widest">
+            Testimonials
+          </span>
+          <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
+            What Our <span className="gradient-text">Clients Say</span>
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+            Don&apos;t take our word for it — hear from the brands and creators
+            we&apos;ve helped succeed.
+          </p>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.name}
+              className="gradient-border p-8 hover:scale-[1.01] transition-transform duration-300"
+            >
+              <div className="relative z-10">
+                {/* Quote Icon */}
+                <Quote
+                  size={32}
+                  className="text-primary/30 mb-4"
+                />
+
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={16}
+                      className="text-accent fill-accent"
+                    />
+                  ))}
+                </div>
+
+                {/* Content */}
+                <p className="text-cream/70 leading-relaxed mb-6">
+                  &ldquo;{testimonial.content}&rdquo;
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg">
+                    {testimonial.name[0]}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-cream">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-sm text-cream/50">
+                      {testimonial.role}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
