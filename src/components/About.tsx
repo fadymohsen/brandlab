@@ -1,18 +1,21 @@
 "use client";
 
-import { Target, Zap, Heart, Award } from "lucide-react";
+import { Target, Zap, Heart, Award, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 const valueIcons = [Target, Zap, Heart, Award];
 
 export default function About() {
   const dict = useDictionary();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
 
   return (
     <section id="about" className="py-24 lg:py-32 relative bg-dark-light/30">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Content */}
           <div>
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">
               {dict.about.label}
@@ -35,16 +38,16 @@ export default function About() {
               >
                 {dict.about.ctaPrimary}
               </a>
-              <a
-                href="#portfolio"
-                className="px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors text-center"
+              <Link
+                href={`/${locale}/about`}
+                className="px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors text-center inline-flex items-center justify-center gap-2"
               >
                 {dict.about.ctaSecondary}
-              </a>
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </Link>
             </div>
           </div>
 
-          {/* Right - Values */}
           <div className="grid grid-cols-2 gap-6">
             {dict.about.values.map((value, index) => {
               const Icon = valueIcons[index];
