@@ -2,6 +2,7 @@
 
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
 
 export default function Contact() {
@@ -14,8 +15,7 @@ export default function Contact() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+        <RevealOnScroll className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
             {dict.contact.label}
           </span>
@@ -28,60 +28,67 @@ export default function Contact() {
           <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
             {dict.contact.subtitle}
           </p>
-        </div>
+        </RevealOnScroll>
 
         <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
-                <Mail size={20} className="text-primary" />
+          <StaggerChildren className="lg:col-span-2 space-y-8">
+            <StaggerItem>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+                  <Mail size={20} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-cream">{dict.contact.email}</h3>
+                  <p className="text-cream/50 mt-1">{dict.contact.emailValue}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-cream">{dict.contact.email}</h3>
-                <p className="text-cream/50 mt-1">{dict.contact.emailValue}</p>
-              </div>
-            </div>
+            </StaggerItem>
 
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
-                <Phone size={20} className="text-primary" />
+            <StaggerItem>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+                  <Phone size={20} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-cream">{dict.contact.phone}</h3>
+                  <p className="text-cream/50 mt-1">{dict.contact.phoneValue}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-cream">{dict.contact.phone}</h3>
-                <p className="text-cream/50 mt-1">{dict.contact.phoneValue}</p>
-              </div>
-            </div>
+            </StaggerItem>
 
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
-                <MapPin size={20} className="text-primary" />
+            <StaggerItem>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+                  <MapPin size={20} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-cream">
+                    {dict.contact.location}
+                  </h3>
+                  <p className="text-cream/50 mt-1">
+                    {dict.contact.locationValue}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-cream">
-                  {dict.contact.location}
-                </h3>
-                <p className="text-cream/50 mt-1">
-                  {dict.contact.locationValue}
-                </p>
-              </div>
-            </div>
+            </StaggerItem>
 
-            {/* CTA Box */}
-            <div className="gradient-border p-6 mt-8">
-              <div className="relative z-10">
-                <h3 className="font-semibold text-cream mb-2">
-                  {dict.contact.guarantee}
-                </h3>
-                <p className="text-sm text-cream/50">
-                  {dict.contact.guaranteeText}
-                </p>
+            <StaggerItem>
+              <div className="gradient-border p-6 mt-8">
+                <div className="relative z-10">
+                  <h3 className="font-semibold text-cream mb-2">
+                    {dict.contact.guarantee}
+                  </h3>
+                  <p className="text-sm text-cream/50">
+                    {dict.contact.guaranteeText}
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
+            </StaggerItem>
+          </StaggerChildren>
 
           {/* Contact Form */}
-          <div className="lg:col-span-3">
+          <RevealOnScroll className="lg:col-span-3" direction="right">
             <form
               onSubmit={(e) => e.preventDefault()}
               className="gradient-border p-8"
@@ -157,7 +164,7 @@ export default function Contact() {
                 </button>
               </div>
             </form>
-          </div>
+          </RevealOnScroll>
         </div>
       </div>
     </section>
