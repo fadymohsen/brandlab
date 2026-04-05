@@ -1,11 +1,10 @@
 "use client";
 
 import { Play, ExternalLink, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { useLeadPopup } from "@/components/LeadPopupProvider";
 
 const gradients = [
   "from-primary to-secondary",
@@ -18,8 +17,7 @@ const gradients = [
 
 export default function PortfolioPage() {
   const dict = useDictionary();
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/ar") ? "ar" : "en";
+  const { open } = useLeadPopup();
 
   return (
     <>
@@ -101,13 +99,13 @@ export default function PortfolioPage() {
           <p className="mt-4 text-cream/50 text-lg">
             {dict.portfolio.ctaSection.subtitle}
           </p>
-          <Link
-            href={`/${locale}/#contact`}
+          <button
+            onClick={open}
             className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
           >
             {dict.portfolio.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />
-          </Link>
+          </button>
         </div>
       </section>
 

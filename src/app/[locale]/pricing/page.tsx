@@ -2,11 +2,10 @@
 
 import { Check, ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { useLeadPopup } from "@/components/LeadPopupProvider";
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +30,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export default function PricingPage() {
   const dict = useDictionary();
-  const pathname = usePathname();
-  const locale = pathname.startsWith("/ar") ? "ar" : "en";
+  const { open } = useLeadPopup();
 
   return (
     <>
@@ -95,8 +93,8 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href={`/${locale}/#contact`}
+                  <button
+                    onClick={open}
                     className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-all ${
                       plan.featured
                         ? "bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
@@ -105,7 +103,7 @@ export default function PricingPage() {
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
@@ -151,13 +149,13 @@ export default function PricingPage() {
           <p className="mt-4 text-cream/50 text-lg">
             {dict.pricing.ctaSection.subtitle}
           </p>
-          <Link
-            href={`/${locale}/#contact`}
+          <button
+            onClick={open}
             className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
           >
             {dict.pricing.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />
-          </Link>
+          </button>
         </div>
       </section>
 
