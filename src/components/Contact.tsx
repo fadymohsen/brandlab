@@ -127,13 +127,18 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-2">
-                    {dict.contact.form.message}
+                    {dict.contact.form.businessField}
                   </label>
-                  <textarea
-                    rows={5}
-                    placeholder={dict.contact.form.messagePlaceholder}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                  />
+                  <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors">
+                    <option value="" className="bg-dark">
+                      {dict.contact.form.businessFieldPlaceholder}
+                    </option>
+                    {dict.contact.form.businessFieldOptions.map((option) => (
+                      <option key={option} value={option} className="bg-dark">
+                        {option}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <button
