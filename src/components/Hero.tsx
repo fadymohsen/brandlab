@@ -1,6 +1,11 @@
+"use client";
+
 import { Play, ArrowRight } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-provider";
 
 export default function Hero() {
+  const dict = useDictionary();
+
   return (
     <section
       id="home"
@@ -28,22 +33,20 @@ export default function Hero() {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8">
           <Play size={14} className="text-primary fill-primary" />
           <span className="text-sm font-medium text-cream/80">
-            Creative Video Agency
+            {dict.hero.badge}
           </span>
         </div>
 
         {/* Headline */}
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.1] mb-6">
-          <span className="text-cream">Where Creativity</span>
+          <span className="text-cream">{dict.hero.headlineTop}</span>
           <br />
-          <span className="gradient-text">Meets Precision</span>
+          <span className="gradient-text">{dict.hero.headlineBottom}</span>
         </h1>
 
         {/* Subheadline */}
         <p className="max-w-2xl mx-auto text-lg sm:text-xl text-cream/60 leading-relaxed mb-10">
-          We transform raw footage into cinematic masterpieces. Helping
-          startups, freelancers, and content creators tell stories that
-          captivate and convert.
+          {dict.hero.subheadline}
         </p>
 
         {/* CTAs */}
@@ -52,10 +55,10 @@ export default function Hero() {
             href="#contact"
             className="group px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-all flex items-center gap-2 animate-gradient"
           >
-            Start Your Journey
+            {dict.hero.ctaPrimary}
             <ArrowRight
               size={18}
-              className="group-hover:translate-x-1 transition-transform"
+              className="group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1 transition-transform"
             />
           </a>
           <a
@@ -63,18 +66,13 @@ export default function Hero() {
             className="px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors flex items-center gap-2"
           >
             <Play size={18} className="text-primary" />
-            View Our Work
+            {dict.hero.ctaSecondary}
           </a>
         </div>
 
         {/* Stats */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-          {[
-            { value: "200+", label: "Projects Delivered" },
-            { value: "50+", label: "Happy Clients" },
-            { value: "5+", label: "Years Experience" },
-            { value: "98%", label: "Client Satisfaction" },
-          ].map((stat) => (
+          {dict.hero.stats.map((stat) => (
             <div key={stat.label}>
               <div className="text-3xl sm:text-4xl font-bold gradient-text">
                 {stat.value}

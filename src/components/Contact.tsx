@@ -1,8 +1,11 @@
 "use client";
 
 import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-provider";
 
 export default function Contact() {
+  const dict = useDictionary();
+
   return (
     <section id="contact" className="py-24 lg:py-32 relative bg-dark-light/30">
       <div className="absolute inset-0">
@@ -13,15 +16,16 @@ export default function Contact() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
-            Get In Touch
+            {dict.contact.label}
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
-            Let&apos;s Create{" "}
-            <span className="gradient-text">Something Amazing</span>
+            {dict.contact.title}{" "}
+            <span className="gradient-text">
+              {dict.contact.titleHighlight}
+            </span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
-            Ready to elevate your content? Drop us a message and let&apos;s
-            bring your vision to life.
+            {dict.contact.subtitle}
           </p>
         </div>
 
@@ -33,8 +37,8 @@ export default function Contact() {
                 <Mail size={20} className="text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-cream">Email Us</h3>
-                <p className="text-cream/50 mt-1">hello@brandlab.studio</p>
+                <h3 className="font-semibold text-cream">{dict.contact.email}</h3>
+                <p className="text-cream/50 mt-1">{dict.contact.emailValue}</p>
               </div>
             </div>
 
@@ -43,8 +47,8 @@ export default function Contact() {
                 <Phone size={20} className="text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-cream">Call Us</h3>
-                <p className="text-cream/50 mt-1">+1 (555) 123-4567</p>
+                <h3 className="font-semibold text-cream">{dict.contact.phone}</h3>
+                <p className="text-cream/50 mt-1">{dict.contact.phoneValue}</p>
               </div>
             </div>
 
@@ -53,10 +57,11 @@ export default function Contact() {
                 <MapPin size={20} className="text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-cream">Location</h3>
+                <h3 className="font-semibold text-cream">
+                  {dict.contact.location}
+                </h3>
                 <p className="text-cream/50 mt-1">
-                  Available worldwide — we work remotely with clients across the
-                  globe.
+                  {dict.contact.locationValue}
                 </p>
               </div>
             </div>
@@ -65,11 +70,10 @@ export default function Contact() {
             <div className="gradient-border p-6 mt-8">
               <div className="relative z-10">
                 <h3 className="font-semibold text-cream mb-2">
-                  Quick Response Guarantee
+                  {dict.contact.guarantee}
                 </h3>
                 <p className="text-sm text-cream/50">
-                  We respond to every inquiry within 24 hours. Your project
-                  matters to us.
+                  {dict.contact.guaranteeText}
                 </p>
               </div>
             </div>
@@ -85,21 +89,21 @@ export default function Contact() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-cream/70 mb-2">
-                      Your Name
+                      {dict.contact.form.name}
                     </label>
                     <input
                       type="text"
-                      placeholder="John Doe"
+                      placeholder={dict.contact.form.namePlaceholder}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-cream/70 mb-2">
-                      Email Address
+                      {dict.contact.form.email}
                     </label>
                     <input
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder={dict.contact.form.emailPlaceholder}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
                     />
                   </div>
@@ -107,40 +111,27 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-2">
-                    Project Type
+                    {dict.contact.form.projectType}
                   </label>
                   <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors">
                     <option value="" className="bg-dark">
-                      Select a service
+                      {dict.contact.form.projectTypePlaceholder}
                     </option>
-                    <option value="editing" className="bg-dark">
-                      Video Editing
-                    </option>
-                    <option value="montage" className="bg-dark">
-                      Montage & Reels
-                    </option>
-                    <option value="color" className="bg-dark">
-                      Color Grading
-                    </option>
-                    <option value="motion" className="bg-dark">
-                      Motion Graphics
-                    </option>
-                    <option value="sound" className="bg-dark">
-                      Sound Design
-                    </option>
-                    <option value="brand" className="bg-dark">
-                      Brand Identity Video
-                    </option>
+                    {dict.contact.form.projectTypeOptions.map((option) => (
+                      <option key={option} value={option} className="bg-dark">
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-2">
-                    Tell Us About Your Project
+                    {dict.contact.form.message}
                   </label>
                   <textarea
                     rows={5}
-                    placeholder="Describe your project, goals, timeline, and any specific requirements..."
+                    placeholder={dict.contact.form.messagePlaceholder}
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors resize-none"
                   />
                 </div>
@@ -150,8 +141,8 @@ export default function Contact() {
                   className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity"
                 >
                   <Send size={18} />
-                  Send Message
-                  <ArrowRight size={16} />
+                  {dict.contact.form.submit}
+                  <ArrowRight size={16} className="rtl:rotate-180" />
                 </button>
               </div>
             </form>

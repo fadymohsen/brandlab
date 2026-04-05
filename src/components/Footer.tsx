@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-provider";
 
 const socialLinks = [
   { label: "Ig", href: "#", name: "Instagram" },
@@ -8,39 +11,38 @@ const socialLinks = [
   { label: "In", href: "#", name: "LinkedIn" },
 ];
 
-const footerLinks = [
-  {
-    title: "Services",
-    links: [
-      { label: "Video Editing", href: "#services" },
-      { label: "Montage & Reels", href: "#services" },
-      { label: "Color Grading", href: "#services" },
-      { label: "Motion Graphics", href: "#services" },
-      { label: "Sound Design", href: "#services" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", href: "#about" },
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Testimonials", href: "#testimonials" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "Contact", href: "#contact" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Blog", href: "#" },
-      { label: "FAQ", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-    ],
-  },
+const companyHrefs = [
+  "#about",
+  "#portfolio",
+  "#testimonials",
+  "#pricing",
+  "#contact",
 ];
 
 export default function Footer() {
+  const dict = useDictionary();
+
+  const footerSections = [
+    {
+      title: dict.footer.servicesTitle,
+      links: dict.footer.services.map((label) => ({
+        label,
+        href: "#services",
+      })),
+    },
+    {
+      title: dict.footer.companyTitle,
+      links: dict.footer.company.map((label, i) => ({
+        label,
+        href: companyHrefs[i],
+      })),
+    },
+    {
+      title: dict.footer.resourcesTitle,
+      links: dict.footer.resources.map((label) => ({ label, href: "#" })),
+    },
+  ];
+
   return (
     <footer className="border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
@@ -60,8 +62,7 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-cream/50 leading-relaxed max-w-sm mb-6">
-              Where creativity meets precision. We help brands and creators
-              craft compelling visual stories that captivate audiences worldwide.
+              {dict.footer.tagline}
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -78,9 +79,11 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          {footerLinks.map((section) => (
+          {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="font-semibold text-cream mb-4">{section.title}</h3>
+              <h3 className="font-semibold text-cream mb-4">
+                {section.title}
+              </h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
@@ -104,11 +107,9 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-cream/30">
-            &copy; {new Date().getFullYear()} Brand Lab. All rights reserved.
+            &copy; {new Date().getFullYear()} {dict.footer.copyright}
           </p>
-          <p className="text-sm text-cream/30">
-            Crafted with passion for visual storytelling.
-          </p>
+          <p className="text-sm text-cream/30">{dict.footer.crafted}</p>
         </div>
       </div>
     </footer>

@@ -1,37 +1,11 @@
-import { Star, Quote } from "lucide-react";
+"use client";
 
-const testimonials = [
-  {
-    name: "Sarah Mitchell",
-    role: "CEO, Elevate Fitness",
-    content:
-      "Brand Lab completely transformed our brand presence. The videos they produced were cinematic, engaging, and drove real results. Our social media engagement tripled within a month.",
-    rating: 5,
-  },
-  {
-    name: "James Rodriguez",
-    role: "Content Creator, 500K+ Followers",
-    content:
-      "Working with Brand Lab feels like having a creative partner who truly understands your vision. The editing quality is unmatched, and the turnaround time is incredible.",
-    rating: 5,
-  },
-  {
-    name: "Emily Chen",
-    role: "Founder, TechFlow",
-    content:
-      "Our product launch video was a game-changer. Brand Lab captured our product's essence perfectly. The video helped us secure our seed round — I can't recommend them enough.",
-    rating: 5,
-  },
-  {
-    name: "Omar Hassan",
-    role: "Freelance Photographer & Videographer",
-    content:
-      "As a freelancer, I needed a reliable editing partner. Brand Lab delivers consistently beautiful work that my clients love. They've become an essential part of my workflow.",
-    rating: 5,
-  },
-];
+import { Star, Quote } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-provider";
 
 export default function Testimonials() {
+  const dict = useDictionary();
+
   return (
     <section
       id="testimonials"
@@ -45,34 +19,33 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
-            Testimonials
+            {dict.testimonials.label}
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
-            What Our <span className="gradient-text">Clients Say</span>
+            {dict.testimonials.title}{" "}
+            <span className="gradient-text">
+              {dict.testimonials.titleHighlight}
+            </span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
-            Don&apos;t take our word for it — hear from the brands and creators
-            we&apos;ve helped succeed.
+            {dict.testimonials.subtitle}
           </p>
         </div>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {testimonials.map((testimonial) => (
+          {dict.testimonials.items.map((testimonial) => (
             <div
               key={testimonial.name}
               className="gradient-border p-8 hover:scale-[1.01] transition-transform duration-300"
             >
               <div className="relative z-10">
                 {/* Quote Icon */}
-                <Quote
-                  size={32}
-                  className="text-primary/30 mb-4"
-                />
+                <Quote size={32} className="text-primary/30 mb-4" />
 
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
                       size={16}

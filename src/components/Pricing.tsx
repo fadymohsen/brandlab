@@ -1,62 +1,11 @@
-import { Check, ArrowRight } from "lucide-react";
+"use client";
 
-const plans = [
-  {
-    name: "Starter",
-    price: "$299",
-    period: "per project",
-    description: "Perfect for freelancers and small content pieces.",
-    features: [
-      "Up to 5 minutes final cut",
-      "2 revision rounds",
-      "Basic color correction",
-      "Royalty-free music",
-      "Social media export formats",
-      "5-day delivery",
-    ],
-    cta: "Get Started",
-    featured: false,
-  },
-  {
-    name: "Professional",
-    price: "$799",
-    period: "per project",
-    description: "Ideal for startups and growing brands.",
-    features: [
-      "Up to 15 minutes final cut",
-      "Unlimited revisions",
-      "Cinematic color grading",
-      "Custom sound design",
-      "Motion graphics & titles",
-      "All export formats",
-      "3-day priority delivery",
-      "Dedicated editor",
-    ],
-    cta: "Start Your Journey",
-    featured: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "tailored for you",
-    description: "For brands that demand the extraordinary.",
-    features: [
-      "Unlimited duration",
-      "Unlimited revisions",
-      "Full post-production suite",
-      "Original score composition",
-      "Advanced VFX & animation",
-      "Multi-platform optimization",
-      "24-hour rush delivery",
-      "Dedicated creative team",
-      "Brand style guide creation",
-    ],
-    cta: "Contact Us",
-    featured: false,
-  },
-];
+import { Check, ArrowRight } from "lucide-react";
+import { useDictionary } from "@/i18n/dictionary-provider";
 
 export default function Pricing() {
+  const dict = useDictionary();
+
   return (
     <section id="pricing" className="py-24 lg:py-32 relative">
       <div className="absolute inset-0">
@@ -67,19 +16,21 @@ export default function Pricing() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
-            Pricing
+            {dict.pricing.label}
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
-            Simple, <span className="gradient-text">Transparent</span> Pricing
+            {dict.pricing.title}{" "}
+            <span className="gradient-text">{dict.pricing.titleHighlight}</span>{" "}
+            {dict.pricing.titleEnd}
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
-            Choose the plan that fits your needs. No hidden fees, no surprises.
+            {dict.pricing.subtitle}
           </p>
         </div>
 
         {/* Pricing Grid */}
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan) => (
+          {dict.pricing.plans.map((plan) => (
             <div
               key={plan.name}
               className={`relative rounded-2xl p-8 transition-transform duration-300 hover:scale-[1.02] ${
@@ -91,7 +42,7 @@ export default function Pricing() {
               <div className="relative z-10">
                 {plan.featured && (
                   <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">
-                    Most Popular
+                    {dict.pricing.mostPopular}
                   </div>
                 )}
 
@@ -104,7 +55,7 @@ export default function Pricing() {
                   <span className="text-5xl font-bold gradient-text">
                     {plan.price}
                   </span>
-                  <span className="text-cream/50 ml-2">/ {plan.period}</span>
+                  <span className="text-cream/50 ms-2">/ {plan.period}</span>
                 </div>
 
                 <ul className="space-y-4 mb-8">
@@ -128,7 +79,7 @@ export default function Pricing() {
                   }`}
                 >
                   {plan.cta}
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="rtl:rotate-180" />
                 </a>
               </div>
             </div>
