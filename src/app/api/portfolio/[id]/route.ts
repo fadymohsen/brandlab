@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readPortfolio, writePortfolio, extractYoutubeId } from "@/lib/portfolio-data";
+import { updatePortfolioItem, deletePortfolioItem, extractYoutubeId } from "@/lib/portfolio-data";
 import { isAuthenticated } from "@/lib/admin-auth";
 
 export async function PUT(
@@ -18,23 +18,18 @@ export async function PUT(
     return NextResponse.json({ error: "Invalid YouTube URL" }, { status: 400 });
   }
 
-  const items = await readPortfolio();
-  const index = items.findIndex((item) => item.id === id);
+  const updated = await updatePortfolioItem(id, {
+    title,
+    category,
+    youtubeUrl,
+    description,
+  });
 
-  if (index === -1) {
+  if (!updated) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  items[index] = {
-    ...items[index],
-    ...(title && { title }),
-    ...(category && { category }),
-    ...(youtubeUrl && { youtubeUrl }),
-    ...(description !== undefined && { description }),
-  };
-
-  await writePortfolio(items);
-  return NextResponse.json(items[index]);
+  return NextResponse.json(updated);
 }
 
 export async function DELETE(
@@ -46,13 +41,11 @@ export async function DELETE(
   }
 
   const { id } = await params;
-  const items = await readPortfolio();
-  const filtered = items.filter((item) => item.id !== id);
+  const deleted = await deletePortfolioItem(id);
 
-  if (filtered.length === items.length) {
+  if (!deleted) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  await writePortfolio(filtered);
   return NextResponse.json({ ok: true });
 }

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readPortfolio, writePortfolio, extractYoutubeId } from "@/lib/portfolio-data";
+import { readPortfolio, createPortfolioItem, extractYoutubeId } from "@/lib/portfolio-data";
+import { initDb } from "@/lib/db";
 import { isAuthenticated } from "@/lib/admin-auth";
-import crypto from "crypto";
 
 export async function GET() {
+  await initDb();
   const items = await readPortfolio();
   return NextResponse.json({ items });
 }
@@ -13,6 +14,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  await initDb();
   const body = await request.json();
   const { title, category, youtubeUrl, description } = body;
 
@@ -30,18 +32,12 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const items = await readPortfolio();
-  const newItem = {
-    id: crypto.randomUUID(),
+  const newItem = await createPortfolioItem({
     title,
     category: category || "Uncategorized",
     youtubeUrl,
     description: description || "",
-    createdAt: new Date().toISOString(),
-  };
-
-  items.push(newItem);
-  await writePortfolio(items);
+  });
 
   return NextResponse.json(newItem, { status: 201 });
 }
