@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Film, Scissors, Palette, Monitor, Music, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
@@ -13,8 +13,18 @@ interface LiveItem {
   title: string;
   category: string;
   youtubeUrl: string;
-  description: string;
 }
+
+const categories = [
+  "Video Editing",
+  "Montage & Reels",
+  "Color Grading",
+  "Motion Graphics",
+  "Sound Design",
+  "Brand Identity Videos",
+];
+
+const categoryIcons = [Film, Scissors, Palette, Monitor, Music, Sparkles];
 
 function extractYoutubeId(url: string): string | null {
   const patterns = [
@@ -34,17 +44,28 @@ export default function PortfolioPage() {
   const dict = useDictionary();
   const { open } = useLeadPopup();
   const [liveItems, setLiveItems] = useState<LiveItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/portfolio")
       .then((res) => res.json())
       .then((data) => {
-        if (data.items?.length > 0) setLiveItems(data.items);
+        if (data.items) setLiveItems(data.items);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
-  const hasLiveItems = liveItems.length > 0;
+  // Group items by category
+  const groupedByCategory = categories
+    .map((cat, index) => ({
+      name: cat,
+      icon: categoryIcons[index],
+      // Match service title from dictionary for localized name
+      localizedName: dict.services.items[index]?.title || cat,
+      items: liveItems.filter((item) => item.category === cat),
+    }))
+    .filter((group) => group.items.length > 0);
 
   return (
     <>
@@ -72,27 +93,47 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="py-20">
+      {/* Portfolio grouped by service */}
+      <section className="py-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {hasLiveItems ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-              {liveItems.map((item) => {
-                const videoId = extractYoutubeId(item.youtubeUrl);
-                if (!videoId) return null;
+          {loading ? (
+            <div className="text-center py-20 text-cream/40">Loading...</div>
+          ) : groupedByCategory.length > 0 ? (
+            <div className="space-y-20">
+              {groupedByCategory.map((group) => {
+                const Icon = group.icon;
                 return (
-                  <div key={item.id} className="group">
-                    <YouTubeShort videoId={videoId} />
-                    <div className="mt-3">
-                      <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                        {item.category}
-                      </span>
-                      <h3 className="text-sm font-semibold text-cream mt-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-xs text-cream/40 mt-1">
-                        {item.description}
-                      </p>
+                  <div key={group.name}>
+                    {/* Category Header */}
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+                        <Icon size={24} className="text-primary" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl lg:text-3xl font-bold text-cream">
+                          {group.localizedName}
+                        </h2>
+                        <p className="text-sm text-cream/40">
+                          {group.items.length}{" "}
+                          {group.items.length === 1 ? "project" : "projects"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Videos Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                      {group.items.map((item) => {
+                        const videoId = extractYoutubeId(item.youtubeUrl);
+                        if (!videoId) return null;
+                        return (
+                          <div key={item.id}>
+                            <YouTubeShort videoId={videoId} />
+                            <h3 className="text-sm font-semibold text-cream mt-3 truncate">
+                              {item.title}
+                            </h3>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
