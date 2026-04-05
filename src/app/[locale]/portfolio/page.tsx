@@ -1,23 +1,50 @@
 "use client";
 
-import { Play, ExternalLink, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
+import YouTubeShort from "@/components/YouTubeShort";
 
-const gradients = [
-  "from-primary to-secondary",
-  "from-secondary to-accent",
-  "from-accent to-primary",
-  "from-primary via-secondary to-accent",
-  "from-secondary to-primary",
-  "from-accent via-secondary to-primary",
-];
+interface LiveItem {
+  id: string;
+  title: string;
+  category: string;
+  youtubeUrl: string;
+  description: string;
+}
+
+function extractYoutubeId(url: string): string | null {
+  const patterns = [
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+    /youtu\.be\/([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
 
 export default function PortfolioPage() {
   const dict = useDictionary();
   const { open } = useLeadPopup();
+  const [liveItems, setLiveItems] = useState<LiveItem[]>([]);
+
+  useEffect(() => {
+    fetch("/api/portfolio")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items?.length > 0) setLiveItems(data.items);
+      })
+      .catch(() => {});
+  }, []);
+
+  const hasLiveItems = liveItems.length > 0;
 
   return (
     <>
@@ -45,42 +72,51 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Projects Grid */}
+      {/* Portfolio Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            {dict.portfolio.items.map((project, index) => (
-              <div
-                key={project.title}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer"
-              >
-                <div
-                  className={`aspect-video bg-gradient-to-br ${gradients[index]} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform border border-white/20">
-                    <Play size={32} className="text-white fill-white ms-1" />
+          {hasLiveItems ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {liveItems.map((item) => {
+                const videoId = extractYoutubeId(item.youtubeUrl);
+                if (!videoId) return null;
+                return (
+                  <div key={item.id} className="group">
+                    <YouTubeShort videoId={videoId} />
+                    <div className="mt-3">
+                      <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                        {item.category}
+                      </span>
+                      <h3 className="text-sm font-semibold text-cream mt-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-cream/40 mt-1">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-8">
+              {dict.portfolio.items.map((project) => (
+                <div key={project.title} className="gradient-border p-8">
+                  <div className="relative z-10">
+                    <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                    <h3 className="text-xl font-semibold text-cream mt-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-cream/50 mt-2">
+                      {project.description}
+                    </p>
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-dark via-dark/80 to-transparent">
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                    {project.category}
-                  </span>
-                  <h3 className="text-xl font-semibold text-cream mt-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-cream/50 mt-2">
-                    {project.description}
-                  </p>
-                </div>
-                <div className="absolute top-4 end-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                    <ExternalLink size={16} className="text-white" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
