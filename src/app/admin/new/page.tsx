@@ -33,17 +33,21 @@ export default function NewPortfolioItem() {
     }
 
     setLoading(true);
-    const res = await fetch("/api/portfolio", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, category, youtubeUrl, description }),
-    });
+    try {
+      const res = await fetch("/api/portfolio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, category, youtubeUrl, description }),
+      });
 
-    if (res.ok) {
-      router.push("/admin");
-    } else {
-      const data = await res.json();
-      setError(data.error || "Something went wrong");
+      if (res.ok) {
+        router.push("/admin");
+      } else {
+        const data = await res.json();
+        setError(data.error || "Something went wrong");
+      }
+    } catch (err) {
+      setError("Network error: " + String(err));
     }
     setLoading(false);
   }
