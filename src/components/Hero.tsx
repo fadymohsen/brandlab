@@ -25,9 +25,9 @@ export default function Hero() {
     >
       {/* Parallax Background Blobs */}
       <div className="absolute inset-0">
-        <ParallaxFloat speed={0.5} direction="up" className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
-        <ParallaxFloat speed={0.3} direction="down" className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
-        <ParallaxFloat speed={0.4} direction="up" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/10 rounded-full blur-[100px]" />
+        <ParallaxFloat speed={0.5} direction="up" className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"><span /></ParallaxFloat>
+        <ParallaxFloat speed={0.3} direction="down" className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]"><span /></ParallaxFloat>
+        <ParallaxFloat speed={0.4} direction="up" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/10 rounded-full blur-[100px]"><span /></ParallaxFloat>
       </div>
 
       {/* Animated Grid Pattern */}
