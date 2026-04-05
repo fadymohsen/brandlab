@@ -420,6 +420,7 @@ const ar: Dictionary = {
       namePlaceholder: "أحمد محمد",
       email: "البريد الإلكتروني",
       emailPlaceholder: "ahmed@example.com",
+      phone: "رقم الهاتف",
       projectType: "نوع المشروع",
       projectTypePlaceholder: "اختر خدمة",
       projectTypeOptions: [

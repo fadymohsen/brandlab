@@ -420,6 +420,7 @@ const en = {
       namePlaceholder: "John Doe",
       email: "Email Address",
       emailPlaceholder: "john@example.com",
+      phone: "Phone Number",
       projectType: "Project Type",
       projectTypePlaceholder: "Select a service",
       projectTypeOptions: [
