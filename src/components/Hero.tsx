@@ -44,19 +44,6 @@ export default function Hero() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <motion.div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8"
-          initial={{ opacity: 0, y: -20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.4, 0, 1] }}
-        >
-          <Play size={14} className="text-primary fill-primary" />
-          <span className="text-sm font-medium text-cream/80">
-            {dict.hero.badge}
-          </span>
-        </motion.div>
-
         {/* Headline — word by word reveal */}
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.1] mb-6">
           <span className="text-cream overflow-hidden block">
