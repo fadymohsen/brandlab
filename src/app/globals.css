@@ -30,6 +30,68 @@ body {
   font-family: var(--font-arabic), sans-serif;
 }
 
+/* Fix select dropdown arrow padding */
+select {
+  padding-right: 2.5rem !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+[dir="rtl"] select {
+  padding-right: 1rem !important;
+  padding-left: 2.5rem !important;
+  background-position: left 1rem center;
+}
+
+/* Phone input styling */
+.PhoneInput {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.PhoneInputCountryIcon {
+  width: 1.5rem;
+  height: 1rem;
+}
+
+.PhoneInputCountrySelectArrow {
+  margin-left: 0.25rem;
+  border-color: rgba(245, 240, 232, 0.5);
+}
+
+.PhoneInputInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  color: #F5F0E8;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.PhoneInputInput::placeholder {
+  color: rgba(245, 240, 232, 0.3);
+}
+
+.PhoneInputInput:focus {
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
 /* Gradient text utility */
 .gradient-text {
   background: linear-gradient(135deg, #7C3AED, #E91E8C, #F97316);
