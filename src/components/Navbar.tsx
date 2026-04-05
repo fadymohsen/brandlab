@@ -107,13 +107,25 @@ export default function Navbar() {
         }`}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-dark/95 backdrop-blur-2xl" />
+        <div
+          className="absolute inset-0 bg-dark/95 backdrop-blur-2xl"
+          onClick={() => setIsOpen(false)}
+        />
 
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-secondary/10 rounded-full blur-[100px]" />
         </div>
+
+        {/* Close Button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-6 end-6 z-20 w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-cream hover:text-primary hover:border-primary/30 transition-colors"
+          aria-label="Close menu"
+        >
+          <X size={22} />
+        </button>
 
         {/* Menu Content */}
         <div className="relative z-10 flex flex-col h-full pt-20 pb-10 px-8">
