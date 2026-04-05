@@ -1,10 +1,14 @@
 "use client";
 
 import { Check, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 export default function Pricing() {
   const dict = useDictionary();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
 
   return (
     <section id="pricing" className="py-24 lg:py-32 relative">
@@ -13,7 +17,6 @@ export default function Pricing() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
             {dict.pricing.label}
@@ -28,7 +31,6 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* Pricing Grid */}
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {dict.pricing.plans.map((plan) => (
             <div
@@ -45,31 +47,22 @@ export default function Pricing() {
                     {dict.pricing.mostPopular}
                   </div>
                 )}
-
                 <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
-                <p className="text-cream/50 text-sm mt-2">
-                  {plan.description}
-                </p>
-
+                <p className="text-cream/50 text-sm mt-2">{plan.description}</p>
                 <div className="mt-6 mb-8">
                   <span className="text-5xl font-bold gradient-text">
                     {plan.price}
                   </span>
                   <span className="text-cream/50 ms-2">/ {plan.period}</span>
                 </div>
-
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <Check
-                        size={18}
-                        className="text-primary mt-0.5 shrink-0"
-                      />
+                      <Check size={18} className="text-primary mt-0.5 shrink-0" />
                       <span className="text-cream/70 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
-
                 <a
                   href="#contact"
                   className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-all ${
@@ -84,6 +77,17 @@ export default function Pricing() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link
+            href={`/${locale}/pricing`}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors"
+          >
+            {dict.pricing.cta}
+            <ArrowRight size={18} className="rtl:rotate-180" />
+          </Link>
         </div>
       </div>
     </section>
