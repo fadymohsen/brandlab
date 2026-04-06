@@ -405,8 +405,10 @@ const en = {
     titleHighlight: "Something Amazing",
     subtitle:
       "Ready to elevate your content? Drop us a message and let's bring your vision to life.",
-    phone: "Call / WhatsApp",
+    phone: "Call Us",
     phoneValue: "+20 122 774 2865",
+    whatsapp: "WhatsApp",
+    whatsappValue: "+20 122 774 2865",
     location: "Location",
     locationValue:
       "Available worldwide — we work remotely with clients across the globe.",

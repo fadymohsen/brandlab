@@ -163,7 +163,6 @@ select {
 
 /* Primary button */
 .btn-primary {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -192,7 +191,6 @@ select {
 
 /* Secondary button */
 .btn-secondary {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;

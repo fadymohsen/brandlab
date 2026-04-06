@@ -405,8 +405,10 @@ const ar: Dictionary = {
     titleHighlight: "شيئاً مذهلاً",
     subtitle:
       "مستعد لرفع مستوى محتواك؟ أرسل لنا رسالة ودعنا نحوّل رؤيتك إلى واقع.",
-    phone: "اتصل / واتساب",
+    phone: "اتصل بنا",
     phoneValue: "+20 122 774 2865",
+    whatsapp: "واتساب",
+    whatsappValue: "+20 122 774 2865",
     location: "الموقع",
     locationValue:
       "متاحون حول العالم — نعمل عن بُعد مع عملاء من جميع أنحاء العالم.",

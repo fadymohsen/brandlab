@@ -169,7 +169,7 @@ export default function AboutPage() {
           </p>
           <button
             onClick={open}
-            className="btn-primary mt-8"
+            className="inline-flex btn-primary mt-8"
           >
             {dict.about.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />

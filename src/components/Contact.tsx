@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, MapPin, Send, ArrowRight } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
@@ -54,15 +54,35 @@ export default function Contact() {
           {/* Contact Info */}
           <StaggerChildren className="lg:col-span-2 space-y-8">
             <StaggerItem>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+              <a
+                href="tel:+201227742865"
+                className="flex items-start gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0 group-hover:from-primary/30 group-hover:to-secondary/30 transition-colors">
                   <Phone size={20} className="text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-cream">{dict.contact.phone}</h3>
+                  <h3 className="font-semibold text-cream group-hover:text-primary transition-colors">{dict.contact.phone}</h3>
                   <p className="text-cream/70 mt-1">{dict.contact.phoneValue}</p>
                 </div>
-              </div>
+              </a>
+            </StaggerItem>
+
+            <StaggerItem>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/20 flex items-center justify-center shrink-0 group-hover:from-green-500/30 group-hover:to-green-600/30 transition-colors">
+                  <MessageCircle size={20} className="text-green-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-cream group-hover:text-green-500 transition-colors">{dict.contact.whatsapp}</h3>
+                  <p className="text-cream/70 mt-1">{dict.contact.whatsappValue}</p>
+                </div>
+              </a>
             </StaggerItem>
 
             <StaggerItem>
@@ -165,7 +185,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="btn-primary w-full rounded-xl"
+                  className="flex btn-primary w-full rounded-xl"
                 >
                   <Send size={18} />
                   {dict.contact.form.submit}

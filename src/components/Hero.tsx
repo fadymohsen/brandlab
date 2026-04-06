@@ -100,7 +100,7 @@ export default function Hero() {
         >
           <MagneticButton
             onClick={open}
-            className="group btn-primary"
+            className="group inline-flex btn-primary"
           >
             {dict.hero.ctaPrimary}
             <ArrowRight
@@ -110,7 +110,7 @@ export default function Hero() {
           </MagneticButton>
           <Link
             href={`/${locale}/portfolio`}
-            className="btn-secondary"
+            className="inline-flex btn-secondary"
           >
             <Play size={18} className="text-primary" />
             {dict.hero.ctaSecondary}

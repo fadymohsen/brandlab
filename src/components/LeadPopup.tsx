@@ -103,7 +103,7 @@ export default function LeadPopup({
             </div>
             <button
               type="submit"
-              className="btn-primary w-full rounded-xl mt-2"
+              className="flex btn-primary w-full rounded-xl mt-2"
             >
               <Send size={18} />
               {dict.leadPopup.submit}

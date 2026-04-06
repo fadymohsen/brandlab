@@ -114,7 +114,7 @@ export default function Portfolio() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/portfolio`}
-            className="btn-primary"
+            className="inline-flex btn-primary"
           >
             {dict.portfolio.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />

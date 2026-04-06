@@ -49,13 +49,13 @@ export default function About() {
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <a
                   href="#contact"
-                  className="btn-primary text-center"
+                  className="inline-flex btn-primary text-center"
                 >
                   {dict.about.ctaPrimary}
                 </a>
                 <Link
                   href={`/${locale}/about`}
-                  className="btn-secondary text-center"
+                  className="inline-flex btn-secondary text-center"
                 >
                   {dict.about.ctaSecondary}
                   <ArrowRight size={16} className="rtl:rotate-180" />

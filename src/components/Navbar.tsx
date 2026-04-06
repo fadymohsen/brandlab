@@ -169,7 +169,7 @@ export default function Navbar() {
             <Link
               href={switchPath}
               onClick={() => setIsOpen(false)}
-              className="btn-secondary w-full rounded-xl py-3"
+              className="flex btn-secondary w-full rounded-xl py-3"
             >
               <Globe size={18} />
               {currentLocale === "en" ? "العربية" : "English"}
@@ -178,7 +178,7 @@ export default function Navbar() {
             {/* CTA */}
             <button
               onClick={() => { setIsOpen(false); openPopup(); }}
-              className="btn-primary w-full rounded-xl"
+              className="flex btn-primary w-full rounded-xl"
             >
               {dict.nav.cta}
               <ArrowRight size={18} className="rtl:rotate-180" />

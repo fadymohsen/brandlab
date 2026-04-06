@@ -72,7 +72,7 @@ export default function Services() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/services`}
-            className="btn-primary"
+            className="inline-flex btn-primary"
           >
             {dict.services.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />

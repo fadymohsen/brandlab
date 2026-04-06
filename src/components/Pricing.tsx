@@ -69,7 +69,7 @@ export default function Pricing() {
                   </ul>
                   <a
                     href="#contact"
-                    className={`w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
+                    className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
@@ -83,7 +83,7 @@ export default function Pricing() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/pricing`}
-            className="btn-secondary"
+            className="inline-flex btn-secondary"
           >
             {dict.pricing.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />

@@ -95,7 +95,7 @@ export default function PricingPage() {
                   </ul>
                   <button
                     onClick={open}
-                    className={`w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
+                    className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
@@ -147,7 +147,7 @@ export default function PricingPage() {
           </p>
           <button
             onClick={open}
-            className="btn-primary mt-8"
+            className="inline-flex btn-primary mt-8"
           >
             {dict.pricing.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />
