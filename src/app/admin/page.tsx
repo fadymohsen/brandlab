@@ -8,10 +8,7 @@ import { Plus, Pencil, Trash2, LogOut, ExternalLink } from "lucide-react";
 
 interface PortfolioItem {
   id: string;
-  title: string;
-  category: string;
   youtubeUrl: string;
-  description: string;
   createdAt: string;
 }
 
@@ -113,14 +110,6 @@ export default function AdminDashboard() {
                 className="gradient-border p-5 flex items-center justify-between gap-4"
               >
                 <div className="relative z-10 flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 className="font-semibold text-cream truncate">
-                      {item.title}
-                    </h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-primary/20 text-primary shrink-0">
-                      {item.category}
-                    </span>
-                  </div>
                   <a
                     href={item.youtubeUrl}
                     target="_blank"

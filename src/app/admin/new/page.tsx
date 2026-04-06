@@ -5,18 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
 
-const categories = [
-  "Video Editing",
-  "Montage & Reels",
-  "Color Grading",
-  "Motion Graphics",
-  "Sound Design",
-  "Brand Identity Videos",
-];
-
 export default function NewPortfolioItem() {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,17 +15,17 @@ export default function NewPortfolioItem() {
     e.preventDefault();
     setError("");
 
-    if (!title.trim() || !youtubeUrl.trim() || !category) {
-      setError("All fields are required");
+    if (!youtubeUrl.trim()) {
+      setError("YouTube Short URL is required");
       return;
     }
 
     if (
       !youtubeUrl.match(
-        /youtube\.com\/(shorts|watch|embed)|youtu\.be\/|instagram\.com\/(reel|reels|p)\//
+        /youtube\.com\/(shorts|watch|embed)|youtu\.be\//
       )
     ) {
-      setError("Please enter a valid YouTube or Instagram reel URL");
+      setError("Please enter a valid YouTube Short URL");
       return;
     }
 
@@ -45,7 +34,7 @@ export default function NewPortfolioItem() {
       const res = await fetch("/api/portfolio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, category, youtubeUrl, description: "" }),
+        body: JSON.stringify({ title: "", category: "", youtubeUrl, description: "" }),
       });
 
       if (res.ok) {
@@ -81,46 +70,13 @@ export default function NewPortfolioItem() {
           <div className="relative z-10 space-y-5">
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Title *
-              </label>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Fitness Brand Campaign"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Category *
-              </label>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
-              >
-                <option value="" className="bg-dark">
-                  Select a category
-                </option>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat} className="bg-dark">
-                    {cat}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                Video URL (YouTube Short or Instagram Reel) *
+                YouTube Short URL *
               </label>
               <input
                 type="url"
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
-                placeholder="https://youtube.com/shorts/... or https://instagram.com/reel/..."
+                placeholder="https://youtube.com/shorts/..."
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
               />
             </div>

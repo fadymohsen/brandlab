@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Film, Scissors, Palette, Monitor, Music, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
@@ -10,21 +10,8 @@ import VideoEmbed from "@/components/VideoEmbed";
 
 interface LiveItem {
   id: string;
-  title: string;
-  category: string;
   youtubeUrl: string;
 }
-
-const categories = [
-  "Video Editing",
-  "Montage & Reels",
-  "Color Grading",
-  "Motion Graphics",
-  "Sound Design",
-  "Brand Identity Videos",
-];
-
-const categoryIcons = [Film, Scissors, Palette, Monitor, Music, Sparkles];
 
 export default function PortfolioPage() {
   const dict = useDictionary();
@@ -41,17 +28,6 @@ export default function PortfolioPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
-
-  // Group items by category
-  const groupedByCategory = categories
-    .map((cat, index) => ({
-      name: cat,
-      icon: categoryIcons[index],
-      // Match service title from dictionary for localized name
-      localizedName: dict.services.items[index]?.title || cat,
-      items: liveItems.filter((item) => item.category === cat),
-    }))
-    .filter((group) => group.items.length > 0);
 
   return (
     <>
@@ -84,62 +60,15 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {loading ? (
             <div className="text-center py-20 text-cream/40">Loading...</div>
-          ) : groupedByCategory.length > 0 ? (
-            <div className="space-y-20">
-              {groupedByCategory.map((group) => {
-                const Icon = group.icon;
-                return (
-                  <div key={group.name}>
-                    {/* Category Header */}
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
-                        <Icon size={24} className="text-primary" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl lg:text-3xl font-bold text-cream">
-                          {group.localizedName}
-                        </h2>
-                        <p className="text-sm text-cream/40">
-                          {group.items.length}{" "}
-                          {group.items.length === 1 ? "project" : "projects"}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Videos Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                      {group.items.map((item) => {
-                        return (
-                          <div key={item.id}>
-                            <VideoEmbed url={item.youtubeUrl} />
-                            <h3 className="text-sm font-semibold text-cream mt-3 truncate">
-                              {item.title}
-                            </h3>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
+          ) : liveItems.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {liveItems.map((item) => (
+                <VideoEmbed key={item.id} url={item.youtubeUrl} />
+              ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-8">
-              {dict.portfolio.items.map((project) => (
-                <div key={project.title} className="gradient-border p-8">
-                  <div className="relative z-10">
-                    <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                      {project.category}
-                    </span>
-                    <h3 className="text-xl font-semibold text-cream mt-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-cream/70 mt-2">
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className="text-center py-20 text-cream/40">
+              No reels yet — check back soon!
             </div>
           )}
         </div>

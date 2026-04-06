@@ -14,58 +14,25 @@ export function YouTubeEmbed({ videoId, className = "" }: { videoId: string; cla
   );
 }
 
-export function InstagramEmbed({ reelId, className = "" }: { reelId: string; className?: string }) {
-  return (
-    <div className={`rounded-2xl overflow-hidden aspect-[9/16] relative ${className}`}>
-      <iframe
-        src={`https://www.instagram.com/reel/${reelId}/embed/?cr=1&hidecaption=1`}
-        className="absolute top-[-60px] left-0 w-full border-0"
-        style={{ height: "calc(100% + 300px)" }}
-        allowFullScreen
-        scrolling="no"
-        title="Instagram Reel"
-      />
-    </div>
-  );
-}
-
 export default function VideoEmbed({
   url,
-  videoSource,
   className = "",
 }: {
   url?: string;
-  videoSource?: { type: "youtube" | "instagram"; id: string };
   className?: string;
 }) {
-  if (!videoSource && url) {
-    // Parse from URL
-    const ytPatterns = [
-      /youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/,
-      /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
-      /youtu\.be\/([a-zA-Z0-9_-]+)/,
-      /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-    ];
-    for (const p of ytPatterns) {
-      const m = url.match(p);
-      if (m) return <YouTubeEmbed videoId={m[1]} className={className} />;
-    }
-    const igPatterns = [
-      /instagram\.com\/reel\/([a-zA-Z0-9_-]+)/,
-      /instagram\.com\/reels\/([a-zA-Z0-9_-]+)/,
-      /instagram\.com\/p\/([a-zA-Z0-9_-]+)/,
-    ];
-    for (const p of igPatterns) {
-      const m = url.match(p);
-      if (m) return <InstagramEmbed reelId={m[1]} className={className} />;
-    }
-    return null;
+  if (!url) return null;
+
+  const ytPatterns = [
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+    /youtu\.be\/([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+  ];
+  for (const p of ytPatterns) {
+    const m = url.match(p);
+    if (m) return <YouTubeEmbed videoId={m[1]} className={className} />;
   }
 
-  if (!videoSource) return null;
-
-  if (videoSource.type === "youtube") {
-    return <YouTubeEmbed videoId={videoSource.id} className={className} />;
-  }
-  return <InstagramEmbed reelId={videoSource.id} className={className} />;
+  return null;
 }

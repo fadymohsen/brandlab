@@ -10,10 +10,7 @@ import VideoEmbed from "./VideoEmbed";
 
 interface LiveItem {
   id: string;
-  title: string;
-  category: string;
   youtubeUrl: string;
-  description: string;
 }
 
 export default function Portfolio() {
@@ -57,17 +54,7 @@ export default function Portfolio() {
           <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {liveItems.slice(0, 8).map((item) => (
                 <StaggerItem key={item.id}>
-                  <div className="group">
-                    <VideoEmbed url={item.youtubeUrl} />
-                    <div className="mt-3">
-                      <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                        {item.category}
-                      </span>
-                      <h3 className="text-sm font-semibold text-cream mt-1 truncate">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </div>
+                  <VideoEmbed url={item.youtubeUrl} />
                 </StaggerItem>
             ))}
           </StaggerChildren>
