@@ -17,11 +17,11 @@ export default function BookCall() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
       >
         <source src="/experts-video.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-dark/60" />
+      <div className="absolute inset-0 bg-dark/40" />
 
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />

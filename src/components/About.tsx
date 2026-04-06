@@ -26,11 +26,11 @@ export default function About() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
       >
         <source src="/bg-video.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-dark/60" />
+      <div className="absolute inset-0 bg-dark/40" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

@@ -28,11 +28,11 @@ export default function Hero() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-dark/60" />
+      <div className="absolute inset-0 bg-dark/40" />
 
       {/* Parallax Background Blobs */}
       <div className="absolute inset-0">
