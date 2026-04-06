@@ -62,23 +62,28 @@ export default function Hero() {
               </motion.span>
             ))}
           </span>
-          <span className="gradient-text overflow-hidden block">
-            {dict.hero.headlineBottom.split(" ").map((word, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                initial={{ opacity: 0, y: 80, rotateX: 40 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.7 + i * 0.1,
-                  ease: [0.25, 0.4, 0, 1],
-                }}
-              >
-                {word}&nbsp;
-              </motion.span>
-            ))}
-          </span>
+          <motion.span
+            className="gradient-text overflow-hidden block"
+            initial={{ opacity: 0, y: 80, rotateX: 40 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              rotateX: 0,
+              textShadow: [
+                "0 0 0px rgba(124,58,237,0)",
+                "0 0 30px rgba(124,58,237,0.6)",
+                "0 0 0px rgba(124,58,237,0)",
+              ],
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.7 },
+              y: { duration: 0.8, delay: 0.7 },
+              rotateX: { duration: 0.8, delay: 0.7 },
+              textShadow: { duration: 2, delay: 1.5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            {dict.hero.headlineBottom}
+          </motion.span>
         </h1>
 
         {/* Subheadline */}

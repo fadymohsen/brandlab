@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import BookCall from "@/components/BookCall";
 import About from "@/components/About";
 import Portfolio from "@/components/Portfolio";
 import Pricing from "@/components/Pricing";
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Services />
+      <BookCall />
       <About />
       <Portfolio />
       <Pricing />

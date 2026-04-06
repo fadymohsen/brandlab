@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -53,17 +53,24 @@ export default function Pricing() {
                   )}
                   <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
                   <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
-                  <div className="mt-6 mb-8">
+                  <div className="mt-6 mb-2">
                     <span className="text-5xl font-bold gradient-text">
                       {plan.price}
                     </span>
                     <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
+                  <p className="text-cream/50 text-xs mb-8">{plan.perReel}</p>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <Check size={18} className="text-primary mt-0.5 shrink-0" />
-                        <span className="text-cream/70 text-sm">{feature}</span>
+                      <li key={feature.label} className="flex items-start gap-3">
+                        {feature.included ? (
+                          <Check size={18} className="text-primary mt-0.5 shrink-0" />
+                        ) : (
+                          <X size={18} className="text-cream/30 mt-0.5 shrink-0" />
+                        )}
+                        <span className={`text-sm ${feature.included ? "text-cream/70" : "text-cream/30"}`}>
+                          {feature.label}
+                        </span>
                       </li>
                     ))}
                   </ul>

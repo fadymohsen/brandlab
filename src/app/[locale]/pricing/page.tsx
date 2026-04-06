@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ArrowRight, ChevronDown } from "lucide-react";
+import { Check, X, ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -85,11 +85,18 @@ export default function PricingPage() {
                     </span>
                     <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
+                  <p className="text-cream/50 text-xs mb-8">{plan.perReel}</p>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <Check size={18} className="text-primary mt-0.5 shrink-0" />
-                        <span className="text-cream/70 text-sm">{feature}</span>
+                      <li key={feature.label} className="flex items-start gap-3">
+                        {feature.included ? (
+                          <Check size={18} className="text-primary mt-0.5 shrink-0" />
+                        ) : (
+                          <X size={18} className="text-cream/30 mt-0.5 shrink-0" />
+                        )}
+                        <span className={`text-sm ${feature.included ? "text-cream/70" : "text-cream/30"}`}>
+                          {feature.label}
+                        </span>
                       </li>
                     ))}
                   </ul>
