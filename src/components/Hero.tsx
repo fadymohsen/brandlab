@@ -88,7 +88,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <motion.p
-          className="max-w-2xl mx-auto text-lg sm:text-xl text-cream/80 leading-relaxed mb-10"
+          className="max-w-2xl mx-auto text-lg sm:text-xl text-cream leading-relaxed mb-10"
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 1, ease: [0.25, 0.4, 0, 1] }}
