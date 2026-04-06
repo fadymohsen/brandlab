@@ -22,6 +22,18 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+      >
+        <source src="/hero-video.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-dark/60" />
+
       {/* Parallax Background Blobs */}
       <div className="absolute inset-0">
         <ParallaxFloat speed={0.5} direction="up" className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"><span /></ParallaxFloat>
