@@ -16,11 +16,13 @@ export function YouTubeEmbed({ videoId, className = "" }: { videoId: string; cla
 
 export function InstagramEmbed({ reelId, className = "" }: { reelId: string; className?: string }) {
   return (
-    <div className={`rounded-2xl overflow-hidden ${className}`}>
+    <div className={`rounded-2xl overflow-hidden aspect-[9/16] relative ${className}`}>
       <iframe
-        src={`https://www.instagram.com/reel/${reelId}/embed`}
-        className="w-full aspect-[9/16]"
+        src={`https://www.instagram.com/reel/${reelId}/embed/?cr=1&hidecaption=1`}
+        className="absolute top-[-60px] left-0 w-full border-0"
+        style={{ height: "calc(100% + 120px)" }}
         allowFullScreen
+        scrolling="no"
         title="Instagram Reel"
       />
     </div>
