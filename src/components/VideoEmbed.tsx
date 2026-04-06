@@ -20,7 +20,7 @@ export function InstagramEmbed({ reelId, className = "" }: { reelId: string; cla
       <iframe
         src={`https://www.instagram.com/reel/${reelId}/embed/?cr=1&hidecaption=1`}
         className="absolute top-[-60px] left-0 w-full border-0"
-        style={{ height: "calc(100% + 120px)" }}
+        style={{ height: "calc(100% + 300px)" }}
         allowFullScreen
         scrolling="no"
         title="Instagram Reel"
