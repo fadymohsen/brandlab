@@ -56,7 +56,7 @@ export default function Footer() {
                 Brand <span className="gradient-text">Lab</span>
               </span>
             </Link>
-            <p className="text-cream/50 leading-relaxed max-w-sm mb-6">
+            <p className="text-cream/70 leading-relaxed max-w-sm mb-6">
               {dict.footer.tagline}
             </p>
             <div className="flex gap-3">
@@ -65,7 +65,7 @@ export default function Footer() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cream/50 hover:text-primary hover:border-primary/30 transition-colors text-xs font-bold"
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cream/70 hover:text-primary hover:border-primary/30 transition-colors text-xs font-bold"
                 >
                   {social.label}
                 </a>
@@ -84,7 +84,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-cream/50 hover:text-cream transition-colors inline-flex items-center gap-1 group"
+                      className="text-sm text-cream/70 hover:text-cream transition-colors inline-flex items-center gap-1 group"
                     >
                       {link.label}
                       <ArrowUpRight

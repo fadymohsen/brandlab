@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "./LeadPopupProvider";
 import {
-  AnimatedCounter,
   MagneticButton,
   ParallaxFloat,
 } from "./animations";
@@ -84,7 +83,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <motion.p
-          className="max-w-2xl mx-auto text-lg sm:text-xl text-cream/60 leading-relaxed mb-10"
+          className="max-w-2xl mx-auto text-lg sm:text-xl text-cream/80 leading-relaxed mb-10"
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 1, ease: [0.25, 0.4, 0, 1] }}
@@ -101,7 +100,7 @@ export default function Hero() {
         >
           <MagneticButton
             onClick={open}
-            className="group px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-all flex items-center gap-2 animate-gradient cursor-pointer"
+            className="group btn-primary"
           >
             {dict.hero.ctaPrimary}
             <ArrowRight
@@ -111,29 +110,13 @@ export default function Hero() {
           </MagneticButton>
           <Link
             href={`/${locale}/portfolio`}
-            className="px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors flex items-center gap-2"
+            className="btn-secondary"
           >
             <Play size={18} className="text-primary" />
             {dict.hero.ctaSecondary}
           </Link>
         </motion.div>
 
-        {/* Stats with animated counters */}
-        <motion.div
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-        >
-          {dict.hero.stats.map((stat) => (
-            <div key={stat.label}>
-              <div className="text-3xl sm:text-4xl font-bold gradient-text">
-                <AnimatedCounter value={stat.value} />
-              </div>
-              <div className="text-sm text-cream/50 mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       {/* Scroll indicator */}

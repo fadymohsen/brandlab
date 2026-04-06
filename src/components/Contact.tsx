@@ -1,12 +1,32 @@
 "use client";
 
-import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Phone, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
 
+const WHATSAPP_NUMBER = "201227742865";
+
 export default function Contact() {
   const dict = useDictionary();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [businessField, setBusinessField] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const lines = [
+      `*New Contact Form*`,
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      projectType ? `Project Type: ${projectType}` : "",
+      businessField ? `Business Field: ${businessField}` : "",
+    ].filter(Boolean);
+    const text = encodeURIComponent(lines.join("\n"));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+  }
 
   return (
     <section id="contact" className="py-24 lg:py-32 relative bg-dark-light/30">
@@ -25,7 +45,7 @@ export default function Contact() {
               {dict.contact.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
             {dict.contact.subtitle}
           </p>
         </RevealOnScroll>
@@ -36,23 +56,11 @@ export default function Contact() {
             <StaggerItem>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
-                  <Mail size={20} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-cream">{dict.contact.email}</h3>
-                  <p className="text-cream/50 mt-1">{dict.contact.emailValue}</p>
-                </div>
-              </div>
-            </StaggerItem>
-
-            <StaggerItem>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
                   <Phone size={20} className="text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-cream">{dict.contact.phone}</h3>
-                  <p className="text-cream/50 mt-1">{dict.contact.phoneValue}</p>
+                  <p className="text-cream/70 mt-1">{dict.contact.phoneValue}</p>
                 </div>
               </div>
             </StaggerItem>
@@ -66,7 +74,7 @@ export default function Contact() {
                   <h3 className="font-semibold text-cream">
                     {dict.contact.location}
                   </h3>
-                  <p className="text-cream/50 mt-1">
+                  <p className="text-cream/70 mt-1">
                     {dict.contact.locationValue}
                   </p>
                 </div>
@@ -79,7 +87,7 @@ export default function Contact() {
                   <h3 className="font-semibold text-cream mb-2">
                     {dict.contact.guarantee}
                   </h3>
-                  <p className="text-sm text-cream/50">
+                  <p className="text-sm text-cream/70">
                     {dict.contact.guaranteeText}
                   </p>
                 </div>
@@ -90,43 +98,40 @@ export default function Contact() {
           {/* Contact Form */}
           <RevealOnScroll className="lg:col-span-3" direction="right">
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
               className="gradient-border p-8"
             >
               <div className="relative z-10 space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-cream/70 mb-2">
-                      {dict.contact.form.name}
-                    </label>
-                    <input
-                      type="text"
-                      placeholder={dict.contact.form.namePlaceholder}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-cream/70 mb-2">
-                      {dict.contact.form.email}
-                    </label>
-                    <input
-                      type="email"
-                      placeholder={dict.contact.form.emailPlaceholder}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-cream/70 mb-2">
+                    {dict.contact.form.name}
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={dict.contact.form.namePlaceholder}
+                    required
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                  />
                 </div>
 
                 <PhoneField
                   label={dict.contact.form.phone}
-                  placeholder="+20 123 456 7890"
+                  placeholder="+20 122 774 2865"
+                  value={phone}
+                  onChange={setPhone}
                 />
 
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-2">
                     {dict.contact.form.projectType}
                   </label>
-                  <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors">
+                  <select
+                    value={projectType}
+                    onChange={(e) => setProjectType(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                  >
                     <option value="" className="bg-dark">
                       {dict.contact.form.projectTypePlaceholder}
                     </option>
@@ -142,7 +147,11 @@ export default function Contact() {
                   <label className="block text-sm font-medium text-cream/70 mb-2">
                     {dict.contact.form.businessField}
                   </label>
-                  <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors">
+                  <select
+                    value={businessField}
+                    onChange={(e) => setBusinessField(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                  >
                     <option value="" className="bg-dark">
                       {dict.contact.form.businessFieldPlaceholder}
                     </option>
@@ -156,7 +165,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity"
+                  className="btn-primary w-full rounded-xl"
                 >
                   <Send size={18} />
                   {dict.contact.form.submit}

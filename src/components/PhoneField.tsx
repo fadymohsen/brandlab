@@ -7,12 +7,26 @@ import "react-phone-number-input/style.css";
 export default function PhoneField({
   label,
   placeholder,
+  value: externalValue,
+  onChange: externalOnChange,
 }: {
   label: string;
   placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
-  const [value, setValue] = useState<string | undefined>();
+  const [internalValue, setInternalValue] = useState<string | undefined>();
   const [touched, setTouched] = useState(false);
+
+  const value = externalValue !== undefined ? externalValue : internalValue;
+
+  function handleChange(val: string | undefined) {
+    if (externalOnChange) {
+      externalOnChange(val ?? "");
+    } else {
+      setInternalValue(val);
+    }
+  }
 
   const isValid = !value || isValidPhoneNumber(value);
 
@@ -25,7 +39,7 @@ export default function PhoneField({
         international
         defaultCountry="EG"
         value={value}
-        onChange={setValue}
+        onChange={handleChange}
         onBlur={() => setTouched(true)}
         placeholder={placeholder}
       />

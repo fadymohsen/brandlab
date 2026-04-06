@@ -27,7 +27,7 @@ export default function RefundPage() {
           {dict.refundPage.sections.map((section) => (
             <div key={section.title}>
               <h2 className="text-2xl font-bold text-cream mb-4">{section.title}</h2>
-              <p className="text-cream/60 leading-relaxed">{section.content}</p>
+              <p className="text-cream/80 leading-relaxed">{section.content}</p>
             </div>
           ))}
         </div>

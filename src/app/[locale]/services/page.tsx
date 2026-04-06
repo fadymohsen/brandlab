@@ -40,7 +40,7 @@ export default function ServicesPage() {
               {dict.services.pageTitleHighlight}
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/60">
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/80">
             {dict.services.pageSubtitle}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
                   <h2 className="text-3xl lg:text-4xl font-bold text-cream mb-4">
                     {service.title}
                   </h2>
-                  <p className="text-cream/50 text-lg leading-relaxed">
+                  <p className="text-cream/70 text-lg leading-relaxed">
                     {service.detailed}
                   </p>
                 </div>
@@ -99,7 +99,7 @@ export default function ServicesPage() {
                 {dict.services.processTitleHighlight}
               </span>
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+            <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
               {dict.services.processSubtitle}
             </p>
           </div>
@@ -112,7 +112,7 @@ export default function ServicesPage() {
                 <h3 className="text-lg font-semibold text-cream mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-cream/50">{step.description}</p>
+                <p className="text-sm text-cream/70">{step.description}</p>
               </div>
             ))}
           </div>
@@ -131,12 +131,12 @@ export default function ServicesPage() {
               {dict.services.ctaSection.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 text-cream/50 text-lg">
+          <p className="mt-4 text-cream/70 text-lg">
             {dict.services.ctaSection.subtitle}
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary mt-8"
           >
             {dict.services.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />

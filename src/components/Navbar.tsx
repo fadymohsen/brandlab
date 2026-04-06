@@ -83,7 +83,7 @@ export default function Navbar() {
             {/* Right — CTA */}
             <button
               onClick={openPopup}
-              className="hidden lg:flex px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-semibold text-white hover:opacity-90 transition-opacity shrink-0"
+              className="hidden lg:flex btn-primary px-6 py-2.5 text-sm shrink-0"
             >
               {dict.nav.cta}
             </button>
@@ -91,7 +91,7 @@ export default function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden text-cream relative z-60 w-10 h-10 flex items-center justify-center"
+              className="lg:hidden text-cream relative z-60 w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 hover:border-primary/30 hover:bg-white/10 transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -169,7 +169,7 @@ export default function Navbar() {
             <Link
               href={switchPath}
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl border border-white/10 text-base font-medium text-cream/70 hover:text-cream hover:border-primary/30 transition-colors"
+              className="btn-secondary w-full rounded-xl py-3"
             >
               <Globe size={18} />
               {currentLocale === "en" ? "العربية" : "English"}
@@ -178,7 +178,7 @@ export default function Navbar() {
             {/* CTA */}
             <button
               onClick={() => { setIsOpen(false); openPopup(); }}
-              className="flex items-center justify-center gap-2 py-4 w-full bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity"
+              className="btn-primary w-full rounded-xl"
             >
               {dict.nav.cta}
               <ArrowRight size={18} className="rtl:rotate-180" />

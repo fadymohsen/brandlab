@@ -28,7 +28,7 @@ export default function Pricing() {
             <span className="gradient-text">{dict.pricing.titleHighlight}</span>{" "}
             {dict.pricing.titleEnd}
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
             {dict.pricing.subtitle}
           </p>
         </RevealOnScroll>
@@ -52,12 +52,12 @@ export default function Pricing() {
                     </div>
                   )}
                   <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
-                  <p className="text-cream/50 text-sm mt-2">{plan.description}</p>
+                  <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
                   <div className="mt-6 mb-8">
                     <span className="text-5xl font-bold gradient-text">
                       {plan.price}
                     </span>
-                    <span className="text-cream/50 ms-2">/ {plan.period}</span>
+                    <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
@@ -69,11 +69,7 @@ export default function Pricing() {
                   </ul>
                   <a
                     href="#contact"
-                    className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-all ${
-                      plan.featured
-                        ? "bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
-                        : "border border-cream/20 text-cream hover:bg-cream/5"
-                    }`}
+                    className={`w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
@@ -87,7 +83,7 @@ export default function Pricing() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/pricing`}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors"
+            className="btn-secondary"
           >
             {dict.pricing.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />

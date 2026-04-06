@@ -87,7 +87,7 @@ export default function PortfolioPage() {
               {dict.portfolio.pageTitleHighlight}
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/60">
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/80">
             {dict.portfolio.pageSubtitle}
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function PortfolioPage() {
                     <h3 className="text-xl font-semibold text-cream mt-2">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-cream/50 mt-2">
+                    <p className="text-sm text-cream/70 mt-2">
                       {project.description}
                     </p>
                   </div>
@@ -173,12 +173,12 @@ export default function PortfolioPage() {
               {dict.portfolio.ctaSection.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 text-cream/50 text-lg">
+          <p className="mt-4 text-cream/70 text-lg">
             {dict.portfolio.ctaSection.subtitle}
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary mt-8"
           >
             {dict.portfolio.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />

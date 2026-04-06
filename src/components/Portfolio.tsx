@@ -62,7 +62,7 @@ export default function Portfolio() {
             {dict.portfolio.title}{" "}
             <span className="gradient-text">{dict.portfolio.titleHighlight}</span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
             {dict.portfolio.subtitle}
           </p>
         </RevealOnScroll>
@@ -101,7 +101,7 @@ export default function Portfolio() {
                     <h3 className="text-lg font-semibold text-cream mt-2">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-cream/50 mt-2">
+                    <p className="text-sm text-cream/70 mt-2">
                       {project.description}
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export default function Portfolio() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/portfolio`}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary"
           >
             {dict.portfolio.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />

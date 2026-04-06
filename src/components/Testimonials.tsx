@@ -31,7 +31,7 @@ function TestimonialCard({
           </div>
           <div>
             <div className="font-semibold text-cream">{testimonial.name}</div>
-            <div className="text-sm text-cream/50">{testimonial.role}</div>
+            <div className="text-sm text-cream/70">{testimonial.role}</div>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@ export default function Testimonials() {
               {dict.testimonials.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
             {dict.testimonials.subtitle}
           </p>
         </RevealOnScroll>

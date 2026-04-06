@@ -18,11 +18,11 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
         <span className="text-lg font-medium text-cream">{question}</span>
         <ChevronDown
           size={20}
-          className={`text-cream/50 shrink-0 ms-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`text-cream/70 shrink-0 ms-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
       {isOpen && (
-        <p className="pb-6 text-cream/50 leading-relaxed">{answer}</p>
+        <p className="pb-6 text-cream/70 leading-relaxed">{answer}</p>
       )}
     </div>
   );
@@ -52,7 +52,7 @@ export default function PricingPage() {
               {dict.pricing.pageTitleHighlight}
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/60">
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/80">
             {dict.pricing.pageSubtitle}
           </p>
         </div>
@@ -78,12 +78,12 @@ export default function PricingPage() {
                     </div>
                   )}
                   <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
-                  <p className="text-cream/50 text-sm mt-2">{plan.description}</p>
+                  <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
                   <div className="mt-6 mb-8">
                     <span className="text-5xl font-bold gradient-text">
                       {plan.price}
                     </span>
-                    <span className="text-cream/50 ms-2">/ {plan.period}</span>
+                    <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
@@ -95,11 +95,7 @@ export default function PricingPage() {
                   </ul>
                   <button
                     onClick={open}
-                    className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-all ${
-                      plan.featured
-                        ? "bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90"
-                        : "border border-cream/20 text-cream hover:bg-cream/5"
-                    }`}
+                    className={`w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
@@ -146,12 +142,12 @@ export default function PricingPage() {
               {dict.pricing.ctaSection.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 text-cream/50 text-lg">
+          <p className="mt-4 text-cream/70 text-lg">
             {dict.pricing.ctaSection.subtitle}
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary mt-8"
           >
             {dict.pricing.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />

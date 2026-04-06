@@ -16,8 +16,8 @@ const en = {
   },
   hero: {
     badge: "Creative Video Agency",
-    headlineTop: "Where Creativity",
-    headlineBottom: "Meets Precision",
+    headlineTop: "We Never",
+    headlineBottom: "Delay",
     subheadline:
       "We transform raw footage into cinematic masterpieces. Helping startups, freelancers, and content creators tell stories that captivate and convert.",
     ctaPrimary: "Start Your Journey",
@@ -405,10 +405,8 @@ const en = {
     titleHighlight: "Something Amazing",
     subtitle:
       "Ready to elevate your content? Drop us a message and let's bring your vision to life.",
-    email: "Email Us",
-    emailValue: "hello@brandlab.studio",
-    phone: "Call Us",
-    phoneValue: "+1 (555) 123-4567",
+    phone: "Call / WhatsApp",
+    phoneValue: "+20 122 774 2865",
     location: "Location",
     locationValue:
       "Available worldwide — we work remotely with clients across the globe.",
@@ -418,8 +416,6 @@ const en = {
     form: {
       name: "Your Name",
       namePlaceholder: "John Doe",
-      email: "Email Address",
-      emailPlaceholder: "john@example.com",
       phone: "Phone Number",
       projectType: "Project Type",
       projectTypePlaceholder: "Select a service",
@@ -616,10 +612,8 @@ const en = {
     subtitle: "Tell us about yourself and we'll get back to you within 24 hours.",
     name: "Full Name",
     namePlaceholder: "John Doe",
-    email: "Email Address",
-    emailPlaceholder: "john@example.com",
     phone: "Phone Number",
-    phonePlaceholder: "+1 (555) 123-4567",
+    phonePlaceholder: "+20 122 774 2865",
     businessField: "Business Field",
     businessFieldPlaceholder: "Select your field",
     businessFieldOptions: [

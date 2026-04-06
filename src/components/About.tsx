@@ -35,12 +35,12 @@ export default function About() {
               </h2>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
-              <p className="mt-6 text-cream/60 text-lg leading-relaxed">
+              <p className="mt-6 text-cream/80 text-lg leading-relaxed">
                 <TextReveal text={dict.about.paragraph1} delay={0.3} />
               </p>
             </RevealOnScroll>
             <RevealOnScroll delay={0.3}>
-              <p className="mt-4 text-cream/60 text-lg leading-relaxed">
+              <p className="mt-4 text-cream/80 text-lg leading-relaxed">
                 {dict.about.paragraph2}
               </p>
             </RevealOnScroll>
@@ -49,13 +49,13 @@ export default function About() {
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <a
                   href="#contact"
-                  className="px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity text-center"
+                  className="btn-primary text-center"
                 >
                   {dict.about.ctaPrimary}
                 </a>
                 <Link
                   href={`/${locale}/about`}
-                  className="px-8 py-4 rounded-full border border-cream/20 text-base font-medium text-cream hover:bg-cream/5 transition-colors text-center inline-flex items-center justify-center gap-2"
+                  className="btn-secondary text-center"
                 >
                   {dict.about.ctaSecondary}
                   <ArrowRight size={16} className="rtl:rotate-180" />
@@ -80,7 +80,7 @@ export default function About() {
                       <h3 className="text-lg font-semibold text-cream mb-2">
                         {value.title}
                       </h3>
-                      <p className="text-sm text-cream/50">{value.description}</p>
+                      <p className="text-sm text-cream/70">{value.description}</p>
                     </div>
                   </div>
                 </StaggerItem>

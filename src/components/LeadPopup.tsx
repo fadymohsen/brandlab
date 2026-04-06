@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { X, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import PhoneField from "./PhoneField";
+
+const WHATSAPP_NUMBER = "201227742865";
 
 export default function LeadPopup({
   isOpen,
@@ -12,8 +15,24 @@ export default function LeadPopup({
   onClose: () => void;
 }) {
   const dict = useDictionary();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [businessField, setBusinessField] = useState("");
 
   if (!isOpen) return null;
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const lines = [
+      `*New Lead*`,
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      businessField ? `Business Field: ${businessField}` : "",
+    ].filter(Boolean);
+    const text = encodeURIComponent(lines.join("\n"));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    onClose();
+  }
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
@@ -43,36 +62,35 @@ export default function LeadPopup({
           <p className="text-cream/50 text-sm mb-6">{dict.leadPopup.subtitle}</p>
 
           {/* Form */}
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
                 {dict.leadPopup.name}
               </label>
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder={dict.leadPopup.namePlaceholder}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                {dict.leadPopup.email}
-              </label>
-              <input
-                type="email"
-                placeholder={dict.leadPopup.emailPlaceholder}
+                required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
               />
             </div>
             <PhoneField
               label={dict.leadPopup.phone}
               placeholder={dict.leadPopup.phonePlaceholder}
+              value={phone}
+              onChange={setPhone}
             />
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
                 {dict.leadPopup.businessField}
               </label>
-              <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors">
+              <select
+                value={businessField}
+                onChange={(e) => setBusinessField(e.target.value)}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+              >
                 <option value="" className="bg-dark">
                   {dict.leadPopup.businessFieldPlaceholder}
                 </option>
@@ -85,7 +103,7 @@ export default function LeadPopup({
             </div>
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl text-base font-semibold text-white hover:opacity-90 transition-opacity mt-2"
+              className="btn-primary w-full rounded-xl mt-2"
             >
               <Send size={18} />
               {dict.leadPopup.submit}

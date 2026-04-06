@@ -18,8 +18,8 @@ const ar: Dictionary = {
   },
   hero: {
     badge: "وكالة فيديو إبداعية",
-    headlineTop: "حيث يلتقي الإبداع",
-    headlineBottom: "بالإتقان",
+    headlineTop: "نحن لا",
+    headlineBottom: "نتأخر أبداً",
     subheadline:
       "نحوّل اللقطات الخام إلى تحف سينمائية. نساعد الشركات الناشئة والمستقلين وصناع المحتوى في سرد قصص تأسر وتُحقق نتائج.",
     ctaPrimary: "ابدأ رحلتك",
@@ -405,10 +405,8 @@ const ar: Dictionary = {
     titleHighlight: "شيئاً مذهلاً",
     subtitle:
       "مستعد لرفع مستوى محتواك؟ أرسل لنا رسالة ودعنا نحوّل رؤيتك إلى واقع.",
-    email: "راسلنا",
-    emailValue: "hello@brandlab.studio",
-    phone: "اتصل بنا",
-    phoneValue: "+1 (555) 123-4567",
+    phone: "اتصل / واتساب",
+    phoneValue: "+20 122 774 2865",
     location: "الموقع",
     locationValue:
       "متاحون حول العالم — نعمل عن بُعد مع عملاء من جميع أنحاء العالم.",
@@ -418,8 +416,6 @@ const ar: Dictionary = {
     form: {
       name: "اسمك",
       namePlaceholder: "أحمد محمد",
-      email: "البريد الإلكتروني",
-      emailPlaceholder: "ahmed@example.com",
       phone: "رقم الهاتف",
       projectType: "نوع المشروع",
       projectTypePlaceholder: "اختر خدمة",
@@ -616,10 +612,8 @@ const ar: Dictionary = {
     subtitle: "أخبرنا عن نفسك وسنعود إليك خلال 24 ساعة.",
     name: "الاسم الكامل",
     namePlaceholder: "أحمد محمد",
-    email: "البريد الإلكتروني",
-    emailPlaceholder: "ahmed@example.com",
     phone: "رقم الهاتف",
-    phonePlaceholder: "+966 5X XXX XXXX",
+    phonePlaceholder: "+20 122 774 2865",
     businessField: "مجال العمل",
     businessFieldPlaceholder: "اختر مجالك",
     businessFieldOptions: [

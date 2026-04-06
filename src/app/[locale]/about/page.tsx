@@ -32,7 +32,7 @@ export default function AboutPage() {
               {dict.about.pageTitleHighlight}
             </span>
           </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/60">
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-cream/80">
             {dict.about.pageSubtitle}
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-6">
             {dict.about.story.paragraphs.map((paragraph, i) => (
-              <p key={i} className="text-cream/60 text-lg leading-relaxed">
+              <p key={i} className="text-cream/80 text-lg leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -66,7 +66,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl font-bold gradient-text mb-4">
                   {dict.about.mission.title}
                 </h3>
-                <p className="text-cream/60 text-lg leading-relaxed">
+                <p className="text-cream/80 text-lg leading-relaxed">
                   {dict.about.mission.description}
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl font-bold gradient-text mb-4">
                   {dict.about.vision.title}
                 </h3>
-                <p className="text-cream/60 text-lg leading-relaxed">
+                <p className="text-cream/80 text-lg leading-relaxed">
                   {dict.about.vision.description}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
                     <h3 className="text-xl font-semibold text-cream mb-3">
                       {value.title}
                     </h3>
-                    <p className="text-cream/50">{value.description}</p>
+                    <p className="text-cream/70">{value.description}</p>
                   </div>
                 </div>
               );
@@ -127,7 +127,7 @@ export default function AboutPage() {
                 {dict.about.team.titleHighlight}
               </span>
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+            <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
               {dict.about.team.subtitle}
             </p>
           </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
                   <p className="text-sm text-primary font-medium mt-1">
                     {member.role}
                   </p>
-                  <p className="text-sm text-cream/50 mt-3">{member.bio}</p>
+                  <p className="text-sm text-cream/70 mt-3">{member.bio}</p>
                 </div>
               </div>
             ))}
@@ -164,12 +164,12 @@ export default function AboutPage() {
               {dict.about.ctaSection.titleHighlight}
             </span>
           </h2>
-          <p className="mt-4 text-cream/50 text-lg">
+          <p className="mt-4 text-cream/70 text-lg">
             {dict.about.ctaSection.subtitle}
           </p>
           <button
             onClick={open}
-            className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary mt-8"
           >
             {dict.about.ctaSection.button}
             <ArrowRight size={18} className="rtl:rotate-180" />

@@ -17,11 +17,11 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
         <span className="text-lg font-medium text-cream">{question}</span>
         <ChevronDown
           size={20}
-          className={`text-cream/50 shrink-0 ms-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`text-cream/70 shrink-0 ms-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
       {isOpen && (
-        <p className="pb-6 text-cream/50 leading-relaxed">{answer}</p>
+        <p className="pb-6 text-cream/70 leading-relaxed">{answer}</p>
       )}
     </div>
   );
@@ -42,7 +42,7 @@ export default function FaqPage() {
             {dict.faqPage.title}{" "}
             <span className="gradient-text">{dict.faqPage.titleHighlight}</span>
           </h1>
-          <p className="mt-6 text-lg text-cream/60">{dict.faqPage.subtitle}</p>
+          <p className="mt-6 text-lg text-cream/80">{dict.faqPage.subtitle}</p>
         </div>
       </section>
       <section className="pb-24">

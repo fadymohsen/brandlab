@@ -41,7 +41,7 @@ export default function Services() {
             {dict.services.title}{" "}
             <span className="gradient-text">{dict.services.titleHighlight}</span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/50 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
             {dict.services.subtitle}
           </p>
         </RevealOnScroll>
@@ -59,7 +59,7 @@ export default function Services() {
                     <h3 className="text-xl font-semibold text-cream mb-3">
                       {service.title}
                     </h3>
-                    <p className="text-cream/50 leading-relaxed">
+                    <p className="text-cream/70 leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -72,7 +72,7 @@ export default function Services() {
         <RevealOnScroll className="text-center mt-12" delay={0.3}>
           <Link
             href={`/${locale}/services`}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full text-base font-semibold text-white hover:opacity-90 transition-opacity"
+            className="btn-primary"
           >
             {dict.services.cta}
             <ArrowRight size={18} className="rtl:rotate-180" />
