@@ -19,8 +19,20 @@ export default function About() {
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
 
   return (
-    <section id="about" className="py-24 lg:py-32 relative bg-dark-light/30">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="about" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+      >
+        <source src="/bg-video.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-dark/60" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <RevealOnScroll>
