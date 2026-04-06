@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
+import { MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
@@ -53,21 +53,6 @@ export default function Contact() {
         <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
           <StaggerChildren className="lg:col-span-2 space-y-8">
-            <StaggerItem>
-              <a
-                href="tel:+201227742865"
-                className="flex items-start gap-4 group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0 group-hover:from-primary/30 group-hover:to-secondary/30 transition-colors">
-                  <Phone size={20} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-cream group-hover:text-primary transition-colors">{dict.contact.phone}</h3>
-                  <p className="text-cream/70 mt-1">{dict.contact.phoneValue}</p>
-                </div>
-              </a>
-            </StaggerItem>
-
             <StaggerItem>
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
