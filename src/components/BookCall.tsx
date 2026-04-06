@@ -10,7 +10,19 @@ export default function BookCall() {
   const { open } = useLeadPopup();
 
   return (
-    <section className="py-20 relative">
+    <section className="py-20 relative overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+      >
+        <source src="/experts-video.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-dark/60" />
+
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />
       </div>
