@@ -24,23 +24,23 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { title, category, youtubeUrl, description } = body;
 
-    if (!title || !youtubeUrl) {
+    if (!youtubeUrl) {
       return NextResponse.json(
-        { error: "Title and video URL are required" },
+        { error: "YouTube Short URL is required" },
         { status: 400 }
       );
     }
 
     if (!isValidVideoUrl(youtubeUrl)) {
       return NextResponse.json(
-        { error: "Invalid video URL. Please use a YouTube or Instagram reel URL." },
+        { error: "Invalid URL. Please use a YouTube Short URL." },
         { status: 400 }
       );
     }
 
     const newItem = await createPortfolioItem({
-      title,
-      category: category || "Uncategorized",
+      title: title || "",
+      category: category || "",
       youtubeUrl,
       description: description || "",
     });

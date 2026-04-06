@@ -116,8 +116,6 @@ export type VideoSource = { type: "youtube"; id: string } | { type: "instagram";
 export function parseVideoUrl(url: string): VideoSource | null {
   const ytId = extractYoutubeId(url);
   if (ytId) return { type: "youtube", id: ytId };
-  const igId = extractInstagramReelId(url);
-  if (igId) return { type: "instagram", id: igId };
   return null;
 }
 

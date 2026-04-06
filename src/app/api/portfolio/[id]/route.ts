@@ -16,7 +16,7 @@ export async function PUT(
     const { title, category, youtubeUrl, description } = body;
 
     if (youtubeUrl && !isValidVideoUrl(youtubeUrl)) {
-      return NextResponse.json({ error: "Invalid video URL. Please use a YouTube or Instagram reel URL." }, { status: 400 });
+      return NextResponse.json({ error: "Invalid URL. Please use a YouTube Short URL." }, { status: 400 });
     }
 
     const updated = await updatePortfolioItem(id, {
