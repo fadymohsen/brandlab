@@ -29,7 +29,19 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative bg-dark-light/30">
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+      >
+        <source src="/contact-video.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-dark/40" />
+
       <div className="absolute inset-0">
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
       </div>
