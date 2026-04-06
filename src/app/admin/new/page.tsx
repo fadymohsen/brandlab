@@ -33,10 +33,10 @@ export default function NewPortfolioItem() {
 
     if (
       !youtubeUrl.match(
-        /youtube\.com\/(shorts|watch|embed)|youtu\.be\//
+        /youtube\.com\/(shorts|watch|embed)|youtu\.be\/|instagram\.com\/(reel|reels|p)\//
       )
     ) {
-      setError("Please enter a valid YouTube URL");
+      setError("Please enter a valid YouTube or Instagram reel URL");
       return;
     }
 
@@ -114,13 +114,13 @@ export default function NewPortfolioItem() {
 
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                YouTube Shorts URL *
+                Video URL (YouTube Short or Instagram Reel) *
               </label>
               <input
                 type="url"
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
-                placeholder="https://www.youtube.com/shorts/VIDEO_ID"
+                placeholder="https://youtube.com/shorts/... or https://instagram.com/reel/..."
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
               />
             </div>

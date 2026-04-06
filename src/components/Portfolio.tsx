@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
-import YouTubeShort from "./YouTubeShort";
+import VideoEmbed from "./VideoEmbed";
 
 interface LiveItem {
   id: string;
@@ -14,20 +14,6 @@ interface LiveItem {
   category: string;
   youtubeUrl: string;
   description: string;
-}
-
-function extractYoutubeId(url: string): string | null {
-  const patterns = [
-    /youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/,
-    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
-    /youtu\.be\/([a-zA-Z0-9_-]+)/,
-    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-  ];
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match) return match[1];
-  }
-  return null;
 }
 
 export default function Portfolio() {
@@ -69,13 +55,10 @@ export default function Portfolio() {
 
         {hasLiveItems ? (
           <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {liveItems.slice(0, 8).map((item) => {
-              const videoId = extractYoutubeId(item.youtubeUrl);
-              if (!videoId) return null;
-              return (
+            {liveItems.slice(0, 8).map((item) => (
                 <StaggerItem key={item.id}>
                   <div className="group">
-                    <YouTubeShort videoId={videoId} />
+                    <VideoEmbed url={item.youtubeUrl} />
                     <div className="mt-3">
                       <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                         {item.category}
@@ -86,8 +69,7 @@ export default function Portfolio() {
                     </div>
                   </div>
                 </StaggerItem>
-              );
-            })}
+            ))}
           </StaggerChildren>
         ) : (
           <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

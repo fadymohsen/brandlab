@@ -97,3 +97,30 @@ export function extractYoutubeId(url: string): string | null {
   }
   return null;
 }
+
+export function extractInstagramReelId(url: string): string | null {
+  const patterns = [
+    /instagram\.com\/reel\/([a-zA-Z0-9_-]+)/,
+    /instagram\.com\/reels\/([a-zA-Z0-9_-]+)/,
+    /instagram\.com\/p\/([a-zA-Z0-9_-]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+export type VideoSource = { type: "youtube"; id: string } | { type: "instagram"; id: string };
+
+export function parseVideoUrl(url: string): VideoSource | null {
+  const ytId = extractYoutubeId(url);
+  if (ytId) return { type: "youtube", id: ytId };
+  const igId = extractInstagramReelId(url);
+  if (igId) return { type: "instagram", id: igId };
+  return null;
+}
+
+export function isValidVideoUrl(url: string): boolean {
+  return parseVideoUrl(url) !== null;
+}

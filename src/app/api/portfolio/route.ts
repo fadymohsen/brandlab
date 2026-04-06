@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readPortfolio, createPortfolioItem, extractYoutubeId } from "@/lib/portfolio-data";
+import { readPortfolio, createPortfolioItem, isValidVideoUrl } from "@/lib/portfolio-data";
 import { initDb } from "@/lib/db";
 import { isAuthenticated } from "@/lib/admin-auth";
 
@@ -26,14 +26,14 @@ export async function POST(request: NextRequest) {
 
     if (!title || !youtubeUrl) {
       return NextResponse.json(
-        { error: "Title and YouTube URL are required" },
+        { error: "Title and video URL are required" },
         { status: 400 }
       );
     }
 
-    if (!extractYoutubeId(youtubeUrl)) {
+    if (!isValidVideoUrl(youtubeUrl)) {
       return NextResponse.json(
-        { error: "Invalid YouTube URL" },
+        { error: "Invalid video URL. Please use a YouTube or Instagram reel URL." },
         { status: 400 }
       );
     }

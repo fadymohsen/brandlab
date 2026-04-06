@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
-import YouTubeShort from "@/components/YouTubeShort";
+import VideoEmbed from "@/components/VideoEmbed";
 
 interface LiveItem {
   id: string;
@@ -25,20 +25,6 @@ const categories = [
 ];
 
 const categoryIcons = [Film, Scissors, Palette, Monitor, Music, Sparkles];
-
-function extractYoutubeId(url: string): string | null {
-  const patterns = [
-    /youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/,
-    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
-    /youtu\.be\/([a-zA-Z0-9_-]+)/,
-    /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-  ];
-  for (const pattern of patterns) {
-    const match = url.match(pattern);
-    if (match) return match[1];
-  }
-  return null;
-}
 
 export default function PortfolioPage() {
   const dict = useDictionary();
@@ -123,11 +109,9 @@ export default function PortfolioPage() {
                     {/* Videos Grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                       {group.items.map((item) => {
-                        const videoId = extractYoutubeId(item.youtubeUrl);
-                        if (!videoId) return null;
                         return (
                           <div key={item.id}>
-                            <YouTubeShort videoId={videoId} />
+                            <VideoEmbed url={item.youtubeUrl} />
                             <h3 className="text-sm font-semibold text-cream mt-3 truncate">
                               {item.title}
                             </h3>

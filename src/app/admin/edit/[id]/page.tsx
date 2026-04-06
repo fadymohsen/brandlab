@@ -134,7 +134,7 @@ export default function EditPortfolioItem() {
 
             <div>
               <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                YouTube Shorts URL *
+                Video URL (YouTube Short or Instagram Reel) *
               </label>
               <input
                 type="url"
