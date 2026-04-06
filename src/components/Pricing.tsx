@@ -57,9 +57,8 @@ export default function Pricing() {
                     <span className="text-5xl font-bold gradient-text">
                       {plan.price}
                     </span>
-                    <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
-                  <p className="text-cream/50 text-xs mb-8">{plan.perReel}</p>
+                  <p className="text-cream/70 text-sm mb-8">{plan.perReel}</p>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
                       <li key={feature.label} className="flex items-start gap-3">

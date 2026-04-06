@@ -7,10 +7,8 @@ import { ArrowUpRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 const socialLinks = [
-  { label: "Ig", href: "#", name: "Instagram" },
-  { label: "Yt", href: "#", name: "YouTube" },
-  { label: "X", href: "#", name: "Twitter" },
-  { label: "In", href: "#", name: "LinkedIn" },
+  { label: "Fb", href: "https://www.facebook.com/share/18V8EyMqVJ/?mibextid=wwXIfr", name: "Facebook" },
+  { label: "Ig", href: "https://www.instagram.com/brand_lab.agency?igsh=NGhibm5idnFpYzJh", name: "Instagram" },
 ];
 
 const companyHrefs = ["/about", "/portfolio", "/pricing", "/contact"];

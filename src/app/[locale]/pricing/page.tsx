@@ -79,13 +79,12 @@ export default function PricingPage() {
                   )}
                   <h3 className="text-2xl font-bold text-cream">{plan.name}</h3>
                   <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
-                  <div className="mt-6 mb-8">
+                  <div className="mt-6 mb-2">
                     <span className="text-5xl font-bold gradient-text">
                       {plan.price}
                     </span>
-                    <span className="text-cream/70 ms-2">/ {plan.period}</span>
                   </div>
-                  <p className="text-cream/50 text-xs mb-8">{plan.perReel}</p>
+                  <p className="text-cream/70 text-sm mb-8">{plan.perReel}</p>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
                       <li key={feature.label} className="flex items-start gap-3">
