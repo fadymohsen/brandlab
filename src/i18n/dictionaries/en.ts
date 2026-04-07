@@ -632,6 +632,13 @@ const en = {
     ],
     submit: "Book My Free Call",
   },
+  cookieConsent: {
+    title: "We use cookies",
+    message: "We use cookies to enhance your browsing experience and analyze site traffic. By continuing to use our site, you consent to our use of cookies.",
+    accept: "Accept All",
+    decline: "Decline",
+    learnMore: "Learn more",
+  },
   bookCall: {
     label: "Free Consultation",
     title: "Talk to Our",

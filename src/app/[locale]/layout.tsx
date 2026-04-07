@@ -6,6 +6,7 @@ import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { DictionaryProvider } from "@/i18n/dictionary-provider";
 import { LeadPopupProvider } from "@/components/LeadPopupProvider";
+import CookieConsent from "@/components/CookieConsent";
 import "../globals.css";
 
 const outfit = Outfit({
@@ -75,7 +76,10 @@ export default async function LocaleLayout({
     >
       <body className="min-h-screen">
         <DictionaryProvider dictionary={dict}>
-          <LeadPopupProvider>{children}</LeadPopupProvider>
+          <LeadPopupProvider>
+            {children}
+            <CookieConsent />
+          </LeadPopupProvider>
         </DictionaryProvider>
       </body>
     </html>
