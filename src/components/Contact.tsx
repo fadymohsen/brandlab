@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
@@ -78,6 +78,21 @@ export default function Contact() {
                 <div>
                   <h3 className="font-semibold text-cream group-hover:text-green-500 transition-colors">{dict.contact.whatsapp}</h3>
                   <p className="text-cream/70 mt-1">{dict.contact.whatsappValue}</p>
+                </div>
+              </a>
+            </StaggerItem>
+
+            <StaggerItem>
+              <a
+                href="mailto:brandlab12@gmail.com"
+                className="flex items-start gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0 group-hover:from-primary/30 group-hover:to-secondary/30 transition-colors">
+                  <Mail size={20} className="text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-cream group-hover:text-primary transition-colors">{dict.contact.email}</h3>
+                  <p className="text-cream/70 mt-1">{dict.contact.emailValue}</p>
                 </div>
               </a>
             </StaggerItem>

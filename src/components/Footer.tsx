@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 
 const socialLinks = [
@@ -73,19 +73,6 @@ export default function Footer() {
             <p className="text-cream/70 leading-relaxed max-w-sm mb-6">
               {dict.footer.tagline}
             </p>
-            {/* Email */}
-            <a
-              href="mailto:brandlab12@gmail.com"
-              className="flex items-center gap-3 mb-6 group"
-            >
-              <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cream/70 group-hover:text-primary group-hover:border-primary/30 transition-colors">
-                <Mail size={16} />
-              </div>
-              <span className="text-sm text-cream/70 group-hover:text-cream transition-colors">
-                brandlab12@gmail.com
-              </span>
-            </a>
-
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a

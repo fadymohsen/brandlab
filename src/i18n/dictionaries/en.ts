@@ -403,6 +403,8 @@ const en = {
     titleHighlight: "Something Amazing",
     subtitle:
       "Ready to elevate your content? Drop us a message and let's bring your vision to life.",
+    email: "Email Us",
+    emailValue: "brandlab12@gmail.com",
     phone: "Call Us",
     phoneValue: "+20 122 774 2865",
     whatsapp: "WhatsApp",

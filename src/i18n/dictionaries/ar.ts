@@ -403,6 +403,8 @@ const ar: Dictionary = {
     titleHighlight: "شيئاً مذهلاً",
     subtitle:
       "مستعد لرفع مستوى محتواك؟ أرسل لنا رسالة ودعنا نحوّل رؤيتك إلى واقع.",
+    email: "راسلنا",
+    emailValue: "brandlab12@gmail.com",
     phone: "اتصل بنا",
     phoneValue: "+20 122 774 2865",
     whatsapp: "واتساب",
