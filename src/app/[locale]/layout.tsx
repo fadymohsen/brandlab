@@ -35,19 +35,29 @@ export async function generateMetadata({
   return {
     title: dict.meta.title,
     description: dict.meta.description,
-    keywords: [
-      "video editing",
-      "montage",
-      "content creation",
-      "video production",
-      "brand videos",
-      "creative agency",
-    ],
+    keywords: dict.meta.keywords,
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
       type: "website",
       locale: locale === "ar" ? "ar_SA" : "en_US",
+      siteName: "Brand Lab",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        en: "/en",
+        ar: "/ar",
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

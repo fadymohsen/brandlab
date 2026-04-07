@@ -3,6 +3,54 @@ const en = {
     title: "Brand Lab | Professional Video Editing & Montage Agency",
     description:
       "Brand Lab is a creative video editing and montage agency helping startups, freelancers, and content creators craft compelling visual stories that captivate audiences and elevate brands.",
+    keywords: "video editing, montage, reels, content creation, video production, brand videos, creative agency, color grading, motion graphics, sound design",
+  },
+  pageMeta: {
+    about: {
+      title: "About Us | Brand Lab — Our Story, Mission & Vision",
+      description: "Learn about Brand Lab's journey, our mission to empower brands with world-class video content, and the creative team behind every project.",
+      keywords: "about brand lab, video editing agency, creative team, video production company, brand storytelling",
+    },
+    services: {
+      title: "Services | Brand Lab — Video Editing, Montage, Motion Graphics & More",
+      description: "Explore our full suite of video production services: professional editing, montage & reels, color grading, motion graphics, sound design, and brand identity videos.",
+      keywords: "video editing services, montage, reels editing, color grading, motion graphics, sound design, brand videos, post-production",
+    },
+    portfolio: {
+      title: "Portfolio | Brand Lab — Our Best Video Projects & Reels",
+      description: "Browse our portfolio of cinematic brand films, social media reels, product videos, and more. See how we bring brands to life through visual storytelling.",
+      keywords: "video portfolio, brand films, social media reels, video editing examples, creative video work",
+    },
+    pricing: {
+      title: "Pricing | Brand Lab — Transparent & Affordable Video Editing Plans",
+      description: "Simple, transparent pricing for video editing and montage services. Choose from Basic, Pro, or Business plans tailored to your brand's needs.",
+      keywords: "video editing pricing, montage packages, reel editing cost, affordable video production, editing plans",
+    },
+    contact: {
+      title: "Contact Us | Brand Lab — Get In Touch & Start Your Project",
+      description: "Ready to elevate your content? Reach out to Brand Lab via WhatsApp or our contact form. We respond within 24 hours.",
+      keywords: "contact brand lab, video editing inquiry, get in touch, start a project, book a call",
+    },
+    faq: {
+      title: "FAQ | Brand Lab — Frequently Asked Questions",
+      description: "Find answers to common questions about Brand Lab's video editing services, turnaround times, revision policy, pricing, and delivery formats.",
+      keywords: "brand lab faq, video editing questions, turnaround time, revision policy, delivery formats",
+    },
+    privacy: {
+      title: "Privacy Policy | Brand Lab",
+      description: "Read Brand Lab's privacy policy to understand how we collect, use, and protect your personal information when you use our services and website.",
+      keywords: "privacy policy, data protection, personal information, brand lab privacy",
+    },
+    terms: {
+      title: "Terms of Service | Brand Lab",
+      description: "Review Brand Lab's terms of service covering project agreements, payment terms, intellectual property, revisions, and client responsibilities.",
+      keywords: "terms of service, client agreement, payment terms, intellectual property, video editing terms",
+    },
+    refund: {
+      title: "Refund Policy | Brand Lab",
+      description: "Understand Brand Lab's refund policy for video editing services, including cancellation terms, deposit rules, and dissatisfaction resolution.",
+      keywords: "refund policy, cancellation policy, money back, deposit refund, brand lab refund",
+    },
   },
   nav: {
     home: "Home",
