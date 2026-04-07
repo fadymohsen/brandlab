@@ -18,12 +18,17 @@ export default function Contact() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const lines = [
-      `*New Contact Form*`,
+      `Hi Brand Lab! 👋`,
+      `I'd like to get in touch regarding a project.`,
+      ``,
+      `*My Details:*`,
       `Name: ${name}`,
       `Phone: ${phone}`,
       projectType ? `Project Type: ${projectType}` : "",
       businessField ? `Business Field: ${businessField}` : "",
-    ].filter(Boolean);
+      ``,
+      `Looking forward to hearing from you!`,
+    ].filter((line) => line !== undefined && line !== null);
     const text = encodeURIComponent(lines.join("\n"));
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
   }

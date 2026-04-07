@@ -31,12 +31,17 @@ export default function LeadPopup({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const lines = [
-      `*New Lead*`,
+      `Hi Brand Lab! 👋`,
+      `I'm interested in your services and would love to learn more.`,
+      ``,
+      `*My Details:*`,
       `Name: ${name}`,
       `Phone: ${phone}`,
       businessField ? `Business Field: ${businessField}` : "",
-      planType ? `Plan Type: ${planType}` : "",
-    ].filter(Boolean);
+      planType ? `Interested Plan: ${planType}` : "",
+      ``,
+      `Looking forward to hearing from you!`,
+    ].filter((line) => line !== undefined && line !== null);
     const text = encodeURIComponent(lines.join("\n"));
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
     onClose();
