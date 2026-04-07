@@ -84,7 +84,7 @@ export default function PricingPage() {
                       {plan.price}
                     </span>
                   </div>
-                  <p className="text-cream/70 text-sm mb-8">{plan.perReel}</p>
+                  <div className="mb-8" />
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature) => (
                       <li key={feature.label} className="flex items-start gap-3">

@@ -7,6 +7,7 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { DictionaryProvider } from "@/i18n/dictionary-provider";
 import { LeadPopupProvider } from "@/components/LeadPopupProvider";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "../globals.css";
 
 const outfit = Outfit({
@@ -89,6 +90,7 @@ export default async function LocaleLayout({
           <LeadPopupProvider>
             {children}
             <CookieConsent />
+            <WhatsAppButton />
           </LeadPopupProvider>
         </DictionaryProvider>
       </body>

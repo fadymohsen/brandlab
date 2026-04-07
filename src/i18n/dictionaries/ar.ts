@@ -396,8 +396,8 @@ const ar: Dictionary = {
         name: "الأساسي",
         price: "4,000 ج.م",
         period: "شهرياً",
-        perReel: "800 ج.م للريل",
-        description: "5 ريلز/شهر — مثالي للبداية.",
+        perReel: "",
+        description: "للعلامات التجارية التي تبدأ بالنشر بانتظام",
         features: [
           { label: "جولة تعديل واحدة", included: true },
           { label: "تصدير لمنصات التواصل", included: true },
@@ -413,8 +413,8 @@ const ar: Dictionary = {
         name: "الاحترافي",
         price: "6,000 ج.م",
         period: "شهرياً",
-        perReel: "600 ج.م للريل",
-        description: "10 ريلز/شهر — مثالي للعلامات التجارية النامية.",
+        perReel: "",
+        description: "للعلامات التجارية المستعدة للنمو وتوسيع المحتوى",
         features: [
           { label: "جولتان من التعديلات", included: true },
           { label: "تصدير لمنصات التواصل", included: true },
@@ -430,8 +430,8 @@ const ar: Dictionary = {
         name: "الأعمال",
         price: "10,000 ج.م",
         period: "شهرياً",
-        perReel: "500 ج.م للريل",
-        description: "20 ريلز/شهر — للعلامات التجارية التي تتطلب الأفضل.",
+        perReel: "",
+        description: "للعلامات التجارية التي تريد حضوراً يومياً وأقصى انتشار",
         features: [
           { label: "تعديلات غير محدودة", included: true },
           { label: "تصدير لمنصات التواصل", included: true },

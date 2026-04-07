@@ -396,8 +396,8 @@ const en = {
         name: "Basic",
         price: "4,000 EGP",
         period: "month",
-        perReel: "800 EGP per reel",
-        description: "5 reels/month — perfect for getting started.",
+        perReel: "",
+        description: "For brands starting to post consistently",
         features: [
           { label: "1 round of changes", included: true },
           { label: "Social media export formats", included: true },
@@ -413,8 +413,8 @@ const en = {
         name: "Pro",
         price: "6,000 EGP",
         period: "month",
-        perReel: "600 EGP per reel",
-        description: "10 reels/month — ideal for growing brands.",
+        perReel: "",
+        description: "For brands ready to grow and scale content",
         features: [
           { label: "2 rounds of changes", included: true },
           { label: "Social media export formats", included: true },
@@ -430,8 +430,8 @@ const en = {
         name: "Business",
         price: "10,000 EGP",
         period: "month",
-        perReel: "500 EGP per reel",
-        description: "20 reels/month — for brands that demand the best.",
+        perReel: "",
+        description: "For brands that want daily presence and maximum reach",
         features: [
           { label: "Unlimited changes", included: true },
           { label: "Social media export formats", included: true },
