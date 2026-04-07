@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Send, ArrowRight } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import PhoneField from "./PhoneField";
@@ -10,14 +10,21 @@ const WHATSAPP_NUMBER = "201227742865";
 export default function LeadPopup({
   isOpen,
   onClose,
+  defaultPlan = "",
 }: {
   isOpen: boolean;
   onClose: () => void;
+  defaultPlan?: string;
 }) {
   const dict = useDictionary();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [businessField, setBusinessField] = useState("");
+  const [planType, setPlanType] = useState(defaultPlan);
+
+  useEffect(() => {
+    setPlanType(defaultPlan);
+  }, [defaultPlan]);
 
   if (!isOpen) return null;
 
@@ -28,6 +35,7 @@ export default function LeadPopup({
       `Name: ${name}`,
       `Phone: ${phone}`,
       businessField ? `Business Field: ${businessField}` : "",
+      planType ? `Plan Type: ${planType}` : "",
     ].filter(Boolean);
     const text = encodeURIComponent(lines.join("\n"));
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
@@ -95,6 +103,25 @@ export default function LeadPopup({
                   {dict.leadPopup.businessFieldPlaceholder}
                 </option>
                 {dict.leadPopup.businessFieldOptions.map((option) => (
+                  <option key={option} value={option} className="bg-dark">
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-cream/70 mb-1.5">
+                {dict.leadPopup.planType}
+              </label>
+              <select
+                value={planType}
+                onChange={(e) => setPlanType(e.target.value)}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+              >
+                <option value="" className="bg-dark">
+                  {dict.leadPopup.planTypePlaceholder}
+                </option>
+                {dict.leadPopup.planTypeOptions.map((option) => (
                   <option key={option} value={option} className="bg-dark">
                     {option}
                   </option>

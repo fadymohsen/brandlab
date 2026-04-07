@@ -424,7 +424,7 @@ const en = {
           { label: "Dedicated editor", included: false },
         ],
         cta: "Start Your Journey",
-        featured: true,
+        featured: false,
       },
       {
         name: "Business",
@@ -440,7 +440,7 @@ const en = {
           { label: "Monthly growth guidance", included: true },
         ],
         cta: "Contact Us",
-        featured: false,
+        featured: true,
       },
     ],
   },
@@ -677,6 +677,9 @@ const en = {
       "Travel & Tourism",
       "Other",
     ],
+    planType: "Plan Type",
+    planTypePlaceholder: "Select a plan",
+    planTypeOptions: ["Basic", "Pro", "Business"],
     submit: "Book My Free Call",
   },
   cookieConsent: {

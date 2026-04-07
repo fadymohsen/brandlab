@@ -30,7 +30,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export default function PricingPage() {
   const dict = useDictionary();
-  const { open } = useLeadPopup();
+  const { open, openWithPlan } = useLeadPopup();
 
   return (
     <>
@@ -100,7 +100,7 @@ export default function PricingPage() {
                     ))}
                   </ul>
                   <button
-                    onClick={open}
+                    onClick={() => openWithPlan(plan.name)}
                     className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}

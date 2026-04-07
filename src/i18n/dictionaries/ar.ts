@@ -424,7 +424,7 @@ const ar: Dictionary = {
           { label: "محرر مخصص", included: false },
         ],
         cta: "ابدأ رحلتك",
-        featured: true,
+        featured: false,
       },
       {
         name: "الأعمال",
@@ -440,7 +440,7 @@ const ar: Dictionary = {
           { label: "توجيه نمو شهري", included: true },
         ],
         cta: "تواصل معنا",
-        featured: false,
+        featured: true,
       },
     ],
   },
@@ -677,6 +677,9 @@ const ar: Dictionary = {
       "السفر والسياحة",
       "أخرى",
     ],
+    planType: "نوع الخطة",
+    planTypePlaceholder: "اختر خطة",
+    planTypeOptions: ["الأساسي", "الاحترافي", "الأعمال"],
     submit: "احجز مكالمتي المجانية",
   },
   cookieConsent: {
