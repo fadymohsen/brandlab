@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, X, ArrowRight, ChevronDown } from "lucide-react";
+import { Check, X, ArrowRight, ChevronDown, Star } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -71,6 +71,11 @@ export default function PricingPage() {
                     : "gradient-border"
                 }`}
               >
+                {plan.featured && (
+                  <div className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30">
+                    <Star size={20} className="text-white fill-white" />
+                  </div>
+                )}
                 <div className="relative z-10">
                   {plan.featured && (
                     <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">

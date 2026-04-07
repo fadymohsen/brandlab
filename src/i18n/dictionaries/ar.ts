@@ -397,8 +397,9 @@ const ar: Dictionary = {
         price: "4,000 ج.م",
         period: "شهرياً",
         perReel: "",
-        description: "5 ريلز/شهر — للعلامات التجارية التي تبدأ بالنشر بانتظام",
+        description: "للعلامات التجارية التي تبدأ بالنشر بانتظام",
         features: [
+          { label: "5 ريلز/شهر", included: true },
           { label: "كتابة هوك مضمّنة", included: true },
           { label: "مونتاج نظيف وجذاب", included: true },
           { label: "كابشن أساسي", included: true },
@@ -414,8 +415,9 @@ const ar: Dictionary = {
         price: "6,000 ج.م",
         period: "شهرياً",
         perReel: "",
-        description: "10 ريلز/شهر — للعلامات التجارية المستعدة للنمو وتوسيع المحتوى",
+        description: "للعلامات التجارية المستعدة للنمو وتوسيع المحتوى",
         features: [
+          { label: "10 ريلز/شهر", included: true },
           { label: "كتابة هوك متقدمة", included: true },
           { label: "مونتاج يركّز على الاحتفاظ", included: true },
           { label: "أساليب مونتاج قائمة على الترندات", included: true },
@@ -431,8 +433,9 @@ const ar: Dictionary = {
         price: "10,000 ج.م",
         period: "شهرياً",
         perReel: "",
-        description: "20 ريلز/شهر — للعلامات التجارية التي تريد حضوراً يومياً وأقصى انتشار",
+        description: "للعلامات التجارية التي تريد حضوراً يومياً وأقصى انتشار",
         features: [
+          { label: "20 ريلز/شهر", included: true },
           { label: "استراتيجية محتوى كاملة", included: true },
           { label: "بحث عن الترندات", included: true },
           { label: "تحسين الاحتفاظ بالمشاهدين", included: true },

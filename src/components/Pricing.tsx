@@ -1,16 +1,18 @@
 "use client";
 
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useDictionary } from "@/i18n/dictionary-provider";
+import { useLeadPopup } from "./LeadPopupProvider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 
 export default function Pricing() {
   const dict = useDictionary();
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
+  const { openWithPlan } = useLeadPopup();
 
   return (
     <section id="pricing" className="py-24 lg:py-32 relative">
@@ -45,6 +47,11 @@ export default function Pricing() {
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
+                {plan.featured && (
+                  <div className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30">
+                    <Star size={20} className="text-white fill-white" />
+                  </div>
+                )}
                 <div className="relative z-10">
                   {plan.featured && (
                     <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">
@@ -73,13 +80,13 @@ export default function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href="#contact"
+                  <button
+                    onClick={() => openWithPlan(plan.name)}
                     className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             </StaggerItem>

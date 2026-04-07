@@ -397,8 +397,9 @@ const en = {
         price: "4,000 EGP",
         period: "month",
         perReel: "",
-        description: "5 reels/month — For brands starting to post consistently",
+        description: "For brands starting to post consistently",
         features: [
+          { label: "5 reels/month", included: true },
           { label: "Hook writing included", included: true },
           { label: "Clean, engaging edits", included: true },
           { label: "Basic captions", included: true },
@@ -414,8 +415,9 @@ const en = {
         price: "6,000 EGP",
         period: "month",
         perReel: "",
-        description: "10 reels/month — For brands ready to grow and scale content",
+        description: "For brands ready to grow and scale content",
         features: [
+          { label: "10 reels/month", included: true },
           { label: "Advanced hook writing", included: true },
           { label: "Retention-focused editing", included: true },
           { label: "Trend-based editing styles", included: true },
@@ -431,8 +433,9 @@ const en = {
         price: "10,000 EGP",
         period: "month",
         perReel: "",
-        description: "20 reels/month — For brands that want daily presence and maximum reach",
+        description: "For brands that want daily presence and maximum reach",
         features: [
+          { label: "20 reels/month", included: true },
           { label: "Full content strategy", included: true },
           { label: "Trend research", included: true },
           { label: "Retention optimization", included: true },
