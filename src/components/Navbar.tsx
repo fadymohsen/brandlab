@@ -45,7 +45,17 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo — Left */}
-            <Link href={`/${currentLocale}`} className="flex items-center gap-3 relative z-60 shrink-0">
+            <Link
+              href={`/${currentLocale}`}
+              onClick={(e) => {
+                const isHome = pathname === `/${currentLocale}` || pathname === `/${currentLocale}/`;
+                if (isHome) {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="flex items-center gap-3 relative z-60 shrink-0"
+            >
               <Image
                 src="/logo.jpg"
                 alt="Brand Lab"
