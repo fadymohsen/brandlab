@@ -320,28 +320,34 @@ const en = {
       "Don't take our word for it — hear from the brands and creators we've helped succeed.",
     items: [
       {
-        name: "Sarah Mitchell",
-        role: "CEO, Elevate Fitness",
+        name: "Hani Kamel",
+        role: "Ex TikTok Manager",
         content:
-          "Brand Lab completely transformed our brand presence. The videos they produced were cinematic, engaging, and drove real results. Our social media engagement tripled within a month.",
+          "I had an excellent experience working with the Brand Lab team. They demonstrated a high level of professionalism and expertise, providing valuable support throughout the entire video creation process. Their deep understanding of content strategies for Reels and TikTok was especially impressive, and it significantly enhanced the quality and performance of my content. The team is highly collaborative, responsive, and detail-oriented, always ensuring that every aspect of the work meets a high standard. I would highly recommend Brand Lab to anyone looking for a reliable and creative partner.",
       },
       {
-        name: "James Rodriguez",
-        role: "Content Creator, 500K+ Followers",
+        name: "Sara",
+        role: "Founder, Alpha Brand Cosmetics",
         content:
-          "Working with Brand Lab feels like having a creative partner who truly understands your vision. The editing quality is unmatched, and the turnaround time is incredible.",
+          "Honestly, you were a lifeline for me because I worked with another agency before you that completely wasted my time — it was the worst experience. But that was meant to be so I could truly appreciate the value of professional work with you. From turning the exact idea in my head into a video, to the highly professional editing and on-time delivery — even faster than expected. I'm so happy working with you and we're still going!",
       },
       {
-        name: "Emily Chen",
-        role: "Founder, TechFlow",
+        name: "Mo Adel",
+        role: "Sales Specialist, Lucky Wheels",
         content:
-          "Our product launch video was a game-changer. Brand Lab captured our product's essence perfectly. The video helped us secure our seed round — I can't recommend them enough.",
+          "I really loved working with you. Friendly team, high quality videos and editing. Thanks for providing such high quality services at competitive prices.",
       },
       {
-        name: "Omar Hassan",
-        role: "Freelance Photographer & Videographer",
+        name: "Karim Gabriel",
+        role: "Founder, Keep Going & KG",
         content:
-          "As a freelancer, I needed a reliable editing partner. Brand Lab delivers consistently beautiful work that my clients love. They've become an essential part of my workflow.",
+          "Working with Brand Lab has been a professional experience. Projects are delivered on time, and any editing requests are handled quickly — all within a well-priced package.",
+      },
+      {
+        name: "Ahmed Maged",
+        role: "Owner, Redbone Gym & CM Transformation",
+        content:
+          "My work was really unstable and my content was inconsistent, but now things are completely different — whether in ease of communication, speed of delivery, and honestly, sales have improved significantly and my social media presence has grown. After God, the credit goes to you. Thank you truly from my heart.",
       },
     ],
   },
