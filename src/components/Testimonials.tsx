@@ -22,14 +22,14 @@ function TestimonialCard({
             <Star key={i} size={16} className="text-accent fill-accent" />
           ))}
         </div>
-        <p className="text-cream/70 leading-relaxed mb-6">
+        <p dir="auto" className="text-cream/70 leading-relaxed mb-6">
           &ldquo;{testimonial.content}&rdquo;
         </p>
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg">
             {testimonial.name[0]}
           </div>
-          <div>
+          <div dir="auto">
             <div className="font-semibold text-cream">{testimonial.name}</div>
             <div className="text-sm text-cream/70">{testimonial.role}</div>
           </div>
