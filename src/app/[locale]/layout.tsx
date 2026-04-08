@@ -6,6 +6,7 @@ import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { DictionaryProvider } from "@/i18n/dictionary-provider";
 import { LeadPopupProvider } from "@/components/LeadPopupProvider";
+import { RegionProvider } from "@/components/RegionProvider";
 import CookieConsent from "@/components/CookieConsent";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "../globals.css";
@@ -87,11 +88,13 @@ export default async function LocaleLayout({
     >
       <body className="min-h-screen">
         <DictionaryProvider dictionary={dict}>
-          <LeadPopupProvider>
-            {children}
-            <CookieConsent />
-            <WhatsAppButton />
-          </LeadPopupProvider>
+          <RegionProvider>
+            <LeadPopupProvider>
+              {children}
+              <CookieConsent />
+              <WhatsAppButton />
+            </LeadPopupProvider>
+          </RegionProvider>
         </DictionaryProvider>
       </body>
     </html>

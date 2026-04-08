@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
+import { useRegion } from "@/components/RegionProvider";
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 export default function PricingPage() {
   const dict = useDictionary();
   const { open, openWithPlan } = useLeadPopup();
+  const region = useRegion();
 
   return (
     <>
@@ -92,7 +94,7 @@ export default function PricingPage() {
                   <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
                   <div className="mt-6 mb-2">
                     <span className="text-5xl font-bold gradient-text">
-                      {plan.price}
+                      {plan.price[region]}
                     </span>
                   </div>
                   <div className="mb-8" />

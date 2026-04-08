@@ -400,7 +400,7 @@ const ar: Dictionary = {
     plans: [
       {
         name: "الأساسي",
-        price: "4,000 ج.م",
+        price: { EG: "4,000 ج.م", INT: "$125" },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية التي تبدأ بالنشر بانتظام",
@@ -418,7 +418,7 @@ const ar: Dictionary = {
       },
       {
         name: "الاحترافي",
-        price: "6,000 ج.م",
+        price: { EG: "6,000 ج.م", INT: "$200" },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية المستعدة للنمو وتوسيع المحتوى",
@@ -436,7 +436,7 @@ const ar: Dictionary = {
       },
       {
         name: "الأعمال",
-        price: "10,000 ج.م",
+        price: { EG: "10,000 ج.م", INT: "$300" },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية التي تريد حضوراً يومياً وأقصى انتشار",

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "./LeadPopupProvider";
+import { useRegion } from "./RegionProvider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 
 export default function Pricing() {
@@ -13,6 +14,7 @@ export default function Pricing() {
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
   const { openWithPlan } = useLeadPopup();
+  const region = useRegion();
 
   return (
     <section id="pricing" className="py-24 lg:py-32 relative">
@@ -62,7 +64,7 @@ export default function Pricing() {
                   <p className="text-cream/70 text-sm mt-2">{plan.description}</p>
                   <div className="mt-6 mb-2">
                     <span className="text-5xl font-bold gradient-text">
-                      {plan.price}
+                      {plan.price[region]}
                     </span>
                   </div>
                   <div className="mb-8" />
