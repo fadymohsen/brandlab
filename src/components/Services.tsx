@@ -3,7 +3,7 @@
 import {
   Film,
   Scissors,
-  Palette,
+  Lightbulb,
   Monitor,
   Music,
   Sparkles,
@@ -19,7 +19,7 @@ import {
   TiltCard,
 } from "./animations";
 
-const icons = [Film, Scissors, Palette, Monitor, Music, Sparkles];
+const icons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
 
 export default function Services() {
   const dict = useDictionary();

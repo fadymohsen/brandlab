@@ -3,7 +3,7 @@ const en = {
     title: "Brand Lab | Professional Video Editing & Montage Agency",
     description:
       "Brand Lab is a creative video editing and montage agency helping startups, freelancers, and content creators craft compelling visual stories that captivate audiences and elevate brands.",
-    keywords: "video editing, montage, reels, content creation, video production, brand videos, creative agency, color grading, motion graphics, sound design",
+    keywords: "video editing, montage, reels, content creation, video production, brand videos, creative agency, content creation, motion graphics, sound design",
   },
   pageMeta: {
     about: {
@@ -13,8 +13,8 @@ const en = {
     },
     services: {
       title: "Services | Brand Lab — Video Editing, Montage, Motion Graphics & More",
-      description: "Explore our full suite of video production services: professional editing, montage & reels, color grading, motion graphics, sound design, and brand identity videos.",
-      keywords: "video editing services, montage, reels editing, color grading, motion graphics, sound design, brand videos, post-production",
+      description: "Explore our full suite of video production services: professional editing, montage & reels, content creation, motion graphics, sound design, and brand identity videos.",
+      keywords: "video editing services, montage, reels editing, content creation, motion graphics, sound design, brand videos, post-production",
     },
     portfolio: {
       title: "Portfolio | Brand Lab — Our Best Video Projects & Reels",
@@ -100,11 +100,11 @@ const en = {
           "Short-form content is king, and we know how to make it reign. We create scroll-stopping reels and montages for Instagram, TikTok, YouTube Shorts, and more. Each piece is crafted with platform-specific best practices — optimal aspect ratios, hook-driven openings, trending audio integration, and text overlays that boost engagement and shareability.",
       },
       {
-        title: "Color Grading",
+        title: "Content Creation",
         description:
-          "Cinematic color grading that sets the mood, enhances storytelling, and gives your videos a signature look.",
+          "We help you craft compelling ideas, scripts, and content strategies — even if you don't know where to start.",
         detailed:
-          "Color is emotion. Our colorists use industry-standard tools like DaVinci Resolve to transform your footage with cinematic color grading. We create custom LUTs, match shots across scenes, correct exposure and white balance, and develop a signature color palette that becomes part of your brand identity. From warm and inviting to cool and corporate — we set the tone.",
+          "Great content starts with a great idea. Our content creation team works with you from the ground up — brainstorming concepts, writing scripts, developing hooks, and planning your content calendar. Whether you're a brand that knows what you want or someone who has no idea where to begin, we guide you through every step. We handle ideation, scriptwriting, storyboarding, and creative direction so you can focus on your business while we bring your vision to life.",
       },
       {
         title: "Motion Graphics",
@@ -323,13 +323,13 @@ const en = {
         name: "Hani Kamel",
         role: "Ex TikTok Manager",
         content:
-          "I had an excellent experience working with the Brand Lab team. They demonstrated a high level of professionalism and expertise, providing valuable support throughout the entire video creation process. Their deep understanding of content strategies for Reels and TikTok was especially impressive, and it significantly enhanced the quality and performance of my content. The team is highly collaborative, responsive, and detail-oriented, always ensuring that every aspect of the work meets a high standard. I would highly recommend Brand Lab to anyone looking for a reliable and creative partner.",
+          "Excellent experience with Brand Lab. Highly professional team with a deep understanding of Reels and TikTok strategies that truly elevated my content quality.",
       },
       {
         name: "Sara",
         role: "Founder, Alpha Brand Cosmetics",
         content:
-          "Honestly, you were a lifeline for me because I worked with another agency before you that completely wasted my time — it was the worst experience. But that was meant to be so I could truly appreciate the value of professional work with you. From turning the exact idea in my head into a video, to the highly professional editing and on-time delivery — even faster than expected. I'm so happy working with you and we're still going!",
+          "Brand Lab turned the exact ideas in my head into videos. Professional editing, on-time delivery, and honestly faster than expected. So happy working with them!",
       },
       {
         name: "Mo Adel",
@@ -341,13 +341,13 @@ const en = {
         name: "Karim Gabriel",
         role: "Founder, Keep Going & KG",
         content:
-          "Working with Brand Lab has been a professional experience. Projects are delivered on time, and any editing requests are handled quickly — all within a well-priced package.",
+          "Working with Brand Lab has been a professional experience. Projects delivered on time, editing requests handled quickly — all within a well-priced package.",
       },
       {
         name: "Ahmed Maged",
         role: "Owner, Redbone Gym & CM Transformation",
         content:
-          "My work was really unstable and my content was inconsistent, but now things are completely different — whether in ease of communication, speed of delivery, and honestly, sales have improved significantly and my social media presence has grown. After God, the credit goes to you. Thank you truly from my heart.",
+          "My content was inconsistent before, but now everything is different. Communication is easy, delivery is fast, and my sales and social media presence have grown significantly.",
       },
     ],
   },
@@ -480,7 +480,7 @@ const en = {
       projectTypeOptions: [
         "Video Editing",
         "Montage & Reels",
-        "Color Grading",
+        "Content Creation",
         "Motion Graphics",
         "Sound Design",
         "Brand Identity Video",
@@ -539,7 +539,7 @@ const en = {
       },
       {
         question: "Do you provide raw footage editing or full production?",
-        answer: "We specialize in post-production — editing, color grading, motion graphics, and sound design. If you need full production including filming, we can recommend trusted partners or discuss custom arrangements.",
+        answer: "We specialize in post-production — editing, content creation, motion graphics, and sound design. If you need full production including filming, we can recommend trusted partners or discuss custom arrangements.",
       },
       {
         question: "How do I get started?",
@@ -597,7 +597,7 @@ const en = {
       },
       {
         title: "Services",
-        content: "Brand Lab provides video editing, montage, color grading, motion graphics, sound design, and related post-production services. The specific deliverables, timelines, and pricing for each project will be outlined in a separate project agreement or proposal.",
+        content: "Brand Lab provides video editing, montage, content creation, motion graphics, sound design, and related post-production services. The specific deliverables, timelines, and pricing for each project will be outlined in a separate project agreement or proposal.",
       },
       {
         title: "Payment Terms",

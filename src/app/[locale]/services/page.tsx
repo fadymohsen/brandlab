@@ -3,7 +3,7 @@
 import {
   Film,
   Scissors,
-  Palette,
+  Lightbulb,
   Monitor,
   Music,
   Sparkles,
@@ -14,7 +14,7 @@ import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
 
-const icons = [Film, Scissors, Palette, Monitor, Music, Sparkles];
+const icons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
 
 export default function ServicesPage() {
   const dict = useDictionary();

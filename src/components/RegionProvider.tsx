@@ -6,11 +6,24 @@ type Region = "EG" | "INT";
 
 const RegionContext = createContext<Region>("EG");
 
+function getRegionFromCookie(): Region | null {
+  const match = document.cookie.match(/(?:^|; )region=(EG|INT)/);
+  return match ? (match[1] as Region) : null;
+}
+
 export function RegionProvider({ children }: { children: React.ReactNode }) {
+  // Read cookie immediately for instant region (set by middleware)
   const [region, setRegion] = useState<Region>("EG");
 
   useEffect(() => {
-    // Always call the API for a fresh IP check (handles VPN/network changes)
+    // Cookie is set by middleware on every request — read it first
+    const cookieRegion = getRegionFromCookie();
+    if (cookieRegion) {
+      setRegion(cookieRegion);
+      return;
+    }
+
+    // Fallback: call API if cookie is missing (e.g. first visit before middleware ran)
     fetch("/api/region")
       .then((res) => res.json())
       .then((data) => {
@@ -19,11 +32,8 @@ export function RegionProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch(() => {
-        // On error, try reading the cookie as fallback
-        const match = document.cookie.match(/(?:^|; )region=(EG|INT)/);
-        if (match) {
-          setRegion(match[1] as Region);
-        }
+        // Default to INT if everything fails
+        setRegion("INT");
       });
   }, []);
 
