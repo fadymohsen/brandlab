@@ -360,6 +360,7 @@ const en = {
       "Choose the plan that fits your needs. No hidden fees, no surprises.",
     cta: "View Pricing Plans",
     mostPopular: "Most Popular",
+    subscribe: "Subscribe Now",
     pageTitle: "Our",
     pageTitleHighlight: "Pricing",
     pageSubtitle:

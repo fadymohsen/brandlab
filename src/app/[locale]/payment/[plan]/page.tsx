@@ -112,9 +112,9 @@ export default function PaymentPage() {
       </section>
 
       {/* Payment Options */}
-      <section className="pb-24">
+      <section className="pt-12 pb-24">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-12">
             {/* Online Payment */}
             <div className="rounded-2xl bg-gradient-to-b from-primary/10 to-secondary/5 border border-primary/20 p-8 flex flex-col">
               <div className="flex items-center gap-3 mb-2">
@@ -130,17 +130,19 @@ export default function PaymentPage() {
               </p>
 
               <div className="flex-1 flex flex-col justify-between">
-                <div className="flex flex-wrap gap-4 justify-center mb-8">
-                  {["Visa", "Mastercard", "Fawry", "Wallet", "Apple Pay"].map(
-                    (method) => (
-                      <div
-                        key={method}
-                        className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/70 text-sm"
-                      >
-                        {method}
-                      </div>
-                    )
-                  )}
+                <div className="flex-1 flex items-center justify-center mb-8">
+                  <div className="flex flex-wrap gap-4 justify-center">
+                    {["Visa", "Mastercard", "Fawry", "Wallet", "Apple Pay"].map(
+                      (method) => (
+                        <div
+                          key={method}
+                          className="px-5 py-3 rounded-lg bg-white/5 border border-white/10 text-cream/70 text-base font-medium"
+                        >
+                          {method}
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
 
                 <button className="flex w-full btn-primary">

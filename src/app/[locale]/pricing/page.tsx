@@ -120,7 +120,7 @@ export default function PricingPage() {
                     href={`/${locale}/payment/${plan.slug}`}
                     className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
-                    {plan.cta}
+                    {dict.pricing.subscribe}
                     <ArrowRight size={16} className="rtl:rotate-180" />
                   </Link>
                 </div>

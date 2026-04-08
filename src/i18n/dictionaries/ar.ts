@@ -360,6 +360,7 @@ const ar: Dictionary = {
     subtitle: "اختر الخطة التي تناسب احتياجاتك. بدون رسوم خفية، بدون مفاجآت.",
     cta: "عرض خطط الأسعار",
     mostPopular: "الأكثر شيوعاً",
+    subscribe: "اشترك الآن",
     pageTitle: "",
     pageTitleHighlight: "أسعارنا",
     pageSubtitle:
