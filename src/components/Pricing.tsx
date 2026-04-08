@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useDictionary } from "@/i18n/dictionary-provider";
-import { useLeadPopup } from "./LeadPopupProvider";
 import { useRegion } from "./RegionProvider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 
@@ -13,7 +12,6 @@ export default function Pricing() {
   const dict = useDictionary();
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
-  const { openWithPlan } = useLeadPopup();
   const region = useRegion();
 
   return (
@@ -82,13 +80,13 @@ export default function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    onClick={() => openWithPlan(plan.name)}
+                  <Link
+                    href={`/${locale}/payment/${plan.slug}`}
                     className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             </StaggerItem>

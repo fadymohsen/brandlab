@@ -400,7 +400,9 @@ const ar: Dictionary = {
     plans: [
       {
         name: "الأساسي",
+        slug: "basic",
         price: { EG: "4,000 ج.م", INT: "$124" },
+        priceRaw: { EG: 4000, INT: 124 },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية التي تبدأ بالنشر بانتظام",
@@ -418,7 +420,9 @@ const ar: Dictionary = {
       },
       {
         name: "الاحترافي",
+        slug: "pro",
         price: { EG: "6,000 ج.م", INT: "$199" },
+        priceRaw: { EG: 6000, INT: 199 },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية المستعدة للنمو وتوسيع المحتوى",
@@ -436,7 +440,9 @@ const ar: Dictionary = {
       },
       {
         name: "الأعمال",
+        slug: "business",
         price: { EG: "10,000 ج.م", INT: "$299" },
+        priceRaw: { EG: 10000, INT: 299 },
         period: "شهرياً",
         perReel: "",
         description: "للعلامات التجارية التي تريد حضوراً يومياً وأقصى انتشار",
@@ -452,6 +458,39 @@ const ar: Dictionary = {
         featured: true,
       },
     ],
+  },
+  payment: {
+    title: "اشترك في",
+    subtitle: "اختر طريقة الدفع المفضلة لديك",
+    planNotFound: "الخطة غير موجودة",
+    backToPricing: "العودة للأسعار",
+    perMonth: "/شهرياً",
+    onlinePayment: {
+      title: "ادفع أونلاين",
+      subtitle: "دفع آمن عبر البطاقة أو المحفظة أو فوري",
+      button: "ادفع الآن",
+      methods: "بطاقة · فوري · محفظة · Apple Pay",
+    },
+    whatsappPayment: {
+      title: "طريقة الاشتراك",
+      steps: [
+        {
+          title: "1. أرسل المبلغ",
+          description: "حوّل {amount} عن طريق فودافون كاش أو إنستاباي على",
+          phone: "+20 106 852 1676",
+        },
+        {
+          title: "2. أرسل الإيصال",
+          description: "خد سكرين شوت للتحويل وابعته لنا على واتساب.",
+        },
+        {
+          title: "3. تفعيل الاشتراك",
+          description: "هنأكد اشتراكك في دقائق وتبدأ على طول.",
+        },
+      ],
+      button: "أرسل الإيصال على واتساب",
+    },
+    or: "أو",
   },
   contact: {
     label: "تواصل معنا",

@@ -2,6 +2,8 @@
 
 import { Check, X, ArrowRight, ChevronDown, Star } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
@@ -31,7 +33,9 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export default function PricingPage() {
   const dict = useDictionary();
-  const { open, openWithPlan } = useLeadPopup();
+  const { open } = useLeadPopup();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
   const region = useRegion();
 
   return (
@@ -112,13 +116,13 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    onClick={() => openWithPlan(plan.name)}
+                  <Link
+                    href={`/${locale}/payment/${plan.slug}`}
                     className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {plan.cta}
                     <ArrowRight size={16} className="rtl:rotate-180" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

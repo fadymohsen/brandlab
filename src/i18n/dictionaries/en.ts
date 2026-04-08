@@ -400,7 +400,9 @@ const en = {
     plans: [
       {
         name: "Basic",
+        slug: "basic",
         price: { EG: "4,000 EGP", INT: "$124" },
+        priceRaw: { EG: 4000, INT: 124 },
         period: "month",
         perReel: "",
         description: "For brands starting to post consistently",
@@ -418,7 +420,9 @@ const en = {
       },
       {
         name: "Pro",
+        slug: "pro",
         price: { EG: "6,000 EGP", INT: "$199" },
+        priceRaw: { EG: 6000, INT: 199 },
         period: "month",
         perReel: "",
         description: "For brands ready to grow and scale content",
@@ -436,7 +440,9 @@ const en = {
       },
       {
         name: "Business",
+        slug: "business",
         price: { EG: "10,000 EGP", INT: "$299" },
+        priceRaw: { EG: 10000, INT: 299 },
         period: "month",
         perReel: "",
         description: "For brands that want daily presence and maximum reach",
@@ -452,6 +458,41 @@ const en = {
         featured: true,
       },
     ],
+  },
+  payment: {
+    title: "Subscribe to",
+    subtitle: "Choose your preferred payment method",
+    planNotFound: "Plan not found",
+    backToPricing: "Back to Pricing",
+    perMonth: "/month",
+    onlinePayment: {
+      title: "Pay Online",
+      subtitle: "Secure payment via card, wallet, or Fawry",
+      button: "Pay Now",
+      methods: "Card · Fawry · Wallet · Apple Pay",
+    },
+    whatsappPayment: {
+      title: "How to subscribe",
+      steps: [
+        {
+          title: "1. Send Payment",
+          description: "Transfer {amount} via Vodafone Cash or InstaPay to",
+          phone: "+20 106 852 1676",
+        },
+        {
+          title: "2. Send the Receipt",
+          description:
+            "Take a screenshot of the transfer and send it to us on WhatsApp.",
+        },
+        {
+          title: "3. Get Activated",
+          description:
+            "We'll confirm your membership within minutes and you're good to go.",
+        },
+      ],
+      button: "Send Receipt on WhatsApp",
+    },
+    or: "or",
   },
   contact: {
     label: "Get In Touch",
