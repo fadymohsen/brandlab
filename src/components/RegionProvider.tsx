@@ -10,14 +10,7 @@ export function RegionProvider({ children }: { children: React.ReactNode }) {
   const [region, setRegion] = useState<Region>("EG");
 
   useEffect(() => {
-    // Check cookie first for instant value
-    const match = document.cookie.match(/(?:^|; )region=(EG|INT)/);
-    if (match) {
-      setRegion(match[1] as Region);
-      return;
-    }
-
-    // Otherwise call API to detect region
+    // Always call the API for a fresh IP check (handles VPN/network changes)
     fetch("/api/region")
       .then((res) => res.json())
       .then((data) => {
@@ -26,7 +19,11 @@ export function RegionProvider({ children }: { children: React.ReactNode }) {
         }
       })
       .catch(() => {
-        // Default stays as EG
+        // On error, try reading the cookie as fallback
+        const match = document.cookie.match(/(?:^|; )region=(EG|INT)/);
+        if (match) {
+          setRegion(match[1] as Region);
+        }
       });
   }, []);
 

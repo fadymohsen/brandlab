@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  // Check if we already have a region cookie
-  const existing = request.cookies.get("region")?.value;
-  if (existing === "EG" || existing === "INT") {
-    return NextResponse.json({ region: existing });
-  }
-
-  // Try to detect country from IP using free geolocation API
+  // Always do a fresh IP lookup to handle VPN/network changes
   try {
     const forwarded = request.headers.get("x-forwarded-for");
     const ip = forwarded?.split(",")[0]?.trim() || "";
@@ -30,7 +24,7 @@ export async function GET(request: NextRequest) {
 
     const response = NextResponse.json({ region });
     response.cookies.set("region", region, {
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: 60 * 60, // 1 hour — short TTL so network changes are picked up
       path: "/",
       sameSite: "lax",
     });
@@ -39,7 +33,7 @@ export async function GET(request: NextRequest) {
     // On any error, default to international
     const response = NextResponse.json({ region: "INT" });
     response.cookies.set("region", "INT", {
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60,
       path: "/",
       sameSite: "lax",
     });
