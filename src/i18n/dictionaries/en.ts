@@ -400,7 +400,7 @@ const en = {
     plans: [
       {
         name: "Basic",
-        price: { EG: "4,000 EGP", INT: "$125" },
+        price: { EG: "4,000 EGP", INT: "$124" },
         period: "month",
         perReel: "",
         description: "For brands starting to post consistently",
@@ -418,7 +418,7 @@ const en = {
       },
       {
         name: "Pro",
-        price: { EG: "6,000 EGP", INT: "$200" },
+        price: { EG: "6,000 EGP", INT: "$199" },
         period: "month",
         perReel: "",
         description: "For brands ready to grow and scale content",
@@ -436,7 +436,7 @@ const en = {
       },
       {
         name: "Business",
-        price: { EG: "10,000 EGP", INT: "$300" },
+        price: { EG: "10,000 EGP", INT: "$299" },
         period: "month",
         perReel: "",
         description: "For brands that want daily presence and maximum reach",
