@@ -337,7 +337,7 @@ export function Marquee({
   reverse?: boolean;
 }) {
   return (
-    <div className={`overflow-hidden ${className}`}>
+    <div dir="ltr" className={`overflow-hidden ${className}`}>
       <motion.div
         className="flex gap-6 w-max"
         animate={{ x: reverse ? ["0%", "-50%"] : ["-50%", "0%"] }}
