@@ -21,7 +21,7 @@ export default function AboutPage() {
         <img
           src="/about-hero.jpg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-[center_70%] opacity-20 pointer-events-none"
         />
         <div className="absolute inset-0 bg-dark/60" />
         <div className="absolute inset-0">
