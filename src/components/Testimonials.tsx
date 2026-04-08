@@ -14,7 +14,7 @@ function TestimonialCard({
   };
 }) {
   return (
-    <div className="gradient-border p-8 w-[400px] shrink-0">
+    <div dir="ltr" className="gradient-border p-8 w-[400px] shrink-0 text-left">
       <div className="relative z-10">
         <Quote size={32} className="text-primary/30 mb-4" />
         <div className="flex gap-1 mb-4">
