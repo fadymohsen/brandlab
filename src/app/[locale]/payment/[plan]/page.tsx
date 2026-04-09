@@ -215,28 +215,32 @@ export default function PaymentPage() {
       </section>
 
       {/* Coupon Input */}
-      <section className="pb-8">
+      <section className="py-8">
         <div className="max-w-md mx-auto px-6 lg:px-8">
           {appliedCoupon ? (
-            <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-green-500/10 border border-green-500/20">
-              <div className="flex items-center gap-2">
-                <Tag size={16} className="text-green-400" />
-                <span className="text-green-400 text-sm font-medium">
-                  {dict.coupon.valid}
-                </span>
-                <span className="font-mono text-sm text-cream font-bold">
-                  {appliedCoupon.code}
-                </span>
+            <div className="flex items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-green-500/10 border border-green-500/20 backdrop-blur-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <Tag size={14} className="text-green-400" />
+                </div>
+                <div>
+                  <span className="text-green-400 text-sm font-medium">
+                    {dict.coupon.valid}
+                  </span>
+                  <span className="font-mono text-sm text-cream font-bold ms-2">
+                    {appliedCoupon.code}
+                  </span>
+                </div>
               </div>
               <button
                 onClick={handleRemoveCoupon}
-                className="text-cream/40 hover:text-cream transition-colors"
+                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-cream/40 hover:text-cream hover:bg-white/10 transition-colors"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
             </div>
           ) : (
-            <div>
+            <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-4 backdrop-blur-sm">
               <div className="flex gap-2">
                 <div className="flex-1 relative">
                   <Tag
@@ -269,7 +273,7 @@ export default function PaymentPage() {
                 </button>
               </div>
               {couponError && (
-                <p className="text-red-400 text-xs mt-2">{couponError}</p>
+                <p className="text-red-400 text-xs mt-3 ps-1">{couponError}</p>
               )}
             </div>
           )}
