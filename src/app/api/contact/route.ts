@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 const ADMIN_EMAIL = "brandlab12@gmail.com";
+const GOOGLE_SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbyDduU7cbH3nGR3GZT-2Gr9GjTjnwwJKbEY2iVu30NCdDI6_XC49xtRUWrJPqnOpa4WcA/exec";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -55,6 +57,13 @@ export async function POST(req: Request) {
         </div>
       `,
     });
+
+    // --- Log to Google Sheet (fire & forget) ---
+    fetch(GOOGLE_SHEET_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, phone, businessField, planType, projectType }),
+    }).catch((err) => console.error("Google Sheet error:", err));
 
     // --- Confirmation email to client ---
     await transporter.sendMail({
