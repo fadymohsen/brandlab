@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Send, ArrowRight } from "lucide-react";
+import { X, Send, ArrowRight, CheckCircle } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import PhoneField from "./PhoneField";
-
-const WHATSAPP_NUMBER = "201227742865";
 
 export default function LeadPopup({
   isOpen,
@@ -18,9 +16,11 @@ export default function LeadPopup({
 }) {
   const dict = useDictionary();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [businessField, setBusinessField] = useState("");
   const [planType, setPlanType] = useState(defaultPlan);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
     setPlanType(defaultPlan);
@@ -28,23 +28,28 @@ export default function LeadPopup({
 
   if (!isOpen) return null;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const lines = [
-      `Hi Brand Lab! 👋`,
-      `I'm interested in your services and would love to learn more.`,
-      ``,
-      `*My Details:*`,
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      businessField ? `Business Field: ${businessField}` : "",
-      planType ? `Interested Plan: ${planType}` : "",
-      ``,
-      `Looking forward to hearing from you!`,
-    ].filter((line) => line !== undefined && line !== null);
-    const text = encodeURIComponent(lines.join("\n"));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
-    onClose();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, businessField, planType }),
+      });
+
+      if (!res.ok) throw new Error();
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setBusinessField("");
+      setPlanType("");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -67,81 +72,111 @@ export default function LeadPopup({
             <X size={16} />
           </button>
 
-          {/* Header */}
-          <h2 className="text-2xl font-bold text-cream mb-2">
-            {dict.leadPopup.title}{" "}
-            <span className="gradient-text">{dict.leadPopup.titleHighlight}</span>
-          </h2>
-          <p className="text-cream/50 text-sm mb-6">{dict.leadPopup.subtitle}</p>
+          {status === "success" ? (
+            <div className="text-center py-8">
+              <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
+              <p className="text-cream text-lg font-semibold">
+                {dict.leadPopup.successMessage}
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Header */}
+              <h2 className="text-2xl font-bold text-cream mb-2">
+                {dict.leadPopup.title}{" "}
+                <span className="gradient-text">{dict.leadPopup.titleHighlight}</span>
+              </h2>
+              <p className="text-cream/50 text-sm mb-6">{dict.leadPopup.subtitle}</p>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                {dict.leadPopup.name}
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={dict.leadPopup.namePlaceholder}
-                required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-            <PhoneField
-              label={dict.leadPopup.phone}
-              placeholder={dict.leadPopup.phonePlaceholder}
-              value={phone}
-              onChange={setPhone}
-            />
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                {dict.leadPopup.businessField}
-              </label>
-              <select
-                value={businessField}
-                onChange={(e) => setBusinessField(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
-              >
-                <option value="" className="bg-dark">
-                  {dict.leadPopup.businessFieldPlaceholder}
-                </option>
-                {dict.leadPopup.businessFieldOptions.map((option) => (
-                  <option key={option} value={option} className="bg-dark">
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-cream/70 mb-1.5">
-                {dict.leadPopup.planType}
-              </label>
-              <select
-                value={planType}
-                onChange={(e) => setPlanType(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
-              >
-                <option value="" className="bg-dark">
-                  {dict.leadPopup.planTypePlaceholder}
-                </option>
-                {dict.leadPopup.planTypeOptions.map((option) => (
-                  <option key={option} value={option} className="bg-dark">
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button
-              type="submit"
-              className="flex btn-primary w-full rounded-xl mt-2"
-            >
-              <Send size={18} />
-              {dict.leadPopup.submit}
-              <ArrowRight size={16} className="rtl:rotate-180" />
-            </button>
-          </form>
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-cream/70 mb-1.5">
+                    {dict.leadPopup.name}
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={dict.leadPopup.namePlaceholder}
+                    required
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-cream/70 mb-1.5">
+                    {dict.leadPopup.email}
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={dict.leadPopup.emailPlaceholder}
+                    required
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                  />
+                </div>
+                <PhoneField
+                  label={dict.leadPopup.phone}
+                  placeholder={dict.leadPopup.phonePlaceholder}
+                  value={phone}
+                  onChange={setPhone}
+                />
+                <div>
+                  <label className="block text-sm font-medium text-cream/70 mb-1.5">
+                    {dict.leadPopup.businessField}
+                  </label>
+                  <select
+                    value={businessField}
+                    onChange={(e) => setBusinessField(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                  >
+                    <option value="" className="bg-dark">
+                      {dict.leadPopup.businessFieldPlaceholder}
+                    </option>
+                    {dict.leadPopup.businessFieldOptions.map((option) => (
+                      <option key={option} value={option} className="bg-dark">
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-cream/70 mb-1.5">
+                    {dict.leadPopup.planType}
+                  </label>
+                  <select
+                    value={planType}
+                    onChange={(e) => setPlanType(e.target.value)}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                  >
+                    <option value="" className="bg-dark">
+                      {dict.leadPopup.planTypePlaceholder}
+                    </option>
+                    {dict.leadPopup.planTypeOptions.map((option) => (
+                      <option key={option} value={option} className="bg-dark">
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {status === "error" && (
+                  <p className="text-red-400 text-sm">{dict.leadPopup.errorMessage}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="flex btn-primary w-full rounded-xl mt-2 disabled:opacity-50"
+                >
+                  <Send size={18} />
+                  {status === "sending" ? dict.leadPopup.sending : dict.leadPopup.submit}
+                  <ArrowRight size={16} className="rtl:rotate-180" />
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </div>

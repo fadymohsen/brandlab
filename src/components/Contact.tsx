@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Mail, MapPin, Send, ArrowRight } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Send, ArrowRight, CheckCircle } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 import PhoneField from "./PhoneField";
@@ -11,26 +11,34 @@ const WHATSAPP_NUMBER = "201227742865";
 export default function Contact() {
   const dict = useDictionary();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [projectType, setProjectType] = useState("");
   const [businessField, setBusinessField] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const lines = [
-      `Hi Brand Lab! 👋`,
-      `I'd like to get in touch regarding a project.`,
-      ``,
-      `*My Details:*`,
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      projectType ? `Project Type: ${projectType}` : "",
-      businessField ? `Business Field: ${businessField}` : "",
-      ``,
-      `Looking forward to hearing from you!`,
-    ].filter((line) => line !== undefined && line !== null);
-    const text = encodeURIComponent(lines.join("\n"));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank");
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, projectType, businessField }),
+      });
+
+      if (!res.ok) throw new Error();
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setProjectType("");
+      setBusinessField("");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -139,75 +147,105 @@ export default function Contact() {
               className="gradient-border p-8"
             >
               <div className="relative z-10 space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-cream/70 mb-2">
-                    {dict.contact.form.name}
-                  </label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={dict.contact.form.namePlaceholder}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-                  />
-                </div>
+                {status === "success" ? (
+                  <div className="text-center py-8">
+                    <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
+                    <p className="text-cream text-lg font-semibold">
+                      {dict.contact.form.successMessage}
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium text-cream/70 mb-2">
+                        {dict.contact.form.name}
+                      </label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder={dict.contact.form.namePlaceholder}
+                        required
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                      />
+                    </div>
 
-                <PhoneField
-                  label={dict.contact.form.phone}
-                  placeholder="+20 122 774 2865"
-                  value={phone}
-                  onChange={setPhone}
-                />
+                    <div>
+                      <label className="block text-sm font-medium text-cream/70 mb-2">
+                        {dict.contact.form.email}
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder={dict.contact.form.emailPlaceholder}
+                        required
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-cream/70 mb-2">
-                    {dict.contact.form.projectType}
-                  </label>
-                  <select
-                    value={projectType}
-                    onChange={(e) => setProjectType(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
-                  >
-                    <option value="" className="bg-dark">
-                      {dict.contact.form.projectTypePlaceholder}
-                    </option>
-                    {dict.contact.form.projectTypeOptions.map((option) => (
-                      <option key={option} value={option} className="bg-dark">
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                    <PhoneField
+                      label={dict.contact.form.phone}
+                      placeholder="+20 122 774 2865"
+                      value={phone}
+                      onChange={setPhone}
+                    />
 
-                <div>
-                  <label className="block text-sm font-medium text-cream/70 mb-2">
-                    {dict.contact.form.businessField}
-                  </label>
-                  <select
-                    value={businessField}
-                    onChange={(e) => setBusinessField(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
-                  >
-                    <option value="" className="bg-dark">
-                      {dict.contact.form.businessFieldPlaceholder}
-                    </option>
-                    {dict.contact.form.businessFieldOptions.map((option) => (
-                      <option key={option} value={option} className="bg-dark">
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                    <div>
+                      <label className="block text-sm font-medium text-cream/70 mb-2">
+                        {dict.contact.form.projectType}
+                      </label>
+                      <select
+                        value={projectType}
+                        onChange={(e) => setProjectType(e.target.value)}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                      >
+                        <option value="" className="bg-dark">
+                          {dict.contact.form.projectTypePlaceholder}
+                        </option>
+                        {dict.contact.form.projectTypeOptions.map((option) => (
+                          <option key={option} value={option} className="bg-dark">
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                <button
-                  type="submit"
-                  className="flex btn-primary w-full rounded-xl"
-                >
-                  <Send size={18} />
-                  {dict.contact.form.submit}
-                  <ArrowRight size={16} className="rtl:rotate-180" />
-                </button>
+                    <div>
+                      <label className="block text-sm font-medium text-cream/70 mb-2">
+                        {dict.contact.form.businessField}
+                      </label>
+                      <select
+                        value={businessField}
+                        onChange={(e) => setBusinessField(e.target.value)}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                      >
+                        <option value="" className="bg-dark">
+                          {dict.contact.form.businessFieldPlaceholder}
+                        </option>
+                        {dict.contact.form.businessFieldOptions.map((option) => (
+                          <option key={option} value={option} className="bg-dark">
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {status === "error" && (
+                      <p className="text-red-400 text-sm">{dict.contact.form.errorMessage}</p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={status === "sending"}
+                      className="flex btn-primary w-full rounded-xl disabled:opacity-50"
+                    >
+                      <Send size={18} />
+                      {status === "sending" ? dict.contact.form.sending : dict.contact.form.submit}
+                      <ArrowRight size={16} className="rtl:rotate-180" />
+                    </button>
+                  </>
+                )}
               </div>
             </form>
           </RevealOnScroll>

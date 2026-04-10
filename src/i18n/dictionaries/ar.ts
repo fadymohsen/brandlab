@@ -528,6 +528,8 @@ const ar: Dictionary = {
     form: {
       name: "اسمك",
       namePlaceholder: "أحمد محمد",
+      email: "البريد الإلكتروني",
+      emailPlaceholder: "ahmed@example.com",
       phone: "رقم الهاتف",
       projectType: "نوع المشروع",
       projectTypePlaceholder: "اختر خدمة",
@@ -554,6 +556,9 @@ const ar: Dictionary = {
         "أخرى",
       ],
       submit: "إرسال الرسالة",
+      sending: "جاري الإرسال...",
+      successMessage: "تم إرسال رسالتك! سنرد عليك خلال 24 ساعة.",
+      errorMessage: "حدث خطأ. يرجى المحاولة مرة أخرى.",
     },
   },
   footer: {
@@ -724,6 +729,8 @@ const ar: Dictionary = {
     subtitle: "املأ بياناتك لحجز مكالمة استشارية مجانية مع أحد خبرائنا. بدون التزامات — مجرد محادثة ودية عن مشروعك.",
     name: "الاسم الكامل",
     namePlaceholder: "أحمد محمد",
+    email: "البريد الإلكتروني",
+    emailPlaceholder: "ahmed@example.com",
     phone: "رقم الهاتف",
     phonePlaceholder: "+20 122 774 2865",
     businessField: "مجال العمل",
@@ -744,6 +751,9 @@ const ar: Dictionary = {
     planTypePlaceholder: "اختر خطة",
     planTypeOptions: ["الأساسي", "الاحترافي", "الأعمال"],
     submit: "احجز مكالمتي المجانية",
+    sending: "جاري الإرسال...",
+    successMessage: "تم إرسال طلبك! سنتواصل معك قريباً.",
+    errorMessage: "حدث خطأ. يرجى المحاولة مرة أخرى.",
   },
   cookieConsent: {
     title: "نستخدم ملفات تعريف الارتباط",

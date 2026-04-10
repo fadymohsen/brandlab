@@ -530,6 +530,8 @@ const en = {
     form: {
       name: "Your Name",
       namePlaceholder: "John Doe",
+      email: "Email Address",
+      emailPlaceholder: "john@example.com",
       phone: "Phone Number",
       projectType: "Project Type",
       projectTypePlaceholder: "Select a service",
@@ -556,6 +558,9 @@ const en = {
         "Other",
       ],
       submit: "Send Message",
+      sending: "Sending...",
+      successMessage: "Message sent! We'll get back to you within 24 hours.",
+      errorMessage: "Something went wrong. Please try again.",
     },
   },
   footer: {
@@ -726,6 +731,8 @@ const en = {
     subtitle: "Fill in your details to schedule a free consultation call with one of our experts. No obligations — just a friendly chat about your project.",
     name: "Full Name",
     namePlaceholder: "John Doe",
+    email: "Email Address",
+    emailPlaceholder: "john@example.com",
     phone: "Phone Number",
     phonePlaceholder: "+20 122 774 2865",
     businessField: "Business Field",
@@ -746,6 +753,9 @@ const en = {
     planTypePlaceholder: "Select a plan",
     planTypeOptions: ["Basic", "Pro", "Business"],
     submit: "Book My Free Call",
+    sending: "Sending...",
+    successMessage: "Your request has been sent! We'll be in touch soon.",
+    errorMessage: "Something went wrong. Please try again.",
   },
   cookieConsent: {
     title: "We use cookies",
