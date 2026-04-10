@@ -558,6 +558,7 @@ const ar: Dictionary = {
       submit: "إرسال الرسالة",
       sending: "جاري الإرسال...",
       successMessage: "تم إرسال رسالتك! سنرد عليك خلال 24 ساعة.",
+      submitAnother: "إرسال طلب آخر",
       errorMessage: "حدث خطأ. يرجى المحاولة مرة أخرى.",
     },
   },
@@ -753,6 +754,7 @@ const ar: Dictionary = {
     submit: "احجز مكالمتي المجانية",
     sending: "جاري الإرسال...",
     successMessage: "تم إرسال طلبك! سنتواصل معك قريباً.",
+    submitAnother: "إرسال طلب آخر",
     errorMessage: "حدث خطأ. يرجى المحاولة مرة أخرى.",
   },
   cookieConsent: {

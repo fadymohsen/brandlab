@@ -153,6 +153,13 @@ export default function Contact() {
                     <p className="text-cream text-lg font-semibold">
                       {dict.contact.form.successMessage}
                     </p>
+                    <button
+                      onClick={() => setStatus("idle")}
+                      className="inline-flex btn-primary mt-6"
+                    >
+                      {dict.contact.form.submitAnother}
+                      <ArrowRight size={16} className="rtl:rotate-180" />
+                    </button>
                   </div>
                 ) : (
                   <>

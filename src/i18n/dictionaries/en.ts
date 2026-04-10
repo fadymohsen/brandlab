@@ -560,6 +560,7 @@ const en = {
       submit: "Send Message",
       sending: "Sending...",
       successMessage: "Message sent! We'll get back to you within 24 hours.",
+      submitAnother: "Submit Another Request",
       errorMessage: "Something went wrong. Please try again.",
     },
   },
@@ -755,6 +756,7 @@ const en = {
     submit: "Book My Free Call",
     sending: "Sending...",
     successMessage: "Your request has been sent! We'll be in touch soon.",
+    submitAnother: "Submit Another Request",
     errorMessage: "Something went wrong. Please try again.",
   },
   cookieConsent: {

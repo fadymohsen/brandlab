@@ -78,6 +78,13 @@ export default function LeadPopup({
               <p className="text-cream text-lg font-semibold">
                 {dict.leadPopup.successMessage}
               </p>
+              <button
+                onClick={() => setStatus("idle")}
+                className="inline-flex btn-primary mt-6"
+              >
+                {dict.leadPopup.submitAnother}
+                <ArrowRight size={16} className="rtl:rotate-180" />
+              </button>
             </div>
           ) : (
             <>
