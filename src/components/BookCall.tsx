@@ -1,6 +1,6 @@
 "use client";
 
-import { PhoneCall, ArrowRight } from "lucide-react";
+import { PhoneCall, ArrowRight, MessageCircle } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "./LeadPopupProvider";
 import { RevealOnScroll } from "./animations";
@@ -44,13 +44,24 @@ export default function BookCall() {
               <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
                 {dict.bookCall.subtitle}
               </p>
-              <button
-                onClick={open}
-                className="inline-flex btn-primary mt-8"
-              >
-                {dict.bookCall.cta}
-                <ArrowRight size={18} className="rtl:rotate-180" />
-              </button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <button
+                  onClick={open}
+                  className="inline-flex btn-primary"
+                >
+                  {dict.bookCall.cta}
+                  <ArrowRight size={18} className="rtl:rotate-180" />
+                </button>
+                <a
+                  href="https://wa.me/201227742865"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 font-semibold hover:bg-green-500/20 transition-colors"
+                >
+                  <MessageCircle size={18} />
+                  {dict.bookCall.ctaWhatsapp}
+                </a>
+              </div>
             </div>
           </div>
         </RevealOnScroll>

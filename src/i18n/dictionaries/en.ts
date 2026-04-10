@@ -770,6 +770,7 @@ const en = {
     titleHighlight: "Experts",
     subtitle: "Book a free call with our team to discuss your project. No commitments — just a friendly conversation about how we can help your brand grow.",
     cta: "Book a Free Call",
+    ctaWhatsapp: "Chat on WhatsApp",
   },
 };
 
