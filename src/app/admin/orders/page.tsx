@@ -15,6 +15,7 @@ import {
   ExternalLink,
   Mail,
   Phone,
+  Trash2,
 } from "lucide-react";
 
 interface Order {
@@ -49,6 +50,14 @@ export default function OrdersPage() {
     }
     fetchOrders();
   }, []);
+
+  async function handleDelete(id: string) {
+    if (!confirm("Are you sure you want to delete this order?")) return;
+    const res = await fetch(`/api/orders/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setOrders(orders.filter((o) => o.id !== id));
+    }
+  }
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -276,8 +285,8 @@ export default function OrdersPage() {
                     </div>
                   </div>
 
-                  {/* Right: Amount + Link */}
-                  <div className="flex items-center gap-4 shrink-0">
+                  {/* Right: Amount + Actions */}
+                  <div className="flex items-center gap-3 shrink-0">
                     <span className="text-lg font-bold text-cream">
                       {formatAmount(order.amount, order.currency)}
                     </span>
@@ -292,6 +301,13 @@ export default function OrdersPage() {
                         <ExternalLink size={14} />
                       </a>
                     )}
+                    <button
+                      onClick={() => handleDelete(order.id)}
+                      className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cream/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                      title="Delete Order"
+                    >
+                      <Trash2 size={14} />
+                    </button>
                   </div>
                 </div>
               </div>
