@@ -122,6 +122,12 @@ export default function CouponsPage() {
           >
             Coupons
           </Link>
+          <Link
+            href="/admin/orders"
+            className="py-3 text-sm text-cream/50 hover:text-cream transition-colors"
+          >
+            Orders
+          </Link>
         </div>
       </nav>
 

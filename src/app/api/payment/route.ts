@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createOrder } from "@/lib/order-data";
 
 const FAWATERAK_API_URL = "https://app.fawaterk.com/api/v2/createInvoiceLink";
 
@@ -64,6 +65,20 @@ export async function POST(req: Request) {
     const data = await response.json();
 
     if (data.status === "success" && data.data?.url) {
+      await createOrder({
+        invoiceId: String(data.data.invoiceId),
+        invoiceKey: data.data.invoiceKey,
+        planName,
+        amount,
+        currency,
+        status: "pending",
+        customerName,
+        customerEmail,
+        customerPhone,
+        couponCode: couponCode || null,
+        paymentUrl: data.data.url,
+      });
+
       return NextResponse.json({
         success: true,
         paymentUrl: data.data.url,

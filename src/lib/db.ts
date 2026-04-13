@@ -32,4 +32,21 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS orders (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      invoice_id TEXT,
+      invoice_key TEXT,
+      plan_name TEXT NOT NULL,
+      amount NUMERIC(10,2) NOT NULL,
+      currency TEXT NOT NULL DEFAULT 'EGP',
+      status TEXT NOT NULL DEFAULT 'pending',
+      customer_name TEXT NOT NULL,
+      customer_email TEXT NOT NULL,
+      customer_phone TEXT NOT NULL,
+      coupon_code TEXT,
+      payment_url TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
 }
