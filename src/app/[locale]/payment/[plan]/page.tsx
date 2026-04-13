@@ -47,9 +47,10 @@ export default function PaymentPage() {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
 
   const paymentMethods = [
-    { id: "2", label: "Card", labelAr: "بطاقة", icon: "💳" },
-    { id: "3", label: "Fawry", labelAr: "فوري", icon: "🏪" },
-    { id: "4", label: "Wallet", labelAr: "محفظة", icon: "📱" },
+    { id: "2", label: "Card", labelAr: "بطاقة" },
+    { id: "3", label: "Fawry", labelAr: "فوري" },
+    { id: "4", label: "Wallet", labelAr: "محفظة" },
+    { id: "11", label: "Apple Pay", labelAr: "Apple Pay" },
   ];
 
   const plan = dict.pricing.plans.find(
@@ -397,22 +398,19 @@ export default function PaymentPage() {
                   <p className="text-cream/40 text-xs">
                     {dict.payment.onlinePayment.selectMethod || "Select payment method"}
                   </p>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {paymentMethods.map((method) => (
                       <button
                         key={method.id}
                         type="button"
                         onClick={() => setSelectedMethod(method.id)}
-                        className={`flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border text-sm font-medium transition-all ${
+                        className={`px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
                           selectedMethod === method.id
                             ? "bg-primary/15 border-primary/40 text-primary"
                             : "bg-white/5 border-white/10 text-cream/50 hover:border-white/20"
                         }`}
                       >
-                        <span className="text-lg">{method.icon}</span>
-                        <span className="text-xs">
-                          {isRtl ? method.labelAr : method.label}
-                        </span>
+                        {isRtl ? method.labelAr : method.label}
                       </button>
                     ))}
                   </div>
