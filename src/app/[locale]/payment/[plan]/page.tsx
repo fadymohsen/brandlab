@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Tag,
   X,
+  Loader2,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -37,6 +38,12 @@ export default function PaymentPage() {
     couponId: string;
     code: string;
   } | null>(null);
+
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
 
   const plan = dict.pricing.plans.find(
     (p: { slug: string }) => p.slug === planSlug
@@ -155,6 +162,52 @@ export default function PaymentPage() {
     setAppliedCoupon(null);
     setCouponCode("");
     setCouponError("");
+  }
+
+  async function handlePayNow() {
+    if (!customerName.trim() || !customerEmail.trim() || !customerPhone.trim()) {
+      setPaymentError(
+        dict.payment.onlinePayment.fillFields || "Please fill in all fields"
+      );
+      return;
+    }
+    setPaymentError("");
+    setPaymentLoading(true);
+
+    try {
+      const res = await fetch("/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          planName: plan!.name,
+          amount: finalAmount,
+          currency,
+          customerName: customerName.trim(),
+          customerEmail: customerEmail.trim(),
+          customerPhone: customerPhone.trim(),
+          locale,
+          couponCode: appliedCoupon?.code || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success && data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+      } else {
+        setPaymentError(
+          data.error ||
+            dict.payment.onlinePayment.error ||
+            "Payment failed. Please try again."
+        );
+      }
+    } catch {
+      setPaymentError(
+        dict.payment.onlinePayment.error || "Payment failed. Please try again."
+      );
+    }
+
+    setPaymentLoading(false);
   }
 
   return (
@@ -294,32 +347,74 @@ export default function PaymentPage() {
                   {dict.payment.onlinePayment.title}
                 </h2>
               </div>
-              <p className="text-cream/60 text-sm mb-8">
+              <p className="text-cream/60 text-sm mb-6">
                 {dict.payment.onlinePayment.subtitle}
               </p>
 
               <div className="flex-1 flex flex-col justify-between">
-                <div className="flex-1 flex items-center justify-center mb-8">
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    {["Visa", "Mastercard", "Fawry", "Wallet", "Apple Pay"].map(
-                      (method) => (
-                        <div
-                          key={method}
-                          className="px-5 py-3 rounded-lg bg-white/5 border border-white/10 text-cream/70 text-base font-medium"
-                        >
-                          {method}
-                        </div>
-                      )
-                    )}
-                  </div>
+                <div className="space-y-3 mb-6">
+                  <input
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder={dict.payment.onlinePayment.namePlaceholder || "Full Name"}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  />
+                  <input
+                    type="email"
+                    value={customerEmail}
+                    onChange={(e) => setCustomerEmail(e.target.value)}
+                    placeholder={dict.payment.onlinePayment.emailPlaceholder || "Email Address"}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  />
+                  <input
+                    type="tel"
+                    value={customerPhone}
+                    onChange={(e) => setCustomerPhone(e.target.value)}
+                    placeholder={dict.payment.onlinePayment.phonePlaceholder || "Phone Number"}
+                    dir="ltr"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  />
                 </div>
 
-                <button className="flex w-full btn-primary">
-                  {dict.payment.onlinePayment.button}
-                  {isRtl ? (
-                    <ArrowLeft size={16} />
+                <div className="flex flex-wrap gap-3 justify-center mb-6">
+                  {["Visa", "Mastercard", "Fawry", "Wallet", "Apple Pay"].map(
+                    (method) => (
+                      <div
+                        key={method}
+                        className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/50 text-xs font-medium"
+                      >
+                        {method}
+                      </div>
+                    )
+                  )}
+                </div>
+
+                {paymentError && (
+                  <p className="text-red-400 text-xs mb-3 text-center">
+                    {paymentError}
+                  </p>
+                )}
+
+                <button
+                  onClick={handlePayNow}
+                  disabled={paymentLoading}
+                  className="flex w-full btn-primary disabled:opacity-50"
+                >
+                  {paymentLoading ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      {dict.payment.onlinePayment.processing || "Processing..."}
+                    </>
                   ) : (
-                    <ArrowRight size={16} />
+                    <>
+                      {dict.payment.onlinePayment.button}
+                      {isRtl ? (
+                        <ArrowLeft size={16} />
+                      ) : (
+                        <ArrowRight size={16} />
+                      )}
+                    </>
                   )}
                 </button>
               </div>
