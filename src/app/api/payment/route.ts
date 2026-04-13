@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/order-data";
 
-const FAWATERAK_API_URL = "https://app.fawaterk.com/api/v2/createInvoiceLink";
+const FAWATERAK_API_URL = "https://app.fawaterk.com/api/v2/invoiceInitPay";
 
 export async function POST(req: Request) {
   try {
@@ -14,9 +14,10 @@ export async function POST(req: Request) {
       customerPhone,
       locale,
       couponCode,
+      paymentMethodId,
     } = await req.json();
 
-    if (!planName || !amount || !currency || !customerName || !customerEmail || !customerPhone) {
+    if (!planName || !amount || !currency || !customerName || !customerEmail || !customerPhone || !paymentMethodId) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -36,6 +37,7 @@ export async function POST(req: Request) {
         Authorization: `Bearer ${process.env.FAWATERAK_API_KEY}`,
       },
       body: JSON.stringify({
+        payment_method_id: paymentMethodId,
         cartTotal: amount,
         currency,
         customer: {
@@ -57,17 +59,18 @@ export async function POST(req: Request) {
             quantity: 1,
           },
         ],
-        sendEmail: true,
-        sendSMS: false,
       }),
     });
 
     const data = await response.json();
 
-    if (data.status === "success" && data.data?.url) {
+    if (data.status === "success" && data.data) {
+      const redirectUrl = data.data.payment_data?.redirectTo || data.data.payment_data?.url;
+      const fawryCode = data.data.payment_data?.fawryCode;
+
       await createOrder({
-        invoiceId: String(data.data.invoiceId),
-        invoiceKey: data.data.invoiceKey,
+        invoiceId: String(data.data.invoice_id),
+        invoiceKey: data.data.invoice_key,
         planName,
         amount,
         currency,
@@ -76,14 +79,15 @@ export async function POST(req: Request) {
         customerEmail,
         customerPhone,
         couponCode: couponCode || null,
-        paymentUrl: data.data.url,
+        paymentUrl: redirectUrl || null,
       });
 
       return NextResponse.json({
         success: true,
-        paymentUrl: data.data.url,
-        invoiceId: data.data.invoiceId,
-        invoiceKey: data.data.invoiceKey,
+        paymentUrl: redirectUrl || null,
+        fawryCode: fawryCode || null,
+        invoiceId: data.data.invoice_id,
+        invoiceKey: data.data.invoice_key,
       });
     }
 

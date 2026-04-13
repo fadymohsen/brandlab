@@ -474,6 +474,7 @@ const ar: Dictionary = {
       namePlaceholder: "الاسم الكامل",
       emailPlaceholder: "البريد الإلكتروني",
       phonePlaceholder: "رقم الهاتف",
+      selectMethod: "اختر طريقة الدفع",
       fillFields: "يرجى ملء جميع الحقول",
       processing: "جاري المعالجة...",
       error: "فشل الدفع. يرجى المحاولة مرة أخرى.",

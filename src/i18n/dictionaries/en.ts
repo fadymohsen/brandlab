@@ -474,6 +474,7 @@ const en = {
       namePlaceholder: "Full Name",
       emailPlaceholder: "Email Address",
       phonePlaceholder: "Phone Number",
+      selectMethod: "Select payment method",
       fillFields: "Please fill in all fields",
       processing: "Processing...",
       error: "Payment failed. Please try again.",

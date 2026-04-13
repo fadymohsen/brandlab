@@ -44,6 +44,13 @@ export default function PaymentPage() {
   const [customerPhone, setCustomerPhone] = useState("");
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState("");
+  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+
+  const paymentMethods = [
+    { id: "2", label: "Card", labelAr: "بطاقة", icon: "💳" },
+    { id: "3", label: "Fawry", labelAr: "فوري", icon: "🏪" },
+    { id: "4", label: "Wallet", labelAr: "محفظة", icon: "📱" },
+  ];
 
   const plan = dict.pricing.plans.find(
     (p: { slug: string }) => p.slug === planSlug
@@ -171,6 +178,12 @@ export default function PaymentPage() {
       );
       return;
     }
+    if (!selectedMethod) {
+      setPaymentError(
+        dict.payment.onlinePayment.selectMethod || "Please select a payment method"
+      );
+      return;
+    }
     setPaymentError("");
     setPaymentLoading(true);
 
@@ -187,6 +200,7 @@ export default function PaymentPage() {
           customerPhone: customerPhone.trim(),
           locale,
           couponCode: appliedCoupon?.code || null,
+          paymentMethodId: Number(selectedMethod),
         }),
       });
 
@@ -194,6 +208,8 @@ export default function PaymentPage() {
 
       if (data.success && data.paymentUrl) {
         window.location.href = data.paymentUrl;
+      } else if (data.success && data.fawryCode) {
+        window.location.href = `/${locale}/payment/result?status=pending&plan=${encodeURIComponent(plan!.name)}&fawryCode=${data.fawryCode}`;
       } else {
         setPaymentError(
           data.error ||
@@ -377,17 +393,29 @@ export default function PaymentPage() {
                   />
                 </div>
 
-                <div className="flex flex-wrap gap-3 justify-center mb-6">
-                  {["Visa", "Mastercard", "Fawry", "Wallet", "Apple Pay"].map(
-                    (method) => (
-                      <div
-                        key={method}
-                        className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/50 text-xs font-medium"
+                <div className="space-y-2 mb-6">
+                  <p className="text-cream/40 text-xs">
+                    {dict.payment.onlinePayment.selectMethod || "Select payment method"}
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {paymentMethods.map((method) => (
+                      <button
+                        key={method.id}
+                        type="button"
+                        onClick={() => setSelectedMethod(method.id)}
+                        className={`flex flex-col items-center gap-1.5 px-3 py-3 rounded-xl border text-sm font-medium transition-all ${
+                          selectedMethod === method.id
+                            ? "bg-primary/15 border-primary/40 text-primary"
+                            : "bg-white/5 border-white/10 text-cream/50 hover:border-white/20"
+                        }`}
                       >
-                        {method}
-                      </div>
-                    )
-                  )}
+                        <span className="text-lg">{method.icon}</span>
+                        <span className="text-xs">
+                          {isRtl ? method.labelAr : method.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {paymentError && (

@@ -37,6 +37,7 @@ interface Order {
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,12 +52,13 @@ export default function OrdersPage() {
     fetchOrders();
   }, []);
 
-  async function handleDelete(id: string) {
-    if (!confirm("Are you sure you want to delete this order?")) return;
-    const res = await fetch(`/api/orders/${id}`, { method: "DELETE" });
+  async function confirmDelete() {
+    if (!deleteId) return;
+    const res = await fetch(`/api/orders/${deleteId}`, { method: "DELETE" });
     if (res.ok) {
-      setOrders(orders.filter((o) => o.id !== id));
+      setOrders(orders.filter((o) => o.id !== deleteId));
     }
+    setDeleteId(null);
   }
 
   async function handleLogout() {
@@ -302,7 +304,7 @@ export default function OrdersPage() {
                       </a>
                     )}
                     <button
-                      onClick={() => handleDelete(order.id)}
+                      onClick={() => setDeleteId(order.id)}
                       className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-cream/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
                       title="Delete Order"
                     >
@@ -315,6 +317,39 @@ export default function OrdersPage() {
           </div>
         )}
       </main>
+
+      {/* Delete Confirmation Modal */}
+      {deleteId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#141418] border border-white/10 rounded-2xl p-8 max-w-sm w-full mx-4 shadow-2xl">
+            <div className="flex justify-center mb-4">
+              <div className="w-14 h-14 rounded-full bg-red-500/15 flex items-center justify-center">
+                <Trash2 size={24} className="text-red-400" />
+              </div>
+            </div>
+            <h3 className="text-lg font-bold text-cream text-center mb-2">
+              Delete Order
+            </h3>
+            <p className="text-cream/50 text-sm text-center mb-6">
+              Are you sure you want to delete this order? This action cannot be undone.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setDeleteId(null)}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm font-medium text-cream/70 hover:bg-white/10 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-red-500/20 border border-red-500/30 text-sm font-medium text-red-400 hover:bg-red-500/30 transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
