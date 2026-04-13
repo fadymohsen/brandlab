@@ -484,7 +484,7 @@ const en = {
         {
           title: "1. Send Payment",
           description: "Transfer {amount} via Vodafone Cash or InstaPay to",
-          phone: "+20 106 852 1676",
+          phone: "+20 122 774 2865",
         },
         {
           title: "2. Send the Receipt",
