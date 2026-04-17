@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -19,6 +19,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useRegion } from "@/components/RegionProvider";
+
+interface PlanData {
+  name: string;
+  slug: string;
+  description: string;
+  price: Record<string, string>;
+  priceRaw: Record<string, number>;
+  features: { label: string; included: boolean }[];
+  featured: boolean;
+}
 
 export default function PaymentPage() {
   const params = useParams();
@@ -45,6 +55,7 @@ export default function PaymentPage() {
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState("");
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [dbPlan, setDbPlan] = useState<PlanData | null>(null);
 
   const paymentMethods = [
     { id: "2", label: "Card", labelAr: "بطاقة" },
@@ -53,9 +64,37 @@ export default function PaymentPage() {
     { id: "11", label: "Apple Pay", labelAr: "Apple Pay" },
   ];
 
-  const plan = dict.pricing.plans.find(
+  // Fetch plans from DB to get current prices
+  useEffect(() => {
+    fetch("/api/plans")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          const found = data.items.find((p: { slug: string }) => p.slug === planSlug);
+          if (found) {
+            setDbPlan({
+              name: locale === "ar" && found.nameAr ? found.nameAr : found.nameEn,
+              slug: found.slug,
+              description: locale === "ar" && found.descriptionAr ? found.descriptionAr : found.descriptionEn,
+              price: { EG: found.priceEg, INT: found.priceInt },
+              priceRaw: { EG: Number(found.priceRawEg), INT: Number(found.priceRawInt) },
+              features: (locale === "ar" && found.featuresAr ? found.featuresAr : found.featuresEn)
+                .split("\n").filter(Boolean)
+                .map((f: string) => ({ label: f.trim(), included: true })),
+              featured: found.isFeatured,
+            });
+          }
+        }
+      })
+      .catch(() => {});
+  }, [planSlug, locale]);
+
+  const dictPlan = dict.pricing.plans.find(
     (p: { slug: string }) => p.slug === planSlug
   );
+
+  // Use DB plan if available, otherwise fall back to dict
+  const plan = dbPlan || dictPlan;
 
   if (!plan) {
     return (
@@ -210,7 +249,11 @@ export default function PaymentPage() {
       if (data.success && data.paymentUrl) {
         window.location.href = data.paymentUrl;
       } else if (data.success && data.fawryCode) {
+        // Fawry — redirect to result page with reference number
         window.location.href = `/${locale}/payment/result?status=pending&plan=${encodeURIComponent(plan!.name)}&fawryCode=${data.fawryCode}`;
+      } else if (data.success && !data.paymentUrl && !data.fawryCode) {
+        // Wallet or other methods that complete immediately without redirect
+        window.location.href = `/${locale}/payment/result?status=success&plan=${encodeURIComponent(plan!.name)}`;
       } else {
         setPaymentError(
           data.error ||

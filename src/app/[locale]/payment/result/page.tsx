@@ -17,6 +17,7 @@ function PaymentResultContent() {
 
   const status = searchParams.get("status") || "fail";
   const planName = searchParams.get("plan") || "";
+  const fawryCode = searchParams.get("fawryCode") || "";
 
   const configs = {
     success: {
@@ -60,7 +61,25 @@ function PaymentResultContent() {
         >
           <div className="flex justify-center mb-6">{config.icon}</div>
           <h1 className="text-3xl font-bold text-cream mb-4">{config.title}</h1>
-          <p className="text-cream/70 text-lg mb-8">{config.message}</p>
+          <p className="text-cream/70 text-lg mb-4">{config.message}</p>
+
+          {/* Fawry Reference Number */}
+          {fawryCode && (
+            <div className="rounded-xl bg-gradient-to-b from-yellow-500/10 to-yellow-500/5 border border-yellow-500/20 p-6 mb-6">
+              <p className="text-yellow-400/70 text-sm mb-2">
+                {locale === "ar" ? "رقم مرجع فوري" : "Fawry Reference Number"}
+              </p>
+              <p className="text-3xl font-bold text-yellow-400 tracking-[0.2em] dir-ltr" dir="ltr">
+                {fawryCode}
+              </p>
+              <p className="text-cream/50 text-xs mt-3">
+                {locale === "ar"
+                  ? "استخدم هذا الرقم لإتمام الدفع في أي منفذ فوري"
+                  : "Use this number to complete payment at any Fawry outlet"}
+              </p>
+            </div>
+          )}
+
           <div className="flex flex-col gap-3">
             {status === "fail" && (
               <Link

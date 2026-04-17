@@ -65,12 +65,45 @@ export async function POST(req: Request) {
     const data = await response.json();
 
     if (data.status === "success" && data.data) {
-      const redirectUrl = data.data.payment_data?.redirectTo || data.data.payment_data?.url;
-      const fawryCode = data.data.payment_data?.fawryCode;
+      const paymentData = data.data.payment_data || {};
+      const redirectUrl = paymentData.redirectTo || paymentData.redirect_to || paymentData.url || paymentData.payment_url || null;
+      const fawryCode = paymentData.fawryCode || paymentData.referenceNumber || paymentData.fawry_ref || null;
+
+      // For wallet: Fawaterak may return the redirect in different fields
+      const walletRedirect = paymentData.walletRedirectUrl || paymentData.redirectUrl || null;
+      const finalRedirect = redirectUrl || walletRedirect;
 
       await createOrder({
         invoiceId: String(data.data.invoice_id),
         invoiceKey: data.data.invoice_key,
+        planName,
+        amount,
+        currency,
+        status: fawryCode ? "pending" : "pending",
+        customerName,
+        customerEmail,
+        customerPhone,
+        couponCode: couponCode || null,
+        paymentUrl: finalRedirect || null,
+      });
+
+      return NextResponse.json({
+        success: true,
+        paymentUrl: finalRedirect || null,
+        fawryCode: fawryCode || null,
+        invoiceId: data.data.invoice_id,
+        invoiceKey: data.data.invoice_key,
+      });
+    }
+
+    // Some Fawaterak responses have status "pending" for wallet
+    if (data.status === "pending" && data.data) {
+      const paymentData = data.data.payment_data || {};
+      const redirectUrl = paymentData.redirectTo || paymentData.redirect_to || paymentData.url || null;
+
+      await createOrder({
+        invoiceId: String(data.data.invoice_id || ""),
+        invoiceKey: data.data.invoice_key || "",
         planName,
         amount,
         currency,
@@ -85,7 +118,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         success: true,
         paymentUrl: redirectUrl || null,
-        fawryCode: fawryCode || null,
+        fawryCode: null,
         invoiceId: data.data.invoice_id,
         invoiceKey: data.data.invoice_key,
       });
