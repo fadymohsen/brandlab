@@ -11,6 +11,30 @@ export async function POST() {
     await initDb();
     const sql = getDb();
 
+    // Auto-migrate: if testimonials table has old columns (name instead of name_en), drop and recreate
+    try {
+      const cols = await sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'testimonials'`;
+      const colNames = cols.map((c: { column_name: string }) => c.column_name);
+      if (colNames.includes('name') && !colNames.includes('name_en')) {
+        await sql`DROP TABLE testimonials`;
+        await sql`
+          CREATE TABLE testimonials (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            name_en TEXT NOT NULL,
+            name_ar TEXT NOT NULL DEFAULT '',
+            role_en TEXT NOT NULL DEFAULT '',
+            role_ar TEXT NOT NULL DEFAULT '',
+            content_en TEXT NOT NULL,
+            content_ar TEXT NOT NULL DEFAULT '',
+            rating INTEGER NOT NULL DEFAULT 5,
+            created_at TIMESTAMPTZ DEFAULT NOW()
+          )
+        `;
+      }
+    } catch {
+      // Table might not exist yet, initDb will create it
+    }
+
     // Check if data already exists
     const existingTestimonials = await sql`SELECT COUNT(*) as count FROM testimonials`;
     const existingServices = await sql`SELECT COUNT(*) as count FROM services`;
