@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   Film,
   Scissors,
@@ -13,12 +14,56 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
+import { usePathname } from "next/navigation";
 
-const icons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Film, Scissors, Lightbulb, Monitor, Music, Sparkles,
+};
+const defaultIcons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
+
+interface ServiceItem {
+  title: string;
+  description: string;
+  detailed: string;
+  icon?: string;
+}
 
 export default function ServicesPage() {
   const dict = useDictionary();
   const { open } = useLeadPopup();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
+
+  const [items, setItems] = useState<ServiceItem[]>(
+    dict.services.items.map((s) => ({
+      title: s.title,
+      description: s.description,
+      detailed: s.detailed,
+    }))
+  );
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setItems(
+            data.items.map((s: {
+              titleEn: string; titleAr: string;
+              descriptionEn: string; descriptionAr: string;
+              detailedEn: string; detailedAr: string;
+              icon: string;
+            }) => ({
+              title: locale === "ar" && s.titleAr ? s.titleAr : s.titleEn,
+              description: locale === "ar" && s.descriptionAr ? s.descriptionAr : s.descriptionEn,
+              detailed: locale === "ar" && s.detailedAr ? s.detailedAr : s.detailedEn,
+              icon: s.icon,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, [locale]);
 
   return (
     <>
@@ -55,8 +100,10 @@ export default function ServicesPage() {
       {/* Detailed Services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-20">
-          {dict.services.items.map((service, index) => {
-            const Icon = icons[index];
+          {items.map((service, index) => {
+            const Icon = service.icon
+              ? iconMap[service.icon] || defaultIcons[index % defaultIcons.length]
+              : defaultIcons[index % defaultIcons.length];
             const isEven = index % 2 === 0;
             return (
               <div
@@ -73,7 +120,7 @@ export default function ServicesPage() {
                     {service.title}
                   </h2>
                   <p className="text-cream/70 text-lg leading-relaxed">
-                    {service.detailed}
+                    {service.detailed || service.description}
                   </p>
                 </div>
                 <div className={!isEven ? "lg:order-1" : ""}>

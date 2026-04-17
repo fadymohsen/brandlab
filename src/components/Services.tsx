@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   Film,
   Scissors,
@@ -19,12 +20,42 @@ import {
   TiltCard,
 } from "./animations";
 
-const icons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Film, Scissors, Lightbulb, Monitor, Music, Sparkles,
+};
+
+const defaultIcons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
+
+interface ServiceItem {
+  title: string;
+  description: string;
+  icon?: string;
+}
 
 export default function Services() {
   const dict = useDictionary();
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
+  const [items, setItems] = useState<ServiceItem[]>(
+    dict.services.items.map((s) => ({ title: s.title, description: s.description }))
+  );
+
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setItems(
+            data.items.map((s: { titleEn: string; titleAr: string; descriptionEn: string; descriptionAr: string; icon: string }) => ({
+              title: locale === "ar" && s.titleAr ? s.titleAr : s.titleEn,
+              description: locale === "ar" && s.descriptionAr ? s.descriptionAr : s.descriptionEn,
+              icon: s.icon,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, [locale]);
 
   return (
     <section id="services" className="py-24 lg:py-32 relative">
@@ -47,8 +78,10 @@ export default function Services() {
         </RevealOnScroll>
 
         <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dict.services.items.map((service, index) => {
-            const Icon = icons[index];
+          {items.map((service, index) => {
+            const Icon = service.icon
+              ? iconMap[service.icon] || defaultIcons[index % defaultIcons.length]
+              : defaultIcons[index % defaultIcons.length];
             return (
               <StaggerItem key={service.title}>
                 <TiltCard className="gradient-border p-8 h-full">

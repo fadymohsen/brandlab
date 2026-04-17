@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, X, ArrowRight, ChevronDown, Star } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -31,12 +31,56 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+interface PlanItem {
+  name: string;
+  slug: string;
+  description: string;
+  price: Record<string, string>;
+  features: { label: string; included: boolean }[];
+  featured: boolean;
+}
+
 export default function PricingPage() {
   const dict = useDictionary();
   const { open } = useLeadPopup();
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
   const region = useRegion();
+
+  const [plans, setPlans] = useState<PlanItem[]>(
+    dict.pricing.plans.map((p) => ({
+      name: p.name, slug: p.slug, description: p.description,
+      price: p.price, features: p.features, featured: p.featured,
+    }))
+  );
+
+  useEffect(() => {
+    fetch("/api/plans")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setPlans(
+            data.items.map((p: {
+              nameEn: string; nameAr: string; slug: string;
+              descriptionEn: string; descriptionAr: string;
+              priceEg: string; priceInt: string;
+              featuresEn: string; featuresAr: string;
+              isFeatured: boolean;
+            }) => ({
+              name: locale === "ar" && p.nameAr ? p.nameAr : p.nameEn,
+              slug: p.slug,
+              description: locale === "ar" && p.descriptionAr ? p.descriptionAr : p.descriptionEn,
+              price: { EG: p.priceEg, INT: p.priceInt },
+              features: (locale === "ar" && p.featuresAr ? p.featuresAr : p.featuresEn)
+                .split("\n").filter(Boolean)
+                .map((f: string) => ({ label: f.trim(), included: true })),
+              featured: p.isFeatured,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, [locale]);
 
   return (
     <>
@@ -74,7 +118,7 @@ export default function PricingPage() {
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8">
-            {dict.pricing.plans.map((plan) => (
+            {plans.map((plan) => (
               <div
                 key={plan.name}
                 className={`relative rounded-2xl p-8 transition-transform duration-300 hover:scale-[1.02] ${

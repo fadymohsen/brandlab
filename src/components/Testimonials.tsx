@@ -1,25 +1,33 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, Marquee } from "./animations";
 
-function TestimonialCard({
-  testimonial,
-}: {
-  testimonial: {
-    name: string;
-    role: string;
-    content: string;
-  };
-}) {
+interface TestimonialItem {
+  name: string;
+  role: string;
+  content: string;
+  rating?: number;
+}
+
+function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
   return (
     <div dir="ltr" className="gradient-border p-8 w-[400px] shrink-0 text-left">
       <div className="relative z-10">
         <Quote size={32} className="text-primary/30 mb-4" />
         <div className="flex gap-1 mb-4">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} size={16} className="text-accent fill-accent" />
+            <Star
+              key={i}
+              size={16}
+              className={
+                i < (testimonial.rating ?? 5)
+                  ? "text-accent fill-accent"
+                  : "text-cream/20"
+              }
+            />
           ))}
         </div>
         <p dir="auto" className="text-cream/70 leading-relaxed mb-6">
@@ -41,6 +49,25 @@ function TestimonialCard({
 
 export default function Testimonials() {
   const dict = useDictionary();
+  const [items, setItems] = useState<TestimonialItem[]>(dict.testimonials.items);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setItems(
+            data.items.map((t: { name: string; role: string; content: string; rating: number }) => ({
+              name: t.name,
+              role: t.role,
+              content: t.content,
+              rating: t.rating,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <section
@@ -67,9 +94,8 @@ export default function Testimonials() {
           </p>
         </RevealOnScroll>
 
-        {/* Infinite scrolling marquee */}
         <Marquee speed={40}>
-          {dict.testimonials.items.map((testimonial) => (
+          {items.map((testimonial) => (
             <TestimonialCard
               key={testimonial.name}
               testimonial={testimonial}

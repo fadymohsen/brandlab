@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Check, X, ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,11 +9,60 @@ import { useDictionary } from "@/i18n/dictionary-provider";
 import { useRegion } from "./RegionProvider";
 import { RevealOnScroll, StaggerChildren, StaggerItem } from "./animations";
 
+interface PlanItem {
+  name: string;
+  slug: string;
+  description: string;
+  price: Record<string, string>;
+  features: { label: string; included: boolean }[];
+  featured: boolean;
+}
+
 export default function Pricing() {
   const dict = useDictionary();
   const pathname = usePathname();
   const locale = pathname.startsWith("/ar") ? "ar" : "en";
   const region = useRegion();
+
+  const [plans, setPlans] = useState<PlanItem[]>(
+    dict.pricing.plans.map((p) => ({
+      name: p.name,
+      slug: p.slug,
+      description: p.description,
+      price: p.price,
+      features: p.features,
+      featured: p.featured,
+    }))
+  );
+
+  useEffect(() => {
+    fetch("/api/plans")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setPlans(
+            data.items.map((p: {
+              nameEn: string; nameAr: string; slug: string;
+              descriptionEn: string; descriptionAr: string;
+              priceEg: string; priceInt: string;
+              featuresEn: string; featuresAr: string;
+              isFeatured: boolean;
+            }) => ({
+              name: locale === "ar" && p.nameAr ? p.nameAr : p.nameEn,
+              slug: p.slug,
+              description: locale === "ar" && p.descriptionAr ? p.descriptionAr : p.descriptionEn,
+              price: { EG: p.priceEg, INT: p.priceInt },
+              features: (locale === "ar" && p.featuresAr ? p.featuresAr : p.featuresEn)
+                .split("\n")
+                .filter(Boolean)
+                .map((f: string) => ({ label: f.trim(), included: true })),
+              featured: p.isFeatured,
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, [locale]);
 
   return (
     <section id="pricing" className="py-24 lg:py-32 relative">
@@ -36,8 +86,8 @@ export default function Pricing() {
         </RevealOnScroll>
 
         <StaggerChildren className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {dict.pricing.plans.map((plan) => (
-            <StaggerItem key={plan.name}>
+          {plans.map((plan) => (
+            <StaggerItem key={plan.slug}>
               <motion.div
                 className={`relative rounded-2xl p-8 h-full ${
                   plan.featured
