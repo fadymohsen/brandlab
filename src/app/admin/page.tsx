@@ -95,13 +95,23 @@ export default function AdminDashboard() {
               <p className="text-xs text-cream/40">Brand Lab</p>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-sm text-cream/50 hover:text-cream transition-colors"
-          >
-            <LogOut size={16} />
-            Logout
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleSeed}
+              disabled={seeding}
+              className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-cream/50 hover:text-cream hover:border-primary/30 transition-colors disabled:opacity-50"
+            >
+              <Database size={13} />
+              {seeding ? "Seeding..." : "Seed Data"}
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-sm text-cream/50 hover:text-cream transition-colors"
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
@@ -138,23 +148,13 @@ export default function AdminDashboard() {
               {items.length} {items.length === 1 ? "item" : "items"}
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleSeed}
-              disabled={seeding}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-medium text-cream/70 hover:text-cream hover:border-primary/30 transition-colors disabled:opacity-50"
-            >
-              <Database size={14} />
-              {seeding ? "Seeding..." : "Seed Site Data"}
-            </button>
-            <Link
-              href="/admin/new"
-              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-            >
-              <Plus size={16} />
-              Add New
-            </Link>
-          </div>
+          <Link
+            href="/admin/new"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+          >
+            <Plus size={16} />
+            Add New
+          </Link>
         </div>
 
         {seedResult && (
