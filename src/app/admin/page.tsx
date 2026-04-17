@@ -29,7 +29,6 @@ function extractYoutubeId(url: string): string | null {
 export default function AdminDashboard() {
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [playingId, setPlayingId] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<string | null>(null);
   const [seeding, setSeeding] = useState(false);
   const [seedResult, setSeedResult] = useState<string | null>(null);
@@ -181,39 +180,24 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {items.map((item) => {
               const ytId = extractYoutubeId(item.youtubeUrl);
-              const isPlaying = playingId === item.id;
 
               return (
                 <div key={item.id} className="gradient-border overflow-hidden">
                   <div className="relative z-10">
-                    {/* Video Preview */}
+                    {/* Video Preview — always embed for Shorts compatibility */}
                     <div className="relative aspect-[9/16] max-h-[400px] bg-black/50">
-                      {isPlaying && ytId ? (
+                      {ytId ? (
                         <iframe
-                          src={`https://www.youtube.com/embed/${ytId}?autoplay=1&loop=1`}
+                          src={`https://www.youtube.com/embed/${ytId}`}
                           className="absolute inset-0 w-full h-full"
-                          allow="autoplay; encrypted-media"
+                          allow="encrypted-media"
                           allowFullScreen
+                          loading="lazy"
                         />
                       ) : (
-                        <>
-                          {ytId && (
-                            <Image
-                              src={`https://img.youtube.com/vi/${ytId}/0.jpg`}
-                              alt="Thumbnail"
-                              fill
-                              className="object-cover"
-                            />
-                          )}
-                          <button
-                            onClick={() => setPlayingId(item.id)}
-                            className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors group"
-                          >
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
-                              <Play size={24} className="text-white ml-1" />
-                            </div>
-                          </button>
-                        </>
+                        <div className="absolute inset-0 flex items-center justify-center text-cream/20">
+                          <Play size={48} />
+                        </div>
                       )}
                     </div>
 
