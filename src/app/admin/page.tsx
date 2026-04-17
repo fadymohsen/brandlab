@@ -177,55 +177,60 @@ export default function AdminDashboard() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {items.map((item) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {items.map((item, index) => {
               const ytId = extractYoutubeId(item.youtubeUrl);
 
               return (
-                <div key={item.id} className="gradient-border overflow-hidden">
-                  <div className="relative z-10">
-                    {/* Video Preview — always embed for Shorts compatibility */}
-                    <div className="relative aspect-[9/16] max-h-[400px] bg-black/50">
-                      {ytId ? (
-                        <iframe
-                          src={`https://www.youtube.com/embed/${ytId}`}
-                          className="absolute inset-0 w-full h-full"
-                          allow="encrypted-media"
-                          allowFullScreen
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center text-cream/20">
-                          <Play size={48} />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Info & Actions */}
-                    <div className="p-4">
-                      <a
-                        href={item.youtubeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-cream/40 hover:text-primary transition-colors flex items-center gap-1 truncate mb-3"
-                      >
-                        {item.youtubeUrl}
-                        <ExternalLink size={10} />
-                      </a>
-                      <div className="flex items-center gap-2">
-                        <Link
-                          href={`/admin/edit/${item.id}`}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/50 hover:text-primary hover:border-primary/30 transition-colors text-xs"
-                        >
-                          <Pencil size={12} /> Edit
-                        </Link>
-                        <button
-                          onClick={() => setDeleteModal(item.id)}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/50 hover:text-red-400 hover:border-red-400/30 transition-colors text-xs"
-                        >
-                          <Trash2 size={12} /> Delete
-                        </button>
+                <div key={item.id} className="group rounded-2xl overflow-hidden bg-white/[0.03] border border-white/[0.06] hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                  {/* Video Embed */}
+                  <div className="relative aspect-[9/16] bg-black">
+                    {ytId ? (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${ytId}?modestbranding=1&rel=0&showinfo=0&controls=1`}
+                        className="absolute inset-0 w-full h-full rounded-t-2xl"
+                        allow="encrypted-media; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-cream/20 gap-3">
+                        <Play size={40} />
+                        <span className="text-xs">No preview</span>
                       </div>
+                    )}
+                    {/* Index badge */}
+                    <div className="absolute top-3 left-3 z-10 w-7 h-7 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center text-[11px] font-bold text-cream/70">
+                      {index + 1}
+                    </div>
+                  </div>
+
+                  {/* Bottom bar */}
+                  <div className="p-3 flex items-center gap-2">
+                    <a
+                      href={item.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 min-w-0 text-[11px] text-cream/30 hover:text-primary transition-colors truncate flex items-center gap-1"
+                    >
+                      <ExternalLink size={9} className="shrink-0" />
+                      <span className="truncate">{item.youtubeUrl.replace(/https?:\/\/(www\.)?/, '')}</span>
+                    </a>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <Link
+                        href={`/admin/edit/${item.id}`}
+                        className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-cream/40 hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all"
+                        title="Edit"
+                      >
+                        <Pencil size={13} />
+                      </Link>
+                      <button
+                        onClick={() => setDeleteModal(item.id)}
+                        className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-cream/40 hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all"
+                        title="Delete"
+                      >
+                        <Trash2 size={13} />
+                      </button>
                     </div>
                   </div>
                 </div>
