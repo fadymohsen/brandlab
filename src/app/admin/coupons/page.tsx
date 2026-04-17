@@ -109,25 +109,13 @@ export default function CouponsPage() {
 
       {/* Nav */}
       <nav className="border-b border-white/5 bg-dark/40">
-        <div className="max-w-6xl mx-auto px-6 flex gap-6">
-          <Link
-            href="/admin"
-            className="py-3 text-sm text-cream/50 hover:text-cream transition-colors"
-          >
-            Portfolio
-          </Link>
-          <Link
-            href="/admin/coupons"
-            className="py-3 text-sm text-cream font-medium border-b-2 border-primary"
-          >
-            Coupons
-          </Link>
-          <Link
-            href="/admin/orders"
-            className="py-3 text-sm text-cream/50 hover:text-cream transition-colors"
-          >
-            Orders
-          </Link>
+        <div className="max-w-6xl mx-auto px-6 flex gap-6 overflow-x-auto">
+          <Link href="/admin" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Portfolio</Link>
+          <Link href="/admin/testimonials" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Testimonials</Link>
+          <Link href="/admin/services" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Services</Link>
+          <Link href="/admin/plans" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Plans & Pricing</Link>
+          <Link href="/admin/coupons" className="py-3 text-sm text-cream font-medium border-b-2 border-primary whitespace-nowrap">Coupons</Link>
+          <Link href="/admin/orders" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Orders</Link>
         </div>
       </nav>
 

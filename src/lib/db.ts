@@ -49,4 +49,48 @@ export async function initDb() {
       created_at TIMESTAMPTZ DEFAULT NOW()
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS testimonials (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      name TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT '',
+      content TEXT NOT NULL,
+      rating INTEGER NOT NULL DEFAULT 5,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS services (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      title_en TEXT NOT NULL,
+      title_ar TEXT NOT NULL DEFAULT '',
+      description_en TEXT NOT NULL DEFAULT '',
+      description_ar TEXT NOT NULL DEFAULT '',
+      detailed_en TEXT NOT NULL DEFAULT '',
+      detailed_ar TEXT NOT NULL DEFAULT '',
+      icon TEXT NOT NULL DEFAULT 'Film',
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS plans (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      name_en TEXT NOT NULL,
+      name_ar TEXT NOT NULL DEFAULT '',
+      slug TEXT NOT NULL,
+      description_en TEXT NOT NULL DEFAULT '',
+      description_ar TEXT NOT NULL DEFAULT '',
+      price_eg TEXT NOT NULL DEFAULT '0',
+      price_int TEXT NOT NULL DEFAULT '0',
+      price_raw_eg NUMERIC(10,2) NOT NULL DEFAULT 0,
+      price_raw_int NUMERIC(10,2) NOT NULL DEFAULT 0,
+      period TEXT NOT NULL DEFAULT 'month',
+      features_en TEXT NOT NULL DEFAULT '',
+      features_ar TEXT NOT NULL DEFAULT '',
+      is_featured BOOLEAN DEFAULT false,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
 }
