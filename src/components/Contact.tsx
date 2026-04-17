@@ -42,7 +42,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-x-hidden">
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -75,7 +75,7 @@ export default function Contact() {
           </p>
         </RevealOnScroll>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto overflow-hidden">
+        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
           <StaggerChildren className="lg:col-span-2 space-y-8">
             <StaggerItem>
