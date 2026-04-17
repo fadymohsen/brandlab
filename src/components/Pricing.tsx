@@ -102,9 +102,9 @@ export default function Pricing() {
                     <Star size={20} className="text-white fill-white" />
                   </div>
                 )}
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   {plan.featured && (
-                    <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">
+                    <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4 self-start">
                       {dict.pricing.mostPopular}
                     </div>
                   )}
@@ -132,7 +132,7 @@ export default function Pricing() {
                   </ul>
                   <Link
                     href={`/${locale}/payment/${plan.slug}`}
-                    className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
+                    className={`flex w-full mt-auto ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {dict.pricing.subscribe}
                     <ArrowRight size={16} className="rtl:rotate-180" />

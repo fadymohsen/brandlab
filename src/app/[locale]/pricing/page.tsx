@@ -121,7 +121,7 @@ export default function PricingPage() {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-2xl p-8 transition-transform duration-300 hover:scale-[1.02] ${
+                className={`relative rounded-2xl p-8 h-full transition-transform duration-300 hover:scale-[1.02] ${
                   plan.featured
                     ? "bg-gradient-to-b from-primary/20 to-secondary/10 border border-primary/30 glow"
                     : "gradient-border"
@@ -132,9 +132,9 @@ export default function PricingPage() {
                     <Star size={20} className="text-white fill-white" />
                   </div>
                 )}
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   {plan.featured && (
-                    <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4">
+                    <div className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white mb-4 self-start">
                       {dict.pricing.mostPopular}
                     </div>
                   )}
@@ -162,7 +162,7 @@ export default function PricingPage() {
                   </ul>
                   <Link
                     href={`/${locale}/payment/${plan.slug}`}
-                    className={`flex w-full ${plan.featured ? "btn-primary" : "btn-secondary"}`}
+                    className={`flex w-full mt-auto ${plan.featured ? "btn-primary" : "btn-secondary"}`}
                   >
                     {dict.pricing.subscribe}
                     <ArrowRight size={16} className="rtl:rotate-180" />
