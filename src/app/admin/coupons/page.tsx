@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { Plus, Pencil, Trash2, LogOut, ToggleLeft, ToggleRight, Tag } from "lucide-react";
+import { Plus, Pencil, Trash2, ToggleLeft, ToggleRight, Tag } from "lucide-react";
+import AdminHeader from "../AdminHeader";
 
 interface Coupon {
   id: string;
@@ -23,7 +22,6 @@ interface Coupon {
 export default function CouponsPage() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   async function fetchCoupons() {
     const res = await fetch("/api/coupons");
@@ -61,11 +59,6 @@ export default function CouponsPage() {
     }
   }
 
-  async function handleLogout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
-  }
-
   function formatDiscount(coupon: Coupon) {
     if (coupon.discountType === "percentage") {
       return `${coupon.discountValue}%`;
@@ -81,43 +74,7 @@ export default function CouponsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b border-white/5 bg-dark/80 backdrop-blur-xl sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/logo.jpg"
-              alt="Brand Lab"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <div>
-              <h1 className="text-lg font-bold text-cream">Admin Dashboard</h1>
-              <p className="text-xs text-cream/40">Brand Lab Admin</p>
-            </div>
-          </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-sm text-cream/50 hover:text-cream transition-colors"
-          >
-            <LogOut size={16} />
-            Logout
-          </button>
-        </div>
-      </header>
-
-      {/* Nav */}
-      <nav className="border-b border-white/5 bg-dark/40">
-        <div className="max-w-6xl mx-auto px-6 flex gap-6 overflow-x-auto">
-          <Link href="/admin" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Portfolio</Link>
-          <Link href="/admin/testimonials" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Testimonials</Link>
-          <Link href="/admin/services" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Services</Link>
-          <Link href="/admin/plans" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Plans & Pricing</Link>
-          <Link href="/admin/coupons" className="py-3 text-sm text-cream font-medium border-b-2 border-primary whitespace-nowrap">Coupons</Link>
-          <Link href="/admin/orders" className="py-3 text-sm text-cream/50 hover:text-cream transition-colors whitespace-nowrap">Orders</Link>
-        </div>
-      </nav>
+      <AdminHeader activeTab="coupons" />
 
       {/* Content */}
       <main className="max-w-6xl mx-auto px-6 py-8">
