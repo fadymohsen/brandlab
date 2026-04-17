@@ -105,8 +105,6 @@ select {
   position: relative;
   background: #141414;
   border-radius: 1rem;
-  max-width: 100%;
-  overflow: hidden;
 }
 
 .gradient-border::before {

@@ -59,7 +59,7 @@ export default function Contact() {
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <RevealOnScroll className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
             {dict.contact.label}
@@ -77,7 +77,7 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
-          <StaggerChildren className="lg:col-span-2 space-y-8">
+          <StaggerChildren className="lg:col-span-2 space-y-8 min-w-0">
             <StaggerItem>
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -141,7 +141,7 @@ export default function Contact() {
           </StaggerChildren>
 
           {/* Contact Form */}
-          <RevealOnScroll className="lg:col-span-3" direction="right">
+          <RevealOnScroll className="lg:col-span-3 min-w-0" direction="right">
             <form
               onSubmit={handleSubmit}
               className="gradient-border p-6 sm:p-8"
