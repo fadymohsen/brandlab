@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, Trash2, LogOut, ExternalLink, Play } from "lucide-react";
+import { Plus, Pencil, Trash2, LogOut, ExternalLink, Play, Database } from "lucide-react";
 
 interface PortfolioItem {
   id: string;
@@ -31,6 +31,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [deleteModal, setDeleteModal] = useState<string | null>(null);
+  const [seeding, setSeeding] = useState(false);
+  const [seedResult, setSeedResult] = useState<string | null>(null);
   const router = useRouter();
 
   async function fetchItems() {
@@ -52,6 +54,23 @@ export default function AdminDashboard() {
       setItems(items.filter((item) => item.id !== id));
     }
     setDeleteModal(null);
+  }
+
+  async function handleSeed() {
+    setSeeding(true);
+    setSeedResult(null);
+    try {
+      const res = await fetch("/api/seed", { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        setSeedResult(data.results.join(" | "));
+      } else {
+        setSeedResult("Error: " + (data.error || "Unknown error"));
+      }
+    } catch (err) {
+      setSeedResult("Network error: " + String(err));
+    }
+    setSeeding(false);
   }
 
   async function handleLogout() {
@@ -120,14 +139,30 @@ export default function AdminDashboard() {
               {items.length} {items.length === 1 ? "item" : "items"}
             </p>
           </div>
-          <Link
-            href="/admin/new"
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-          >
-            <Plus size={16} />
-            Add New
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleSeed}
+              disabled={seeding}
+              className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-medium text-cream/70 hover:text-cream hover:border-primary/30 transition-colors disabled:opacity-50"
+            >
+              <Database size={14} />
+              {seeding ? "Seeding..." : "Seed Site Data"}
+            </button>
+            <Link
+              href="/admin/new"
+              className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+            >
+              <Plus size={16} />
+              Add New
+            </Link>
+          </div>
         </div>
+
+        {seedResult && (
+          <div className="mb-6 p-4 rounded-xl bg-primary/10 border border-primary/20 text-sm text-cream/80">
+            {seedResult}
+          </div>
+        )}
 
         {loading ? (
           <div className="text-center py-20 text-cream/40">Loading...</div>
