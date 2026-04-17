@@ -60,7 +60,6 @@ export default function PaymentPage() {
   const paymentMethods = [
     { id: "2", label: "Card", labelAr: "بطاقة" },
     { id: "3", label: "Fawry", labelAr: "فوري" },
-    { id: "4", label: "Wallet", labelAr: "محفظة" },
     { id: "11", label: "Apple Pay", labelAr: "Apple Pay" },
   ];
 
