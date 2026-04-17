@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, Trash2, LogOut, X, Save, Film, Scissors, Lightbulb, Monitor, Music, Sparkles, GripVertical } from "lucide-react";
+import { Plus, Pencil, Trash2, LogOut, X, Save, Film, Scissors, Lightbulb, Monitor, Music, Sparkles } from "lucide-react";
 
 const ICON_OPTIONS = [
   { value: "Film", label: "Film", Icon: Film },

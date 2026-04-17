@@ -14,7 +14,7 @@ export async function POST() {
     // Auto-migrate: if testimonials table has old columns (name instead of name_en), drop and recreate
     try {
       const cols = await sql`SELECT column_name FROM information_schema.columns WHERE table_name = 'testimonials'`;
-      const colNames = cols.map((c: { column_name: string }) => c.column_name);
+      const colNames = cols.map((c) => String(c.column_name));
       if (colNames.includes('name') && !colNames.includes('name_en')) {
         await sql`DROP TABLE testimonials`;
         await sql`
@@ -31,7 +31,7 @@ export async function POST() {
           )
         `;
       }
-    } catch {
+    } catch (_e) {
       // Table might not exist yet, initDb will create it
     }
 
