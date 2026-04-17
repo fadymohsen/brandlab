@@ -21,15 +21,15 @@ export async function POST() {
     // ===== SEED TESTIMONIALS =====
     if (Number(existingTestimonials[0].count) === 0) {
       const testimonials = [
-        { name: "Hani Kamel", role: "Ex TikTok Manager", content: "Excellent experience with Brand Lab. Highly professional team with a deep understanding of Reels and TikTok strategies that truly elevated my content quality.", rating: 5 },
-        { name: "Sara", role: "Founder, Alpha Brand Cosmetics", content: "Brand Lab turned the exact ideas in my head into videos. Professional editing, on-time delivery, and honestly faster than expected. So happy working with them!", rating: 5 },
-        { name: "Mo Adel", role: "Sales Specialist, Lucky Wheels", content: "I really loved working with you. Friendly team, high quality videos and editing. Thanks for providing such high quality services at competitive prices.", rating: 5 },
-        { name: "Karim Gabriel", role: "Founder, Keep Going & KG", content: "Working with Brand Lab has been a professional experience. Projects delivered on time, editing requests handled quickly — all within a well-priced package.", rating: 5 },
-        { name: "Ahmed Maged", role: "Owner, Redbone Gym & CM Transformation", content: "My content was inconsistent before, but now everything is different. Communication is easy, delivery is fast, and my sales and social media presence have grown significantly.", rating: 5 },
+        { nameEn: "Hani Kamel", nameAr: "هاني كامل", roleEn: "Ex TikTok Manager", roleAr: "مدير تيك توك سابق", contentEn: "Excellent experience with Brand Lab. Highly professional team with a deep understanding of Reels and TikTok strategies that truly elevated my content quality.", contentAr: "تجربة ممتازة مع براند لاب. فريق احترافي جداً وفاهم استراتيجيات الريلز والتيك توك، وده رفع جودة المحتوى بتاعي بشكل كبير.", rating: 5 },
+        { nameEn: "Sara", nameAr: "سارة", roleEn: "Founder, Alpha Brand Cosmetics", roleAr: "مؤسسة، ألفا براند كوزمتكس", contentEn: "Brand Lab turned the exact ideas in my head into videos. Professional editing, on-time delivery, and honestly faster than expected. So happy working with them!", contentAr: "براند لاب طلّعوا الفكرة اللي في دماغي فيديو بالظبط. مونتاج بروفيشنال وتسليم في المعاد وأسرع كمان. مبسوطة جداً بالشغل معاهم!", rating: 5 },
+        { nameEn: "Mo Adel", nameAr: "مو عادل", roleEn: "Sales Specialist, Lucky Wheels", roleAr: "أخصائي مبيعات، لاكي ويلز", contentEn: "I really loved working with you. Friendly team, high quality videos and editing. Thanks for providing such high quality services at competitive prices.", contentAr: "حبيت جداً الشغل معاكم. فريق ودود وجودة فيديوهات ومونتاج عالية. شكراً لتقديم خدمات بجودة عالية وأسعار تنافسية.", rating: 5 },
+        { nameEn: "Karim Gabriel", nameAr: "كريم جبريال", roleEn: "Founder, Keep Going & KG", roleAr: "مؤسس، كيب جوينج و KG", contentEn: "Working with Brand Lab has been a professional experience. Projects delivered on time, editing requests handled quickly — all within a well-priced package.", contentAr: "التعامل مع براند لاب كان تجربة احترافية. المشاريع تُسلّم في موعدها وطلبات التعديل بتتنفذ بسرعة — وكل ده بسعر ممتاز.", rating: 5 },
+        { nameEn: "Ahmed Maged", nameAr: "أحمد ماجد", roleEn: "Owner, Redbone Gym & CM Transformation", roleAr: "مالك، ريدبون جيم و CM Transformation", contentEn: "My content was inconsistent before, but now everything is different. Communication is easy, delivery is fast, and my sales and social media presence have grown significantly.", contentAr: "المحتوى كان غير منتظم قبل كده، بس دلوقتي كل حاجة اتغيرت. التعامل سهل والتسليم سريع والمبيعات والانتشار على السوشيال ميديا زادوا جداً.", rating: 5 },
       ];
 
       for (const t of testimonials) {
-        await sql`INSERT INTO testimonials (name, role, content, rating) VALUES (${t.name}, ${t.role}, ${t.content}, ${t.rating})`;
+        await sql`INSERT INTO testimonials (name_en, name_ar, role_en, role_ar, content_en, content_ar, rating) VALUES (${t.nameEn}, ${t.nameAr}, ${t.roleEn}, ${t.roleAr}, ${t.contentEn}, ${t.contentAr}, ${t.rating})`;
       }
       results.push(`Seeded ${testimonials.length} testimonials`);
     } else {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { RevealOnScroll, Marquee } from "./animations";
 
@@ -49,6 +50,8 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
 
 export default function Testimonials() {
   const dict = useDictionary();
+  const pathname = usePathname();
+  const locale = pathname.startsWith("/ar") ? "ar" : "en";
   const [items, setItems] = useState<TestimonialItem[]>(dict.testimonials.items);
 
   useEffect(() => {
@@ -57,17 +60,17 @@ export default function Testimonials() {
       .then((data) => {
         if (data.items && data.items.length > 0) {
           setItems(
-            data.items.map((t: { name: string; role: string; content: string; rating: number }) => ({
-              name: t.name,
-              role: t.role,
-              content: t.content,
+            data.items.map((t: { nameEn: string; nameAr: string; roleEn: string; roleAr: string; contentEn: string; contentAr: string; rating: number }) => ({
+              name: locale === "ar" && t.nameAr ? t.nameAr : t.nameEn,
+              role: locale === "ar" && t.roleAr ? t.roleAr : t.roleEn,
+              content: locale === "ar" && t.contentAr ? t.contentAr : t.contentEn,
               rating: t.rating,
             }))
           );
         }
       })
       .catch(() => {});
-  }, []);
+  }, [locale]);
 
   return (
     <section

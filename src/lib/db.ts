@@ -52,9 +52,12 @@ export async function initDb() {
   await sql`
     CREATE TABLE IF NOT EXISTS testimonials (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-      name TEXT NOT NULL,
-      role TEXT NOT NULL DEFAULT '',
-      content TEXT NOT NULL,
+      name_en TEXT NOT NULL,
+      name_ar TEXT NOT NULL DEFAULT '',
+      role_en TEXT NOT NULL DEFAULT '',
+      role_ar TEXT NOT NULL DEFAULT '',
+      content_en TEXT NOT NULL,
+      content_ar TEXT NOT NULL DEFAULT '',
       rating INTEGER NOT NULL DEFAULT 5,
       created_at TIMESTAMPTZ DEFAULT NOW()
     )

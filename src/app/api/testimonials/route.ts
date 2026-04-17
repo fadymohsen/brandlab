@@ -22,17 +22,19 @@ export async function POST(request: NextRequest) {
 
     await initDb();
     const body = await request.json();
-    const { name, role, content, rating } = body;
 
-    if (!name || !content) {
-      return NextResponse.json({ error: "Name and content are required" }, { status: 400 });
+    if (!body.nameEn || !body.contentEn) {
+      return NextResponse.json({ error: "English name and content are required" }, { status: 400 });
     }
 
     const item = await createTestimonial({
-      name,
-      role: role || "",
-      content,
-      rating: rating || 5,
+      nameEn: body.nameEn,
+      nameAr: body.nameAr || "",
+      roleEn: body.roleEn || "",
+      roleAr: body.roleAr || "",
+      contentEn: body.contentEn,
+      contentAr: body.contentAr || "",
+      rating: body.rating || 5,
     });
 
     return NextResponse.json(item, { status: 201 });
