@@ -16,7 +16,7 @@ interface TestimonialItem {
 function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
   return (
     <div dir="ltr" className="gradient-border p-8 w-[400px] shrink-0 text-left">
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <Quote size={32} className="text-primary/30 mb-4" />
         <div className="flex gap-1 mb-4">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -31,11 +31,11 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
             />
           ))}
         </div>
-        <p dir="auto" className="text-cream/70 leading-relaxed mb-6">
+        <p dir="auto" className="text-cream/70 leading-relaxed mb-6 flex-1">
           &ldquo;{testimonial.content}&rdquo;
         </p>
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg">
+        <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg shrink-0">
             {testimonial.name[0]}
           </div>
           <div dir="auto">

@@ -42,7 +42,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="contact" className="py-24 lg:py-32 relative overflow-x-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -75,7 +75,7 @@ export default function Contact() {
           </p>
         </RevealOnScroll>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto overflow-hidden">
           {/* Contact Info */}
           <StaggerChildren className="lg:col-span-2 space-y-8">
             <StaggerItem>
@@ -127,7 +127,7 @@ export default function Contact() {
             </StaggerItem>
 
             <StaggerItem>
-              <div className="gradient-border p-6 mt-8">
+              <div className="gradient-border p-5 sm:p-6 mt-8">
                 <div className="relative z-10">
                   <h3 className="font-semibold text-cream mb-2">
                     {dict.contact.guarantee}
@@ -144,7 +144,7 @@ export default function Contact() {
           <RevealOnScroll className="lg:col-span-3" direction="right">
             <form
               onSubmit={handleSubmit}
-              className="gradient-border p-8"
+              className="gradient-border p-6 sm:p-8"
             >
               <div className="relative z-10 space-y-6">
                 {status === "success" ? (

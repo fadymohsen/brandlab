@@ -60,7 +60,6 @@ export default function PaymentPage() {
   const paymentMethods = [
     { id: "2", label: "Card", labelAr: "بطاقة" },
     { id: "3", label: "Fawry", labelAr: "فوري" },
-    { id: "11", label: "Apple Pay", labelAr: "Apple Pay" },
   ];
 
   // Fetch plans from DB to get current prices
@@ -440,13 +439,13 @@ export default function PaymentPage() {
                   <p className="text-cream/40 text-xs">
                     {dict.payment.onlinePayment.selectMethod || "Select payment method"}
                   </p>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="flex justify-center gap-3">
                     {paymentMethods.map((method) => (
                       <button
                         key={method.id}
                         type="button"
                         onClick={() => setSelectedMethod(method.id)}
-                        className={`px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
+                        className={`px-6 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                           selectedMethod === method.id
                             ? "bg-primary/15 border-primary/40 text-primary"
                             : "bg-white/5 border-white/10 text-cream/50 hover:border-white/20"

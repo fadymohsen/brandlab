@@ -131,11 +131,11 @@ export default function TestimonialsPage() {
                   <p className="text-cream/70 text-sm leading-relaxed mb-2">&ldquo;{item.contentEn}&rdquo;</p>
                   {/* AR content */}
                   {item.contentAr && (
-                    <p className="text-cream/40 text-sm leading-relaxed mb-4" dir="rtl">&ldquo;{item.contentAr}&rdquo;</p>
+                    <p className="text-cream/40 text-sm leading-relaxed" dir="rtl">&ldquo;{item.contentAr}&rdquo;</p>
                   )}
 
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold">
+                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold shrink-0">
                       {item.nameEn[0]}
                     </div>
                     <div>
@@ -149,7 +149,7 @@ export default function TestimonialsPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-2 mt-auto pt-4">
+                  <div className="flex gap-2 pt-4">
                     <button onClick={() => openEdit(item)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 border border-white/10 text-cream/50 hover:text-primary hover:border-primary/30 transition-colors text-xs">
                       <Pencil size={12} /> Edit
                     </button>
