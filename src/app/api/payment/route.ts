@@ -64,14 +64,25 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
+    // Log full Fawaterak response for debugging
+    console.log("Fawaterak response:", JSON.stringify(data, null, 2));
+
     if (data.status === "success" && data.data) {
       const paymentData = data.data.payment_data || {};
-      const redirectUrl = paymentData.redirectTo || paymentData.redirect_to || paymentData.url || paymentData.payment_url || null;
+      // Check all possible redirect URL locations
+      const redirectUrl = paymentData.redirectTo
+        || paymentData.redirect_to
+        || paymentData.url
+        || paymentData.payment_url
+        || paymentData.walletRedirectUrl
+        || paymentData.redirectUrl
+        || data.data.redirectTo
+        || data.data.redirect_to
+        || data.data.url
+        || data.data.payment_url
+        || null;
       const fawryCode = paymentData.fawryCode || paymentData.referenceNumber || paymentData.fawry_ref || null;
-
-      // For wallet: Fawaterak may return the redirect in different fields
-      const walletRedirect = paymentData.walletRedirectUrl || paymentData.redirectUrl || null;
-      const finalRedirect = redirectUrl || walletRedirect;
+      const finalRedirect = redirectUrl;
 
       await createOrder({
         invoiceId: String(data.data.invoice_id),
