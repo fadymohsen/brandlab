@@ -21,6 +21,15 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 };
 const defaultIcons = [Film, Scissors, Lightbulb, Monitor, Music, Sparkles];
 
+const serviceImages: Record<number, string> = {
+  0: "/services/video-editing.jpg",
+  1: "/services/montage-reels.jpg",
+  2: "/services/content-creation.jpg",
+  3: "/services/motion-graphics.jpg",
+  4: "/services/sound-design.jpg",
+  5: "/services/brand-identity.jpg",
+};
+
 interface ServiceItem {
   title: string;
   description: string;
@@ -124,17 +133,25 @@ export default function ServicesPage() {
                   </p>
                 </div>
                 <div className={!isEven ? "lg:order-1" : ""}>
-                  <div
-                    className={`aspect-video rounded-2xl bg-gradient-to-br ${
-                      index % 3 === 0
-                        ? "from-primary/20 to-secondary/10"
-                        : index % 3 === 1
-                          ? "from-secondary/20 to-accent/10"
-                          : "from-accent/20 to-primary/10"
-                    } flex items-center justify-center`}
-                  >
-                    <Icon size={64} className="text-cream/20" />
-                  </div>
+                  {serviceImages[index] ? (
+                    <img
+                      src={serviceImages[index]}
+                      alt={service.title}
+                      className="aspect-video rounded-2xl object-cover w-full"
+                    />
+                  ) : (
+                    <div
+                      className={`aspect-video rounded-2xl bg-gradient-to-br ${
+                        index % 3 === 0
+                          ? "from-primary/20 to-secondary/10"
+                          : index % 3 === 1
+                            ? "from-secondary/20 to-accent/10"
+                            : "from-accent/20 to-primary/10"
+                      } flex items-center justify-center`}
+                    >
+                      <Icon size={64} className="text-cream/20" />
+                    </div>
+                  )}
                 </div>
               </div>
             );
