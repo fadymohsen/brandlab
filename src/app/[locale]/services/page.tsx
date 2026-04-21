@@ -134,15 +134,11 @@ export default function ServicesPage() {
                 </div>
                 <div className={!isEven ? "lg:order-1" : ""}>
                   {serviceImages[index] ? (
-                    <div className="relative aspect-video rounded-2xl overflow-hidden">
-                      <img
-                        src={serviceImages[index]}
-                        alt={service.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-primary/30 mix-blend-multiply" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
-                    </div>
+                    <img
+                      src={serviceImages[index]}
+                      alt={service.title}
+                      className="aspect-video rounded-2xl object-cover w-full"
+                    />
                   ) : (
                     <div
                       className={`aspect-video rounded-2xl bg-gradient-to-br ${
