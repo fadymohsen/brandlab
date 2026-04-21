@@ -57,7 +57,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         {/* Headline — word by word reveal */}
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.1] mb-6">
-          <span className="text-cream overflow-hidden block py-2">
+          <span className="text-cream block py-2">
             {dict.hero.headlineTop.split(" ").map((word, i) => (
               <motion.span
                 key={i}
@@ -75,7 +75,7 @@ export default function Hero() {
             ))}
           </span>
           <motion.span
-            className="gradient-text overflow-hidden block py-2"
+            className="gradient-text block py-2"
             initial={{ opacity: 0, y: 80, rotateX: 40 }}
             animate={{
               opacity: 1,
