@@ -537,7 +537,7 @@ export default function PaymentPage() {
               </div>
 
               <a
-                href={`https://wa.me/201227742865?text=${whatsappMessage}`}
+                href="https://ipn.eg/S/kiroazmi1/instapay/3nVDOC"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-full btn-secondary mt-8 !border-green-500/30 hover:!bg-green-500/10"

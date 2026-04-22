@@ -484,8 +484,7 @@ const ar: Dictionary = {
       steps: [
         {
           title: "1. أرسل المبلغ",
-          description: "حوّل {amount} عن طريق فودافون كاش أو إنستاباي على",
-          phone: "+20 122 774 2865",
+          description: "حوّل {amount} عن طريق إنستاباي",
         },
         {
           title: "2. أرسل الإيصال",
@@ -496,7 +495,7 @@ const ar: Dictionary = {
           description: "هنأكد اشتراكك في دقائق وتبدأ على طول.",
         },
       ],
-      button: "أرسل الإيصال على واتساب",
+      button: "ادفع عبر إنستاباي",
     },
     or: "أو",
   },

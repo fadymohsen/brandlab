@@ -484,8 +484,7 @@ const en = {
       steps: [
         {
           title: "1. Send Payment",
-          description: "Transfer {amount} via Vodafone Cash or InstaPay to",
-          phone: "+20 122 774 2865",
+          description: "Transfer {amount} via InstaPay",
         },
         {
           title: "2. Send the Receipt",
@@ -498,7 +497,7 @@ const en = {
             "We'll confirm your membership within minutes and you're good to go.",
         },
       ],
-      button: "Send Receipt on WhatsApp",
+      button: "Pay via InstaPay",
     },
     or: "or",
   },
