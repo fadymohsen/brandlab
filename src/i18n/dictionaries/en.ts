@@ -356,7 +356,8 @@ const en = {
     title: "Reel",
     titleHighlight: "Packages",
     titleEnd: "",
-    subtitle: "",
+    subtitle:
+      "Scroll-stopping short videos crafted to hook viewers and grow your brand. Built for Reels, TikTok, and Shorts.",
     cta: "View Pricing Plans",
     mostPopular: "Most Popular",
     subscribe: "Subscribe Now",
