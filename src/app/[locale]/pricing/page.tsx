@@ -100,10 +100,7 @@ export default function PricingPage() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-[120px]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest">
-            {dict.pricing.label}
-          </span>
-          <h1 className="mt-4 text-5xl lg:text-7xl font-bold text-cream">
+          <h1 className="text-5xl lg:text-7xl font-bold text-cream">
             {dict.pricing.pageTitle}{" "}
             <span className="gradient-text">
               {dict.pricing.pageTitleHighlight}
