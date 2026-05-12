@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DesignPricing from "@/components/DesignPricing";
 import { useDictionary } from "@/i18n/dictionary-provider";
 import { useLeadPopup } from "@/components/LeadPopupProvider";
 import { useRegion } from "@/components/RegionProvider";
@@ -173,6 +174,9 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      {/* Design Packages */}
+      <DesignPricing />
 
       {/* FAQ */}
       <section className="py-20 bg-dark-light/30">
