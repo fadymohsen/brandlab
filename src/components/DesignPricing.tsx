@@ -117,35 +117,35 @@ export default function DesignPricing() {
                     ))}
                   </ul>
 
-                  {/* Price + CTA row */}
-                  <div className="flex items-center justify-between gap-4 pt-6 border-t border-cream/10">
-                    <div>
-                      <div
-                        className={`text-3xl lg:text-4xl font-bold ${
-                          plan.featured ? "text-accent" : "text-cream"
-                        }`}
-                      >
-                        {plan.price[region]}
-                      </div>
-                      <div className="text-cream/40 text-xs mt-1">
-                        {section.perPack}
-                      </div>
-                    </div>
-                    <Link
-                      href={`/${locale}/payment/${plan.slug}`}
-                      className={`inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all ${
-                        plan.featured
-                          ? "bg-accent text-dark hover:bg-accent/90 shadow-lg shadow-accent/30"
-                          : "border-2 border-accent/40 text-accent hover:bg-accent/10"
+                  {/* Price */}
+                  <div className="flex items-baseline gap-2 pt-6 border-t border-cream/10 mb-6">
+                    <div
+                      className={`text-3xl lg:text-4xl font-bold ${
+                        plan.featured ? "text-accent" : "text-cream"
                       }`}
                     >
-                      {plan.cta}
-                      <ArrowRight
-                        size={16}
-                        className="rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
-                      />
-                    </Link>
+                      {plan.price[region]}
+                    </div>
+                    <div className="text-cream/40 text-sm">
+                      {section.perPack}
+                    </div>
                   </div>
+
+                  {/* Full-width CTA */}
+                  <Link
+                    href={`/${locale}/payment/${plan.slug}`}
+                    className={`flex w-full items-center justify-center gap-2 px-6 py-4 rounded-full text-base font-semibold transition-all ${
+                      plan.featured
+                        ? "bg-accent text-dark hover:bg-accent/90 shadow-lg shadow-accent/30 hover:shadow-accent/40 hover:-translate-y-0.5"
+                        : "border-2 border-accent/40 text-accent hover:bg-accent/10 hover:border-accent/70"
+                    }`}
+                  >
+                    {dict.pricing.subscribe}
+                    <ArrowRight
+                      size={16}
+                      className="rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
+                    />
+                  </Link>
                 </div>
               </motion.div>
             </StaggerItem>
