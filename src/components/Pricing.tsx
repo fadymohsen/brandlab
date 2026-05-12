@@ -77,12 +77,14 @@ export default function Pricing() {
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
             {dict.pricing.title}{" "}
-            <span className="gradient-text">{dict.pricing.titleHighlight}</span>{" "}
-            {dict.pricing.titleEnd}
+            <span className="gradient-text">{dict.pricing.titleHighlight}</span>
+            {dict.pricing.titleEnd && ` ${dict.pricing.titleEnd}`}
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
-            {dict.pricing.subtitle}
-          </p>
+          {dict.pricing.subtitle && (
+            <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
+              {dict.pricing.subtitle}
+            </p>
+          )}
         </RevealOnScroll>
 
         <StaggerChildren className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
