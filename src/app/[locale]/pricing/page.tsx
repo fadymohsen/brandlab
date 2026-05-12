@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, X, ArrowRight, ChevronDown, Star } from "lucide-react";
+import { Check, X, ArrowRight, ChevronDown, Star, Film } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -118,6 +118,24 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary uppercase tracking-widest">
+              <Film size={16} />
+              {dict.pricing.label}
+            </span>
+            <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
+              {dict.pricing.title}{" "}
+              <span className="gradient-text">
+                {dict.pricing.titleHighlight}
+              </span>
+              {dict.pricing.titleEnd && ` ${dict.pricing.titleEnd}`}
+            </h2>
+            {dict.pricing.subtitle && (
+              <p className="mt-4 max-w-2xl mx-auto text-cream/70 text-lg">
+                {dict.pricing.subtitle}
+              </p>
+            )}
+          </div>
           <div className="grid lg:grid-cols-3 gap-8">
             {plans.map((plan) => (
               <div
