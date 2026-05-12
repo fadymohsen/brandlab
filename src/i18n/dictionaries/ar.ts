@@ -357,7 +357,8 @@ const ar: Dictionary = {
     title: "باقات",
     titleHighlight: "الريلز",
     titleEnd: "",
-    subtitle: "",
+    subtitle:
+      "فيديوهات قصيرة توقف السكرول وتجذب المشاهدين وتنمّي علامتك التجارية. مصممة للريلز والتيك توك والشورتس.",
     cta: "عرض خطط الأسعار",
     mostPopular: "الأكثر شيوعاً",
     subscribe: "اشترك الآن",
