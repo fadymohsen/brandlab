@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Check, X, ArrowRight, Star } from "lucide-react";
+import { Check, X, ArrowRight, Star, Film } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -72,7 +72,8 @@ export default function Pricing() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <RevealOnScroll className="text-center mb-16">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary uppercase tracking-widest">
+            <Film size={16} />
             {dict.pricing.label}
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl font-bold text-cream">
