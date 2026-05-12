@@ -352,12 +352,11 @@ const en = {
     ],
   },
   pricing: {
-    label: "Pricing",
-    title: "Simple,",
-    titleHighlight: "Transparent",
-    titleEnd: "Pricing",
-    subtitle:
-      "Choose the plan that fits your needs. No hidden fees, no surprises.",
+    label: "Reel Packages",
+    title: "Reel",
+    titleHighlight: "Packages",
+    titleEnd: "",
+    subtitle: "",
     cta: "View Pricing Plans",
     mostPopular: "Most Popular",
     subscribe: "Subscribe Now",
