@@ -87,9 +87,11 @@ export default function PaymentPage() {
       .catch(() => {});
   }, [planSlug, locale]);
 
-  const dictPlan = dict.pricing.plans.find(
-    (p: { slug: string }) => p.slug === planSlug
-  );
+  const dictPlan =
+    dict.pricing.plans.find((p: { slug: string }) => p.slug === planSlug) ||
+    dict.pricing.designPlans.find(
+      (p: { slug: string }) => p.slug === planSlug
+    );
 
   // Use DB plan if available, otherwise fall back to dict
   const plan = dbPlan || dictPlan;
@@ -308,7 +310,9 @@ export default function PaymentPage() {
               <span className="text-5xl font-bold gradient-text">{price}</span>
             )}
             <span className="text-cream/60 text-lg ms-2">
-              {dict.payment.perMonth}
+              {planSlug.startsWith("design-")
+                ? dict.pricing.designSection.perPack
+                : dict.payment.perMonth}
             </span>
           </div>
           {hasDiscount && (
