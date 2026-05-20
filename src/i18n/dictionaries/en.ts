@@ -880,7 +880,7 @@ const en = {
       role: "Position *",
       rolePlaceholder: "Select a position",
       roleOptions: ["Reel Editor", "Graphic Designer"],
-      portfolio: "Portfolio Link",
+      portfolio: "Portfolio Link *",
       portfolioPlaceholder: "https://your-portfolio.com",
       message: "Tell us about yourself",
       messagePlaceholder: "Share your experience, skills, or anything you'd like us to know...",

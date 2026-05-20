@@ -879,7 +879,7 @@ const ar: Dictionary = {
       role: "الوظيفة *",
       rolePlaceholder: "اختر وظيفة",
       roleOptions: ["محرر ريلز", "مصمم جرافيك"],
-      portfolio: "رابط البورتفوليو",
+      portfolio: "رابط البورتفوليو *",
       portfolioPlaceholder: "https://your-portfolio.com",
       message: "كلمنا عن نفسك",
       messagePlaceholder: "شاركنا خبرتك ومهاراتك أو أي حاجة تحب نعرفها...",

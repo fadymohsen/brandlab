@@ -34,6 +34,7 @@ export default function JoinUs() {
       if (!res.ok) throw new Error();
       setStatus("success");
       setName(""); setEmail(""); setPhone(""); setRole(""); setPortfolio(""); setMessage("");
+      setTimeout(() => setStatus("idle"), 10000);
     } catch {
       setStatus("error");
     }
@@ -126,22 +127,21 @@ export default function JoinUs() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.email}</label>
-                        <input
-                          type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                          placeholder={t.form.emailPlaceholder} required
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
-                        />
-                      </div>
-                      <PhoneField
-                        label={t.form.phone}
-                        placeholder="+20 1XX XXX XXXX"
-                        value={phone}
-                        onChange={setPhone}
+                    <div>
+                      <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.email}</label>
+                      <input
+                        type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                        placeholder={t.form.emailPlaceholder} required
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
                       />
                     </div>
+
+                    <PhoneField
+                      label={t.form.phone}
+                      placeholder="+20 1XX XXX XXXX"
+                      value={phone}
+                      onChange={setPhone}
+                    />
 
                     <div>
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.role}</label>
@@ -160,7 +160,7 @@ export default function JoinUs() {
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.portfolio}</label>
                       <input
                         type="url" value={portfolio} onChange={(e) => setPortfolio(e.target.value)}
-                        placeholder={t.form.portfolioPlaceholder}
+                        placeholder={t.form.portfolioPlaceholder} required
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
                       />
                     </div>
