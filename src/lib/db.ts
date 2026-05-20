@@ -59,8 +59,12 @@ export async function initDb() {
       content_en TEXT NOT NULL,
       content_ar TEXT NOT NULL DEFAULT '',
       rating INTEGER NOT NULL DEFAULT 5,
+      image_url TEXT NOT NULL DEFAULT '',
       created_at TIMESTAMPTZ DEFAULT NOW()
     )
+  `;
+  await sql`
+    ALTER TABLE testimonials ADD COLUMN IF NOT EXISTS image_url TEXT NOT NULL DEFAULT ''
   `;
   await sql`
     CREATE TABLE IF NOT EXISTS services (

@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
       contentEn: body.contentEn,
       contentAr: body.contentAr || "",
       rating: body.rating || 5,
+      imageUrl: body.imageUrl || "",
     });
 
     return NextResponse.json(item, { status: 201 });

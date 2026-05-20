@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, Star, X, Save, Quote } from "lucide-react";
+import { Plus, Pencil, Trash2, Star, X, Save, Quote, Upload, ImageIcon } from "lucide-react";
 import AdminHeader from "../AdminHeader";
 
 interface Testimonial {
@@ -13,10 +13,11 @@ interface Testimonial {
   contentEn: string;
   contentAr: string;
   rating: number;
+  imageUrl: string;
   createdAt: string;
 }
 
-const emptyForm = { nameEn: "", nameAr: "", roleEn: "", roleAr: "", contentEn: "", contentAr: "", rating: 5 };
+const emptyForm = { nameEn: "", nameAr: "", roleEn: "", roleAr: "", contentEn: "", contentAr: "", rating: 5, imageUrl: "" };
 
 export default function TestimonialsPage() {
   const [items, setItems] = useState<Testimonial[]>([]);
@@ -25,6 +26,7 @@ export default function TestimonialsPage() {
   const [editing, setEditing] = useState<Testimonial | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [deleteModal, setDeleteModal] = useState<string | null>(null);
 
   async function fetchItems() {
@@ -50,9 +52,25 @@ export default function TestimonialsPage() {
       nameEn: item.nameEn, nameAr: item.nameAr,
       roleEn: item.roleEn, roleAr: item.roleAr,
       contentEn: item.contentEn, contentAr: item.contentAr,
-      rating: item.rating,
+      rating: item.rating, imageUrl: item.imageUrl || "",
     });
     setShowForm(true);
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const res = await fetch("/api/testimonials/upload", { method: "POST", body: formData });
+      if (res.ok) {
+        const data = await res.json();
+        setForm((prev) => ({ ...prev, imageUrl: data.imageUrl }));
+      }
+    } catch { /* ignore */ }
+    setUploading(false);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -135,9 +153,15 @@ export default function TestimonialsPage() {
                   )}
 
                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/5">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold shrink-0">
-                      {item.nameEn[0]}
-                    </div>
+                    {item.imageUrl ? (
+                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                        <img src={item.imageUrl} alt={item.nameEn} className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold shrink-0">
+                        {item.nameEn[0]}
+                      </div>
+                    )}
                     <div>
                       <div className="font-semibold text-cream text-sm">
                         {item.nameEn}
@@ -201,6 +225,28 @@ export default function TestimonialsPage() {
                 <div>
                   <label className="block text-sm font-medium text-cream/70 mb-1.5">Testimonial (AR)</label>
                   <textarea value={form.contentAr} onChange={(e) => setForm({ ...form, contentAr: e.target.value })} rows={4} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 resize-none" placeholder="ماذا قال العميل..." dir="rtl" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-cream/70 mb-1.5">Photo</label>
+                <div className="flex items-center gap-4">
+                  {form.imageUrl ? (
+                    <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border border-white/10">
+                      <img src={form.imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                      <ImageIcon size={24} className="text-cream/30" />
+                    </div>
+                  )}
+                  <label className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-cream/70 hover:border-primary/30 hover:text-primary transition-colors cursor-pointer text-sm">
+                    <Upload size={14} />
+                    {uploading ? "Uploading..." : "Upload Photo"}
+                    <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleImageUpload} className="hidden" disabled={uploading} />
+                  </label>
+                  {form.imageUrl && (
+                    <button type="button" onClick={() => setForm({ ...form, imageUrl: "" })} className="text-xs text-red-400 hover:text-red-300">Remove</button>
+                  )}
                 </div>
               </div>
               <div>

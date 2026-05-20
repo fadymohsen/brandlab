@@ -57,10 +57,10 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
           &ldquo;{testimonial.content}&rdquo;
         </p>
         <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
-          {getTestimonialImage(testimonial.name) ? (
+          {(testimonial.image || getTestimonialImage(testimonial.name)) ? (
             <div className="w-12 h-12 rounded-full overflow-hidden shrink-0">
               <img
-                src={getTestimonialImage(testimonial.name)}
+                src={testimonial.image || getTestimonialImage(testimonial.name)}
                 alt={testimonial.name}
                 className="w-full h-full object-cover"
               />
@@ -92,11 +92,12 @@ export default function Testimonials() {
       .then((data) => {
         if (data.items && data.items.length > 0) {
           setItems(
-            data.items.map((t: { nameEn: string; nameAr: string; roleEn: string; roleAr: string; contentEn: string; contentAr: string; rating: number }) => ({
+            data.items.map((t: { nameEn: string; nameAr: string; roleEn: string; roleAr: string; contentEn: string; contentAr: string; rating: number; imageUrl?: string }) => ({
               name: locale === "ar" && t.nameAr ? t.nameAr : t.nameEn,
               role: locale === "ar" && t.roleAr ? t.roleAr : t.roleEn,
               content: locale === "ar" && t.contentAr ? t.contentAr : t.contentEn,
               rating: t.rating,
+              image: t.imageUrl || undefined,
             }))
           );
         }

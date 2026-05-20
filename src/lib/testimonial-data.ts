@@ -9,13 +9,14 @@ export interface Testimonial {
   contentEn: string;
   contentAr: string;
   rating: number;
+  imageUrl: string;
   createdAt: string;
 }
 
 export async function listTestimonials(): Promise<Testimonial[]> {
   const sql = getDb();
   const rows = await sql`
-    SELECT id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, created_at
+    SELECT id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, image_url, created_at
     FROM testimonials
     ORDER BY created_at DESC
   `;
@@ -28,6 +29,7 @@ export async function listTestimonials(): Promise<Testimonial[]> {
     contentEn: row.content_en,
     contentAr: row.content_ar,
     rating: row.rating,
+    imageUrl: row.image_url ?? "",
     createdAt: row.created_at,
   }));
 }
@@ -40,12 +42,13 @@ export async function createTestimonial(item: {
   contentEn: string;
   contentAr: string;
   rating: number;
+  imageUrl?: string;
 }): Promise<Testimonial> {
   const sql = getDb();
   const rows = await sql`
-    INSERT INTO testimonials (name_en, name_ar, role_en, role_ar, content_en, content_ar, rating)
-    VALUES (${item.nameEn}, ${item.nameAr}, ${item.roleEn}, ${item.roleAr}, ${item.contentEn}, ${item.contentAr}, ${item.rating})
-    RETURNING id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, created_at
+    INSERT INTO testimonials (name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, image_url)
+    VALUES (${item.nameEn}, ${item.nameAr}, ${item.roleEn}, ${item.roleAr}, ${item.contentEn}, ${item.contentAr}, ${item.rating}, ${item.imageUrl ?? ""})
+    RETURNING id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, image_url, created_at
   `;
   const row = rows[0];
   return {
@@ -57,13 +60,14 @@ export async function createTestimonial(item: {
     contentEn: row.content_en,
     contentAr: row.content_ar,
     rating: row.rating,
+    imageUrl: row.image_url ?? "",
     createdAt: row.created_at,
   };
 }
 
 export async function updateTestimonial(
   id: string,
-  item: { nameEn?: string; nameAr?: string; roleEn?: string; roleAr?: string; contentEn?: string; contentAr?: string; rating?: number }
+  item: { nameEn?: string; nameAr?: string; roleEn?: string; roleAr?: string; contentEn?: string; contentAr?: string; rating?: number; imageUrl?: string }
 ): Promise<Testimonial | null> {
   const sql = getDb();
   const current = await sql`SELECT * FROM testimonials WHERE id = ${id}`;
@@ -78,9 +82,10 @@ export async function updateTestimonial(
       role_ar = ${item.roleAr ?? current[0].role_ar},
       content_en = ${item.contentEn ?? current[0].content_en},
       content_ar = ${item.contentAr ?? current[0].content_ar},
-      rating = ${item.rating ?? current[0].rating}
+      rating = ${item.rating ?? current[0].rating},
+      image_url = ${item.imageUrl ?? current[0].image_url ?? ""}
     WHERE id = ${id}
-    RETURNING id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, created_at
+    RETURNING id, name_en, name_ar, role_en, role_ar, content_en, content_ar, rating, image_url, created_at
   `;
   const row = rows[0];
   return {
@@ -92,6 +97,7 @@ export async function updateTestimonial(
     contentEn: row.content_en,
     contentAr: row.content_ar,
     rating: row.rating,
+    imageUrl: row.image_url ?? "",
     createdAt: row.created_at,
   };
 }
