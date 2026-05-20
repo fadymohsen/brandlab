@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import DesignPricing from "@/components/DesignPricing";
 import Contact from "@/components/Contact";
+import JoinTeamCTA from "@/components/JoinTeamCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <Pricing />
       <DesignPricing />
       <Contact />
+      <JoinTeamCTA />
       <Footer />
     </>
   );

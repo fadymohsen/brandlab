@@ -846,6 +846,52 @@ const en = {
     cta: "Book a Free Call",
     ctaWhatsapp: "Chat on WhatsApp",
   },
+  joinTeamCTA: {
+    label: "We're Hiring",
+    title: "Join Our",
+    titleHighlight: "Creative Team",
+    subtitle: "We're looking for talented reel editors and graphic designers to join Brand Lab. Show us what you've got!",
+    cta: "Apply Now",
+  },
+  joinUs: {
+    label: "Join Us",
+    title: "Join",
+    titleHighlight: "Brand Lab",
+    subtitle: "We're always looking for creative talent to join our team. Apply below and let's create something amazing together.",
+    rolesTitle: "Open Positions",
+    roles: {
+      "reel-editor": {
+        title: "Reel Editor",
+        description: "Edit short-form video content for Instagram Reels, TikTok, and YouTube Shorts. You should have a strong sense of pacing, trending audio, and platform-specific best practices.",
+      },
+      "graphic-designer": {
+        title: "Graphic Designer",
+        description: "Create eye-catching social media designs, brand visuals, and marketing materials. Proficiency in Photoshop, Illustrator, or Figma is required.",
+      },
+    },
+    whyJoin: "Why Brand Lab?",
+    whyJoinText: "Work with a fast-growing creative agency, collaborate on exciting projects, flexible remote work, and grow your skills with a supportive team.",
+    form: {
+      name: "Full Name *",
+      namePlaceholder: "Your full name",
+      email: "Email *",
+      emailPlaceholder: "your@email.com",
+      phone: "Phone *",
+      role: "Position *",
+      rolePlaceholder: "Select a position",
+      roleOptions: ["Reel Editor", "Graphic Designer"],
+      portfolio: "Portfolio Link",
+      portfolioPlaceholder: "https://your-portfolio.com",
+      message: "Tell us about yourself",
+      messagePlaceholder: "Share your experience, skills, or anything you'd like us to know...",
+      submit: "Submit Application",
+      sending: "Submitting...",
+      successMessage: "Application Submitted!",
+      successSub: "We'll review your application and get back to you soon.",
+      submitAnother: "Submit Another",
+      errorMessage: "Something went wrong. Please try again.",
+    },
+  },
 };
 
 export type Dictionary = typeof en;
