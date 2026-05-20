@@ -15,14 +15,14 @@ interface TestimonialItem {
 }
 
 const TESTIMONIAL_IMAGES: Record<string, string> = {
-  "Ahmed Zoher": "/images/testimonials/ahmed-zoher.jpg",
-  "Ahmed Maged": "/images/testimonials/ahmed-maged.jpg",
-  "Sara": "/images/testimonials/sara.jpg",
-  "Karim Gabriel": "/images/testimonials/karim-gabriel.jpg",
-  "Khalloud": "/images/testimonials/khalloud.jpg",
-  "Mo Adel": "/images/testimonials/mo-adel.jpg",
-  "Hani Kamel": "/images/testimonials/hani-kamel.jpg",
-  "أحمد زهير": "/images/testimonials/ahmed-zoher.jpg",
+  "ahmed zoher": "/images/testimonials/ahmed-zoher.png",
+  "ahmed maged": "/images/testimonials/ahmed-maged.jpg",
+  "sara": "/images/testimonials/sara.jpg",
+  "karim gabriel": "/images/testimonials/karim-gabriel.jpg",
+  "khalloud": "/images/testimonials/khalloud.jpg",
+  "mo adel": "/images/testimonials/mo-adel.jpg",
+  "hani kamel": "/images/testimonials/hani-kamel.jpg",
+  "أحمد زهير": "/images/testimonials/ahmed-zoher.png",
   "أحمد ماجد": "/images/testimonials/ahmed-maged.jpg",
   "سارة": "/images/testimonials/sara.jpg",
   "كريم جبريال": "/images/testimonials/karim-gabriel.jpg",
@@ -30,6 +30,10 @@ const TESTIMONIAL_IMAGES: Record<string, string> = {
   "مو عادل": "/images/testimonials/mo-adel.jpg",
   "هاني كامل": "/images/testimonials/hani-kamel.jpg",
 };
+
+function getTestimonialImage(name: string): string | undefined {
+  return TESTIMONIAL_IMAGES[name.toLowerCase().trim()] || TESTIMONIAL_IMAGES[name.trim()];
+}
 
 function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
   return (
@@ -53,12 +57,14 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
           &ldquo;{testimonial.content}&rdquo;
         </p>
         <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
-          {TESTIMONIAL_IMAGES[testimonial.name] ? (
-            <img
-              src={TESTIMONIAL_IMAGES[testimonial.name]}
-              alt={testimonial.name}
-              className="w-12 h-12 rounded-full object-cover object-top shrink-0"
-            />
+          {getTestimonialImage(testimonial.name) ? (
+            <div className="w-12 h-12 rounded-full overflow-hidden shrink-0">
+              <img
+                src={getTestimonialImage(testimonial.name)}
+                alt={testimonial.name}
+                className="w-full h-full object-cover scale-150"
+              />
+            </div>
           ) : (
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg shrink-0">
               {testimonial.name[0]}
