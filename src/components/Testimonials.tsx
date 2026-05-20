@@ -57,7 +57,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
             <img
               src={TESTIMONIAL_IMAGES[testimonial.name]}
               alt={testimonial.name}
-              className="w-12 h-12 rounded-full object-cover shrink-0"
+              className="w-12 h-12 rounded-full object-cover object-top shrink-0"
             />
           ) : (
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg shrink-0">
