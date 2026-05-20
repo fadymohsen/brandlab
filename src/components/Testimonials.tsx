@@ -62,7 +62,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
               <img
                 src={getTestimonialImage(testimonial.name)}
                 alt={testimonial.name}
-                className="w-full h-full object-cover scale-150"
+                className={`w-full h-full object-cover ${getTestimonialImage(testimonial.name)?.endsWith(".png") ? "" : "scale-150"}`}
               />
             </div>
           ) : (
