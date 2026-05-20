@@ -11,7 +11,25 @@ interface TestimonialItem {
   role: string;
   content: string;
   rating?: number;
+  image?: string;
 }
+
+const TESTIMONIAL_IMAGES: Record<string, string> = {
+  "Ahmed Zoher": "/images/testimonials/ahmed-zoher.jpg",
+  "Ahmed Maged": "/images/testimonials/ahmed-maged.jpg",
+  "Sara": "/images/testimonials/sara.jpg",
+  "Karim Gabriel": "/images/testimonials/karim-gabriel.jpg",
+  "Khalloud": "/images/testimonials/khalloud.jpg",
+  "Mo Adel": "/images/testimonials/mo-adel.jpg",
+  "Hani Kamel": "/images/testimonials/hani-kamel.jpg",
+  "أحمد زهير": "/images/testimonials/ahmed-zoher.jpg",
+  "أحمد ماجد": "/images/testimonials/ahmed-maged.jpg",
+  "سارة": "/images/testimonials/sara.jpg",
+  "كريم جبريال": "/images/testimonials/karim-gabriel.jpg",
+  "خلود": "/images/testimonials/khalloud.jpg",
+  "مو عادل": "/images/testimonials/mo-adel.jpg",
+  "هاني كامل": "/images/testimonials/hani-kamel.jpg",
+};
 
 function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
   return (
@@ -35,9 +53,17 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
           &ldquo;{testimonial.content}&rdquo;
         </p>
         <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg shrink-0">
-            {testimonial.name[0]}
-          </div>
+          {TESTIMONIAL_IMAGES[testimonial.name] ? (
+            <img
+              src={TESTIMONIAL_IMAGES[testimonial.name]}
+              alt={testimonial.name}
+              className="w-12 h-12 rounded-full object-cover shrink-0"
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold text-lg shrink-0">
+              {testimonial.name[0]}
+            </div>
+          )}
           <div dir="auto">
             <div className="font-semibold text-cream">{testimonial.name}</div>
             <div className="text-sm text-cream/70">{testimonial.role}</div>

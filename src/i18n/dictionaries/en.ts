@@ -349,6 +349,18 @@ const en = {
         content:
           "My content was inconsistent before, but now everything is different. Communication is easy, delivery is fast, and my sales and social media presence have grown significantly.",
       },
+      {
+        name: "Ahmed Zoher",
+        role: "Owner, Fire Diet & Fire Supplement",
+        content:
+          "Brand Lab understood my brand from day one. The content they create is exactly what my audience needs — strong, on-brand, and always delivered on time.",
+      },
+      {
+        name: "Khalloud",
+        role: "Arab GT Introducer",
+        content:
+          "Creative team with a real understanding of automotive content. They know how to make every video stand out and grab attention on social media.",
+      },
     ],
   },
   pricing: {
