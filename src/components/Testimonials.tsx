@@ -16,19 +16,19 @@ interface TestimonialItem {
 
 const TESTIMONIAL_IMAGES: Record<string, string> = {
   "ahmed zoher": "/images/testimonials/ahmed-zoher.png",
-  "ahmed maged": "/images/testimonials/ahmed-maged.jpg",
+  "ahmed maged": "/images/testimonials/ahmed-maged.png",
   "sara": "/images/testimonials/sara.png",
-  "karim gabriel": "/images/testimonials/karim-gabriel.jpg",
-  "khalloud": "/images/testimonials/khalloud.jpg",
-  "mo adel": "/images/testimonials/mo-adel.jpg",
-  "hani kamel": "/images/testimonials/hani-kamel.jpg",
+  "karim gabriel": "/images/testimonials/karim-gabriel.png",
+  "khalloud": "/images/testimonials/khalloud.png",
+  "mo adel": "/images/testimonials/mo-adel.png",
+  "hani kamel": "/images/testimonials/hani-kamel.png",
   "أحمد زهير": "/images/testimonials/ahmed-zoher.png",
-  "أحمد ماجد": "/images/testimonials/ahmed-maged.jpg",
+  "أحمد ماجد": "/images/testimonials/ahmed-maged.png",
   "سارة": "/images/testimonials/sara.png",
-  "كريم جبريال": "/images/testimonials/karim-gabriel.jpg",
-  "خلود": "/images/testimonials/khalloud.jpg",
-  "مو عادل": "/images/testimonials/mo-adel.jpg",
-  "هاني كامل": "/images/testimonials/hani-kamel.jpg",
+  "كريم جبريال": "/images/testimonials/karim-gabriel.png",
+  "خلود": "/images/testimonials/khalloud.png",
+  "مو عادل": "/images/testimonials/mo-adel.png",
+  "هاني كامل": "/images/testimonials/hani-kamel.png",
 };
 
 function getTestimonialImage(name: string): string | undefined {
@@ -62,7 +62,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
               <img
                 src={getTestimonialImage(testimonial.name)}
                 alt={testimonial.name}
-                className={`w-full h-full object-cover ${getTestimonialImage(testimonial.name)?.endsWith(".png") ? "" : "scale-150"}`}
+                className="w-full h-full object-cover"
               />
             </div>
           ) : (
