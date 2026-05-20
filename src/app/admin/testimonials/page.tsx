@@ -19,6 +19,21 @@ interface Testimonial {
 
 const emptyForm = { nameEn: "", nameAr: "", roleEn: "", roleAr: "", contentEn: "", contentAr: "", rating: 5, imageUrl: "" };
 
+const TESTIMONIAL_IMAGES: Record<string, string> = {
+  "ahmed zoher": "/images/testimonials/ahmed-zoher.png",
+  "ahmed maged": "/images/testimonials/ahmed-maged.png",
+  "sara": "/images/testimonials/sara.png",
+  "karim gabriel": "/images/testimonials/karim-gabriel.png",
+  "khalloud": "/images/testimonials/khalloud.png",
+  "mo adel": "/images/testimonials/mo-adel.png",
+  "hani kamel": "/images/testimonials/hani-kamel.png",
+};
+
+function getImage(item: Testimonial): string | undefined {
+  if (item.imageUrl) return item.imageUrl;
+  return TESTIMONIAL_IMAGES[item.nameEn.toLowerCase().trim()];
+}
+
 export default function TestimonialsPage() {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,7 +67,7 @@ export default function TestimonialsPage() {
       nameEn: item.nameEn, nameAr: item.nameAr,
       roleEn: item.roleEn, roleAr: item.roleAr,
       contentEn: item.contentEn, contentAr: item.contentAr,
-      rating: item.rating, imageUrl: item.imageUrl || "",
+      rating: item.rating, imageUrl: item.imageUrl || getImage(item) || "",
     });
     setShowForm(true);
   }
@@ -153,9 +168,9 @@ export default function TestimonialsPage() {
                   )}
 
                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/5">
-                    {item.imageUrl ? (
+                    {getImage(item) ? (
                       <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
-                        <img src={item.imageUrl} alt={item.nameEn} className="w-full h-full object-cover" />
+                        <img src={getImage(item)} alt={item.nameEn} className="w-full h-full object-cover" />
                       </div>
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-semibold shrink-0">

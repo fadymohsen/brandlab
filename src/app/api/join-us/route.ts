@@ -20,7 +20,7 @@ function brandedEmail(content: string) {
   <div style="max-width:600px;margin:0 auto;padding:0;">
     <!-- Header -->
     <div style="background:linear-gradient(135deg,#7c3aed,#c026d3);padding:32px 24px;text-align:center;border-radius:12px 12px 0 0;">
-      <img src="cid:logo" alt="Brand Lab" style="height:50px;margin-bottom:8px;" />
+      <h1 style="color:#ffffff;margin:0 0 4px;font-size:28px;font-weight:800;letter-spacing:1px;">Brand Lab</h1>
       <p style="color:rgba(255,255,255,0.8);margin:0;font-size:13px;letter-spacing:2px;text-transform:uppercase;">Creative Video Agency</p>
     </div>
     <!-- Body -->
@@ -41,11 +41,6 @@ function brandedEmail(content: string) {
 </html>`;
 }
 
-const logoAttachment = {
-  filename: "logo.jpg",
-  path: process.cwd() + "/public/logo.jpg",
-  cid: "logo",
-};
 
 export async function POST(req: Request) {
   try {
@@ -96,7 +91,6 @@ export async function POST(req: Request) {
           </tr>` : ""}
         </table>
       `),
-      attachments: [logoAttachment],
     });
 
     // Client confirmation email
@@ -127,7 +121,6 @@ export async function POST(req: Request) {
           Best regards,<br/><strong style="color:#f5f0eb;">The Brand Lab Team</strong>
         </p>
       `),
-      attachments: [logoAttachment],
     });
 
     return NextResponse.json({ success: true });

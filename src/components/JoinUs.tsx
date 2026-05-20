@@ -21,9 +21,24 @@ export default function JoinUs() {
   const [portfolio, setPortfolio] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState(false);
+
+  function validate() {
+    const errs: Record<string, boolean> = {};
+    if (!name.trim()) errs.name = true;
+    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) errs.email = true;
+    if (!phone.trim()) errs.phone = true;
+    if (!role) errs.role = true;
+    if (!portfolio.trim()) errs.portfolio = true;
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setTouched(true);
+    if (!validate()) return;
     setStatus("sending");
     try {
       const res = await fetch("/api/join-us", {
@@ -101,7 +116,7 @@ export default function JoinUs() {
 
           {/* Application Form */}
           <RevealOnScroll className="lg:col-span-3 min-w-0" direction="right">
-            <form onSubmit={handleSubmit} className="gradient-border p-6 sm:p-8">
+            <form onSubmit={handleSubmit} noValidate className="gradient-border p-6 sm:p-8">
               <div className="relative z-10 space-y-6">
                 {status === "success" ? (
                   <div className="text-center py-8">
@@ -121,48 +136,53 @@ export default function JoinUs() {
                     <div>
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.name}</label>
                       <input
-                        type="text" value={name} onChange={(e) => setName(e.target.value)}
-                        placeholder={t.form.namePlaceholder} required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                        type="text" value={name} onChange={(e) => { setName(e.target.value); if (touched) validate(); }}
+                        placeholder={t.form.namePlaceholder}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-cream placeholder:text-cream/30 focus:outline-none transition-colors ${touched && errors.name ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-primary/50"}`}
                       />
+                      {touched && errors.name && <p className="text-red-400 text-xs mt-1.5">This field is required</p>}
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.email}</label>
                       <input
-                        type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                        placeholder={t.form.emailPlaceholder} required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                        type="email" value={email} onChange={(e) => { setEmail(e.target.value); if (touched) validate(); }}
+                        placeholder={t.form.emailPlaceholder}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-cream placeholder:text-cream/30 focus:outline-none transition-colors ${touched && errors.email ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-primary/50"}`}
                       />
+                      {touched && errors.email && <p className="text-red-400 text-xs mt-1.5">Please enter a valid email</p>}
                     </div>
 
                     <PhoneField
                       label={t.form.phone}
                       placeholder="+20 1XX XXX XXXX"
                       value={phone}
-                      onChange={setPhone}
+                      onChange={(v) => { setPhone(v); if (touched) validate(); }}
                     />
+                    {touched && errors.phone && <p className="text-red-400 text-xs -mt-4">This field is required</p>}
 
                     <div>
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.role}</label>
                       <select
-                        value={role} onChange={(e) => setRole(e.target.value)} required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream/70 focus:outline-none focus:border-primary/50 transition-colors"
+                        value={role} onChange={(e) => { setRole(e.target.value); if (touched) validate(); }}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-cream/70 focus:outline-none transition-colors ${touched && errors.role ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-primary/50"}`}
                       >
                         <option value="" className="bg-dark">{t.form.rolePlaceholder}</option>
                         {t.form.roleOptions.map((opt: string) => (
                           <option key={opt} value={opt} className="bg-dark">{opt}</option>
                         ))}
                       </select>
+                      {touched && errors.role && <p className="text-red-400 text-xs mt-1.5">Please select a position</p>}
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-cream/70 mb-2">{t.form.portfolio}</label>
                       <input
-                        type="url" value={portfolio} onChange={(e) => setPortfolio(e.target.value)}
-                        placeholder={t.form.portfolioPlaceholder} required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder:text-cream/30 focus:outline-none focus:border-primary/50 transition-colors"
+                        type="url" value={portfolio} onChange={(e) => { setPortfolio(e.target.value); if (touched) validate(); }}
+                        placeholder={t.form.portfolioPlaceholder}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-cream placeholder:text-cream/30 focus:outline-none transition-colors ${touched && errors.portfolio ? "border-red-500/50 focus:border-red-500" : "border-white/10 focus:border-primary/50"}`}
                       />
+                      {touched && errors.portfolio && <p className="text-red-400 text-xs mt-1.5">Portfolio link is required</p>}
                     </div>
 
                     <div>
