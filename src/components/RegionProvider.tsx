@@ -1,8 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-
-type Region = "EG" | "INT";
+import type { Region } from "@/lib/region";
 
 const RegionContext = createContext<Region>("EG");
 
@@ -11,11 +10,24 @@ function getRegionFromCookie(): Region | null {
   return match ? (match[1] as Region) : null;
 }
 
+// IP geolocation misses Egyptian visitors on VPNs or carriers routed abroad;
+// a device clock set to Cairo time is a strong signal they're in Egypt.
+function isEgyptTimezone(): boolean {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone === "Africa/Cairo";
+  } catch {
+    return false;
+  }
+}
+
 export function RegionProvider({ children }: { children: React.ReactNode }) {
   // Read cookie immediately for instant region (set by middleware)
   const [region, setRegion] = useState<Region>("EG");
 
   useEffect(() => {
+    // Initial state is already EG
+    if (isEgyptTimezone()) return;
+
     // Cookie is set by middleware on every request — read it first
     const cookieRegion = getRegionFromCookie();
     if (cookieRegion) {

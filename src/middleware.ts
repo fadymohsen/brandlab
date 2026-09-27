@@ -1,26 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "./i18n/config";
+import { getCountryFromHeaders, regionFromCountry, type Region } from "./lib/region";
 
-function detectRegion(request: NextRequest): "EG" | "INT" {
-  // Vercel provides country code via header
-  const vercelCountry = request.headers.get("x-vercel-ip-country");
-  if (vercelCountry) {
-    return vercelCountry === "EG" ? "EG" : "INT";
-  }
-
-  // Cloudflare
-  const cfCountry = request.headers.get("cf-ipcountry");
-  if (cfCountry) {
-    return cfCountry === "EG" ? "EG" : "INT";
-  }
-
-  // AWS CloudFront
-  const awsCountry = request.headers.get("cloudfront-viewer-country");
-  if (awsCountry) {
-    return awsCountry === "EG" ? "EG" : "INT";
-  }
-
-  return "INT";
+function detectRegion(request: NextRequest): Region {
+  return regionFromCountry(getCountryFromHeaders(request.headers));
 }
 
 export function middleware(request: NextRequest) {
