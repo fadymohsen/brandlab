@@ -1,17 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getCountryFromHeaders, regionFromCountry, type Region } from "@/lib/region";
 
 export async function GET(request: NextRequest) {
   try {
-    let region = "INT";
+    let region: Region = "INT";
 
     // 1. Check hosting platform geo headers first (most reliable)
-    const vercelCountry = request.headers.get("x-vercel-ip-country");
-    const cfCountry = request.headers.get("cf-ipcountry");
-    const awsCountry = request.headers.get("cloudfront-viewer-country");
-    const platformCountry = vercelCountry || cfCountry || awsCountry;
+    const platformCountry = getCountryFromHeaders(request.headers);
 
     if (platformCountry) {
-      region = platformCountry === "EG" ? "EG" : "INT";
+      region = regionFromCountry(platformCountry);
     } else {
       // 2. Fallback to ipapi.co for non-platform environments
       const forwarded = request.headers.get("x-forwarded-for");
